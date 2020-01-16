@@ -12,7 +12,7 @@
 <body>
 <!-- Header -->
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img src="https://anytech365.com/wp-content/uploads/2019/02/AnyTech365_vertical-transparent.png" width="30" height="30" class="d-inline-block align-top" alt="">
         Road Tech Assistance SL
     </a>
