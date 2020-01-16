@@ -2,7 +2,7 @@
 @section('content')
 <div class="d-flex justify-content-center align-items-center divSign">
     <div class="d-flex justify-content-center align-items-center card signup bg-light">
-        <form class="form-signin w-75" action="" method="get">
+        <form class="form-signin w-75" action="/signup/request" method="get">
             <br>
             <input type="text" name="name" class="form-control" placeholder="Nombre" required><br>
             <input type="text" name="lastname" class="form-control" placeholder="Apellidos" required><br>
