@@ -12,7 +12,6 @@ use App\Tecnico;
 class IncidenciaController extends Controller
 {
 
-
     public function store(Request $request)
     {
         $incidencia = new Incidencia(

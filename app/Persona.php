@@ -6,7 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
+
     public function login() {
         return $this->hasOne("App\Login");
     }
+
+    public function operador() {
+        return $this->belongsTo("App\Operador");
+    }
+
+    public function tecnico() {
+        return $this->belongsTo("App\Tecnico");
+    }
+
+    public function gerente() {
+        return $this->belongsTo("App\Gerente");
+    }
+
+    public function coordinador() {
+        return $this->belongsTo("App\Coordinador");
+    }
+
+
+
 }

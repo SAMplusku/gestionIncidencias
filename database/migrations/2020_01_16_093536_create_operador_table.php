@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOperadorTable extends CreatePersonaTable
+class CreateOperadorTable extends migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up(string $tablename)
+    public function up()
     {
-        parent::up("operador");
         Schema::create('operador', function (Blueprint $table) {
+            $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });
     }
