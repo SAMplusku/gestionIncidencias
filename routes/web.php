@@ -16,16 +16,13 @@ Route::get('/', function () {
 });
 Route::get('/perfil', function () {
     return view('perfil');
-});
+})->name('perfil');
 Route::get('/login', function (){
     return view('login');
 })->name('login');
-Route::get('/login/check', function (){
-    return view('login.check');
-})->name('login');
+Route::get('/login/check', 'UserController@check')->name('login');
 Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
-Route::get('/signup/store', function (){
-    return view('signup');
-})->name('signup.store');
+Route::get('/signup/store', 'UserController@store')->name('signup.store');
+Route::get('/index', function (){return view('index');})->name('index');
