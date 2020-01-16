@@ -26,3 +26,14 @@ Route::get('/signup', function (){
 })->name('signup');
 Route::get('/signup/store', 'UserController@store')->name('signup.store');
 Route::get('/index', function (){return view('index');})->name('index');
+
+Route::get('/incidencia', function () {
+    return view('incidencia');
+})->name('incidencia');
+
+Route::get('/anadir', 'incidenciaController@store');
+
+Route::get('/signup/store', function (){
+    return view('signup');
+})->name('signup.store');
+
