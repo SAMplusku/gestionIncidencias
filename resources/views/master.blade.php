@@ -18,7 +18,7 @@
     </a>
 </nav>
 <!-- Container -->
-<div class="container-fluid">
+<div class="container-fluid" >
     @yield('content')
 </div>
 <!-- Footer -->
