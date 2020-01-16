@@ -9,3 +9,15 @@
 a:hover, a:visited{
     text-decoration: none;
 }
+.login{
+    width: 40%;
+    height: 70%;
+}
+.signup{
+    width: 40%;
+    height: 100%;
+    margin-top: 2%;
+}
+.divSign{
+    height: 80%;
+}

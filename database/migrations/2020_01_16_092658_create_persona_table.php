@@ -4,16 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTecnicoTable extends Migration
+class CreatePersonaTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(string $tablename)
     {
-        Schema::create('tecnico', function (Blueprint $table) {
+        Schema::create($tablename, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("nombre");
             $table->string("dni");
@@ -22,12 +22,6 @@ class CreateTecnicoTable extends Migration
             $table->integer("edad");
             $table->string("direccion");
             $table->string("foto");
-            $table->string("jornada");
-            $table->boolean("estado");
-            $table->string("localizacion");
-            $table->string("tipo");
-            $table->unsignedBigInteger("id_login");
-            $table->timestamps();
         });
     }
 
@@ -38,6 +32,6 @@ class CreateTecnicoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tecnico');
+        Schema::dropIfExists('persona');
     }
 }
