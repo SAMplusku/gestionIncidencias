@@ -4,25 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoordinadorTable extends Migration
+class CreateCoordinadorTable extends CreatePersonaTable
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(string $tablename)
     {
+        parent::up("coordinador");
         Schema::create('coordinador', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string("nombre");
-            $table->string("dni");
-            $table->integer("telefono");
-            $table->string("apellidos");
-            $table->integer("edad");
-            $table->string("direccion");
-            $table->string("foto");
-            $table->unsignedBigInteger("id_login");
             $table->timestamps();
         });
     }
