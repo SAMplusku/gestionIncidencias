@@ -17,6 +17,7 @@ class CreatePersonaTable extends Migration
             $table->bigIncrements('id');
             $table->string("nombre");
             $table->string("dni");
+            $table->string("email");
             $table->integer("telefono");
             $table->string("apellidos");
             $table->integer("edad");
