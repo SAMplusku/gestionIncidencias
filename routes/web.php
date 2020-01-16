@@ -26,6 +26,13 @@ Route::get('/login/check', function (){
 Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
+
+Route::get('/incidencia', function () {
+    return view('incidencia');
+})->name('incidencia');
+
+Route::get('/anadir', 'incidenciaController@store');
+
 Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store');
