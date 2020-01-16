@@ -4,17 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGerenteTable extends CreatePersonaTable
+class CreateGerenteTable extends migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up(string $tablename)
+    public function up()
     {
-        parent::up("gerente");
+
         Schema::create('gerente', function (Blueprint $table) {
+            $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });
     }

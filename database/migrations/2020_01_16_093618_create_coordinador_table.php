@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoordinadorTable extends CreatePersonaTable
+class CreateCoordinadorTable extends migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up(string $tablename)
+    public function up()
     {
-        parent::up("coordinador");
         Schema::create('coordinador', function (Blueprint $table) {
+            $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });
     }
