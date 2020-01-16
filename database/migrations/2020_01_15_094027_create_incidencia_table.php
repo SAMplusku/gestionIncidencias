@@ -23,7 +23,7 @@ class CreateIncidenciaTable extends Migration
             $table->string("observacion");
             $table->unsignedBigInteger("id_tecnico");
             $table->unsignedBigInteger("id_operador");
-            $table->unsignedBigInteger("id_vehiculo");
+            $table->unsignedBigInteger("id_cliente");
             $table->timestamps();
         });
     }
