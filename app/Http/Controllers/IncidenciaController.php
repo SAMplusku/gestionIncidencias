@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Vehiculo;
 use Illuminate\Http\Request;
 use App\Operadore;
 use App\Incidencia;
@@ -14,6 +15,24 @@ class IncidenciaController extends Controller
 
     public function store(Request $request)
     {
+        $cliente = new Cliente(
+            array(
+                'nombre'=>$request->get('nombre'),
+                'dni'=>$request->get('dni'),
+                'telefono'=>$request->get('telefono'),
+                'apellidos'=>$request->get('apellidos'),
+                'direccion'=>$request->get('direccion'),
+            )
+        );
+
+        $vehiculo = new Vehiculo(
+            array(
+                'matricula'=>$request->get('matricula'),
+                'marca'=>$request->get('marca'),
+                'modelo'=>$request->get('modelo'),
+            )
+        );
+
         $incidencia = new Incidencia(
             array(
                 'localizacion'=>$request->get('localizacion'),
@@ -27,6 +46,8 @@ class IncidenciaController extends Controller
                 'id_cliente'=>$request->get('id_cliente')
             )
         );
+        $cliente->save();
+        $vehiculo->save();
         $incidencia->save();
         return redirect()->route('');
     }
