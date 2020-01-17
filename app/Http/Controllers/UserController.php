@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 class UserController extends Controller
 {
-   /** public function check(Request $request){
+   public function check(Request $request){
 
         $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->get();
         if ($user != "" || $user != null){
@@ -21,8 +21,7 @@ class UserController extends Controller
         }else{
             return redirect()->route('login');
         }
-
-    }**/
+    }
 
     public function enviarEmailCoordinador(Request $request){
 
