@@ -1,3 +1,5 @@
+@extends('master')
+@section('content')
 <div>
-    <p>{{$user->id}}</p>
+    <p>{{$user->usuario}}</p>
 </div>
