@@ -13,7 +13,7 @@ class CreateIncidenciaTable extends Migration
      */
     public function up()
     {
-        Schema::create('incidencia', function (Blueprint $table) {
+        Schema::create('incidencias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("localizacion");
             $table->string("tipo");

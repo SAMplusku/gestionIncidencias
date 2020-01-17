@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
-                                    <input type="text" class="form-control" name="nombre" value="{{$persoma->nombre}}">
+                                    <input type="text" class="form-control" name="nombre" value="{{$persona->nombre}}">
                                 </div>
                             </div>
 
