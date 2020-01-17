@@ -45,3 +45,7 @@ Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store');
 
+Route::get('/busquedaTecnicos', function (){
+    return view('busquedaTecnicos');
+})->name('signup.store');
+
