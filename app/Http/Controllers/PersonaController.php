@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Taller;
+use App\Coordinadore;
+use App\Login;
+use App\Operadore;
+use App\Tecnico;
+
 use Illuminate\Http\Request;
-use App\Persona;
+
+
 class PersonaController extends Controller
 {
     public function show($id) {
-        $persona = Taller::all()->where('id',$id);
+
+        $tecnico = Tecnico::all()->where('id',$id);
+
 
         return view("perfil", [
-            "persona" => $persona
+            "persona" => $tecnico
         ]);
     }
 }

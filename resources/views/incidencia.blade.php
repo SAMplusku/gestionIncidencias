@@ -1,5 +1,12 @@
 @extends('master')
 @section('content')
+<?php
+$faker = Faker\Factory::create();
+
+?>
+
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
+
 
     <div class="d-flex justify-content-center align-items-center">
     <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
@@ -29,6 +36,11 @@
             <input class="form-control" type="text" name="marca" placeholder="Marca" required>
             <label>Modelo</label>
             <input class="form-control" type="text" name="modelo" placeholder="Modelo" required>
+            <input class="form-control" type="text" name="nombre" placeholder="Nombre" value="<?= $faker->name ?>" required>
+            <label>DNI</label>
+            <input class="form-control" type="text" name="dni" placeholder="DNI" value="" required>
+            <label>Descripcion</label>
+            <textarea class="form-control" type="text" name="descripcion" placeholder="Descripcion de la incidencia" required></textarea>
 
             <label>Tipo</label>
             <select name="tipo" class="form-control">

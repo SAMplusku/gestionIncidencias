@@ -13,7 +13,7 @@ class CreatePersonaTable extends Migration
      */
     public function up()
     {
-        Schema::create("persona", function (Blueprint $table) {
+        Schema::create("personas", function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("nombre");
             $table->string("dni");
@@ -23,6 +23,7 @@ class CreatePersonaTable extends Migration
             $table->integer("edad");
             $table->string("direccion");
             $table->string("foto");
+            $table->unsignedBigInteger("id_login");
         });
     }
 
