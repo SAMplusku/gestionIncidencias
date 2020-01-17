@@ -13,7 +13,7 @@ class Operador extends Persona
     }
 
     public function persona() {
-        return $this->belongsTo("App\Persona");
+        return $this->hasOne("App\Persona");
     }
 
 }

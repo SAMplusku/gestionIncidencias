@@ -14,9 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/perfil', function () {
-    return view('perfil');
-})->name('perfil');
+Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil');
+
 Route::get('/login', function (){
     return view('login');
 })->name('login');
