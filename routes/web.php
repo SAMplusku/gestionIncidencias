@@ -1,5 +1,8 @@
 <?php
 
+use App\Incidencia;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,21 +14,25 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/perfil', function () {
-    return view('perfil');
-})->name('perfil');
+
+Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil');
+
 Route::get('/login', function (){
-    return view('login');
-})->name('login');
+    return view('login');})->name('login');
+
 //Route::get('/login/check', 'UserController@check')->name('login');
 Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
+
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
+
 Route::get('/index', function (){return view('index');})->name('index');
+
 Route::get('/signup/store', 'UserController@store')->name('signup.store');
 
 Route::get('/incidencia', function () {

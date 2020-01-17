@@ -2,28 +2,6 @@
 
 @section("content")
 
-    <script>
-        $(document).ready(function() {
-
-
-            var readURL = function(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('.avatar').attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            };
-
-            $(".file-upload").on('change', function(){
-                readURL(this);
-            });
-        });
-    </script>
-
         <div class="col-sm-10 w-100">
             <h1>Miguel Barros</h1>
         </div>
@@ -62,42 +40,42 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
-                                    <input type="text" class="form-control" name="nombre">
+                                    <input type="text" class="form-control" name="nombre" value="{{$persoma->nombre}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Apellidos</h4>
-                                    <input type="text" class="form-control" name="apellidos">
+                                    <input type="text" class="form-control" name="apellidos" {{$persona->apellidos}}>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Telefono</h4>
-                                    <input type="text" class="form-control" name="telefono">
+                                    <input type="text" class="form-control" name="telefono" {{$persona->telefono}}>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="email"><h4>Email</h4></label>
-                                    <input type="email" class="form-control" name="email">
+                                    <input type="email" class="form-control" name="email" value="{{$persona->email}}" >
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Direccion</h4>
-                                    <input type="text" class="form-control" name="direccion">
+                                    <input type="text" class="form-control" name="direccion" value="{{$persona->direccion}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Dni</h4>
-                                    <input type="text" class="form-control" name="dni">
+                                    <input type="text" class="form-control" name="dni" value="{{$persona->dni}}">
                                 </div>
                             </div>
 
