@@ -17,8 +17,8 @@ class CreateTecnicoTable extends migration
         Schema::create('tecnico', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
             $table->string("localizacion");
-            $table->string("especialiciacion");
-            $table->string("disponibilidad");
+            $table->string("especializacion");
+            $table->boolean("disponibilidad");
             $table->string("jornada");
             $table->timestamps();
         });
