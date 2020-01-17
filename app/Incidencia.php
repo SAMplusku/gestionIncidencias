@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incidencia extends Model
 {
+
     public function tecnico() {
         return $this->hasOne("App\Tecnico");
     }

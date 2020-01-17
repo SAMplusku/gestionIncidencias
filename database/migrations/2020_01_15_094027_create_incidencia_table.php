@@ -17,7 +17,8 @@ class CreateIncidenciaTable extends Migration
             $table->bigIncrements('id');
             $table->string("localizacion");
             $table->string("tipo");
-            $table->date("fecha");
+            $table->date("fechafin");
+            $table->date("fechainicio");
             $table->boolean("estado");
             $table->string("descripion");
             $table->string("observacion");
