@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Operador;
+use App\Operadore;
 use App\Incidencia;
 use App\Cliente;
 use App\Tecnico;

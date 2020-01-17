@@ -14,7 +14,7 @@ class CreateTecnicoTable extends migration
     public function up()
     {
 
-        Schema::create('tecnico', function (Blueprint $table) {
+        Schema::create('tecnicos', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
             $table->string("localizacion");
             $table->string("especializacion");

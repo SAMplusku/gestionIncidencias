@@ -13,7 +13,7 @@ class CreateOperadorTable extends migration
      */
     public function up()
     {
-        Schema::create('operador', function (Blueprint $table) {
+        Schema::create('operadores', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });
