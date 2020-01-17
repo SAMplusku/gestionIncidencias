@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
+                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
                     <label class="btn btn-default bg-info">
                         Cambia de foto <input type="file" hidden>
                     </label>

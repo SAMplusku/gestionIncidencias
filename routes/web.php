@@ -44,4 +44,10 @@ Route::get('/anadir', 'incidenciaController@store');
 Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store');
+
+Route::get('/busquedaTecnicos', function (){
+    return view('busquedaTecnicos');
+})
+
 Route::get('/cerrarSesion', 'UserController@cerrarSesion');
+
