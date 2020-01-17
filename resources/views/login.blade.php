@@ -1,9 +1,9 @@
 @extends('master')
 @section('content')
-    <div class="d-flex justify-content-center align-items-center"  id="arkaitz">
+    <div class="d-flex justify-content-center align-items-center"  id="login">
         <div class="d-flex justify-content-center align-items-center card login bg-light" >
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Iniciar sesión</h1>
-            <form class="form-signin w-75" action="{{redirect()->route('signup')}}" method="get">
+            <form class="form-signin w-75" action="/login/check" method="get">
 
                 <input type="text" name="email" class="form-control" placeholder="Email" required autofocus><br>
                 <input type="password" name="password" class="form-control" placeholder="Contraseña" required><br>
