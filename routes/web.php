@@ -31,7 +31,7 @@ Route::get('/signup', function (){
 
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
 
-Route::get('/index', function (){return view('index');})->name('index');
+Route::get('/index', function(){return view('index');})->name('index');
 
 Route::get('/signup/store', 'UserController@store')->name('signup.store');
 
@@ -47,5 +47,7 @@ Route::get('/signup/store', function (){
 
 Route::get('/busquedaTecnicos', function (){
     return view('busquedaTecnicos');
-})->name('signup.store');
+})
+
+Route::get('/cerrarSesion', 'UserController@cerrarSesion');
 

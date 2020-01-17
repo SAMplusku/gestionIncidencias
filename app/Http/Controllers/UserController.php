@@ -1,28 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Login;
+use App\Persona;
 use Redirect;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 class UserController extends Controller
 {
    public function check(Request $request){
-
+       session_start();
         $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->get();
-        if ($user != "" || $user != null){
 
-            return view('index', [
-                'user' => $user
-            ]);
+        if ($user != "" || $user != null || sizeof($user) !=0){
+            $persona= Persona::find($user[0]->id);
+            $_SESSION['id'] = $user[0]->id;
+            $_SESSION['nombre'] = $persona->nombre;
+            return redirect()->route('index');
         }else{
             return redirect()->route('login');
         }
     }
-
     public function enviarEmailCoordinador(Request $request){
 
         $mail = new PHPMailer();
@@ -45,5 +46,12 @@ class UserController extends Controller
         $mail->Send();
 
         return redirect()->route('login');
+    }
+
+    public function cerrarSesion(){
+       session_start();
+        unset($_SESSION['id']);
+        unset($_SESSION['nombre']);
+        return redirect()->route('index');
     }
 }
