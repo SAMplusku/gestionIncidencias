@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Incidencia;
-use App\Operador;
+use App\Coordinadore;
+use App\Login;
+use App\Operadore;
 use App\Tecnico;
 use Illuminate\Http\Request;
-use App\Persona;
+
 
 class PersonaController extends Controller
 {

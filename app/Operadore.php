@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Persona;
 
-class Operador extends Persona
+class Operadore extends Persona
 {
 
     public function incidencia() {

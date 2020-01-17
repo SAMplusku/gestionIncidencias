@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Persona;
 
-class Coordinador extends Persona
+class Coordinadore extends Persona
 {
 
     public function persona() {

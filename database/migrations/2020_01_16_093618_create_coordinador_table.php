@@ -13,7 +13,7 @@ class CreateCoordinadorTable extends migration
      */
     public function up()
     {
-        Schema::create('coordinador', function (Blueprint $table) {
+        Schema::create('coordinadores', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });

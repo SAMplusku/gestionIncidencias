@@ -14,7 +14,7 @@ class CreateGerenteTable extends migration
     public function up()
     {
 
-        Schema::create('gerente', function (Blueprint $table) {
+        Schema::create('gerentes', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
             $table->timestamps();
         });
