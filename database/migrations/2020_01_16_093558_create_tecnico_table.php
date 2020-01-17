@@ -4,17 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTecnicoTable extends CreatePersonaTable
+class CreateTecnicoTable extends migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up(string $tablename)
+    public function up()
     {
-        parent::up("tecnico");
+
         Schema::create('tecnico', function (Blueprint $table) {
+            $table->unsignedBigInteger("id_persona");
+            $table->string("localizacion");
+            $table->string("especialiciacion");
+            $table->string("disponibilidad");
+            $table->string("jornada");
             $table->timestamps();
         });
     }
