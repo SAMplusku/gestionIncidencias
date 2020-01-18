@@ -47,7 +47,7 @@ Route::get('/signup/store', function (){
 
 Route::get('/busquedaTecnicos', function (){
     return view('busquedaTecnicos');
-})
+});
 
 Route::get('/cerrarSesion', 'UserController@cerrarSesion');
 
