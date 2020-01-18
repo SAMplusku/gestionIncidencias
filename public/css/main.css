@@ -24,3 +24,10 @@ a:hover, a:visited{
 #login{
     height: 88%;
 }
+
+#imagenTecnicos {
+    position: relative;
+    max-width: 50px;
+    float: left;
+    margin-right: 15px;
+}
