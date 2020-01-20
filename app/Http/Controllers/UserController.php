@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Coordinadore;
+use App\Gerente;
+use App\Operadore;
+use App\Tecnico;
 use Illuminate\Http\Request;
 use App\Login;
 use App\Persona;
@@ -13,19 +17,30 @@ class UserController extends Controller
 {
    public function check(Request $request){
        session_start();
-        $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->get();
+        $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->first();
 
-        if ($user != "" || $user != null || sizeof($user) !=0){
-            $persona= Persona::find($user[0]->id);
-            $_SESSION['id'] = $user[0]->id;
+        if ($user != null){
+            $persona= Persona::find($user->id);
+            $_SESSION['id'] = $user->id;
             $_SESSION['nombre'] = $persona->nombre;
+
+            if (Operadore::where('id_persona','=',$persona->id)->count()> 0){
+                $_SESSION['persona'] = "operador";
+            }elseif (Tecnico::where('id_persona','=',$persona->id)->count()> 0){
+                $_SESSION['persona'] = "tecnico";
+            }elseif (Coordinadore::where('id_persona','=',$persona->id)->count()> 0){
+                $_SESSION['persona'] = "coordinador";
+            }elseif (Gerente::where('id_persona','=',$persona->id)->count()> 0){
+                $_SESSION['persona'] = "gerente";
+            }
             return redirect()->route('index');
         }else{
             return redirect()->route('login');
         }
     }
-    public function enviarEmailCoordinador(Request $request){
 
+
+    public function enviarEmailCoordinador(Request $request){
         $mail = new PHPMailer();
         $mail->isSmtp();
         $mail->SMTPDebug = 0;
@@ -52,6 +67,7 @@ class UserController extends Controller
        session_start();
         unset($_SESSION['id']);
         unset($_SESSION['nombre']);
+        unset($_SESSION['persona']);
         return redirect()->route('index');
     }
 }
