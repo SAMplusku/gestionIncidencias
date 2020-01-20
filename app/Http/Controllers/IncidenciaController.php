@@ -15,16 +15,6 @@ class IncidenciaController extends Controller
 
     public function store(Request $request)
     {
-        $cliente = new Cliente(
-            array(
-                'nombre'=>$request->get('nombre'),
-                'dni'=>$request->get('dni'),
-                'telefono'=>$request->get('telefono'),
-                'apellidos'=>$request->get('apellidos'),
-                'direccion'=>$request->get('direccion'),
-            )
-        );
-
         $vehiculo = new Vehiculo(
             array(
                 'matricula'=>$request->get('matricula'),
@@ -32,22 +22,35 @@ class IncidenciaController extends Controller
                 'modelo'=>$request->get('modelo'),
             )
         );
+        $vehiculo->save();
+        $vehiculo2 = Vehiculo::all()->last();
+        $cliente = new Cliente(
+            array(
+                'nombre'=>$request->get('nombrecliente'),
+                'dni'=>$request->get('dni'),
+                'edad'=>$request->get('edad'),
+                'telefono'=>$request->get('telefono'),
+                'apellidos'=>$request->get('apellidos'),
+                'direccion'=>$request->get('direccion'),
+                'id_vehiculo'=>$vehiculo2->id
+            )
+        );
+        $cliente->save();
+        $cliente2= Cliente::all()->last();
+
 
         $incidencia = new Incidencia(
             array(
-                'localizacion'=>$request->get('localizacion'),
                 'tipo'=>$request->get('tipo'),
                 'fecha'=>$request->get('fecha'),
-                'estado'=>$request->get('estado'),
                 'descripcion'=>$request->get('descripcion'),
                 'observacion'=>$request->get('observacion'),
                 'id_tecnico'=>$request->get('id_tecnico'),
                 'id_operador'=>$request->get('id_operador'),
-                'id_cliente'=>$request->get('id_cliente')
+                'id_cliente'=>$cliente2->id
             )
         );
-        $cliente->save();
-        $vehiculo->save();
+
         $incidencia->save();
         return redirect()->route('');
     }
