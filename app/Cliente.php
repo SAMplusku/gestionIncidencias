@@ -13,4 +13,8 @@ class Cliente extends Model
     public function vehiculo() {
         return $this->hasOne("App\Vehiculo");
     }
+
+    public  function persona() {
+        return $this->belongsTo("App\Persona");
+    }
 }

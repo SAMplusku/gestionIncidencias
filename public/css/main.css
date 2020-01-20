@@ -31,3 +31,14 @@ a:hover, a:visited{
     float: left;
     margin-right: 15px;
 }
+
+#linkUsuario{
+    font-size: 23px;
+    text-transform: capitalize;
+}
+
+#tipoTrabajador{
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
