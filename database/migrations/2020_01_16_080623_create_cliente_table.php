@@ -21,7 +21,6 @@ class CreateClienteTable extends Migration
             $table->string("apellidos");
             $table->integer("edad");
             $table->string("direccion");
-            $table->string("foto");
             $table->unsignedBigInteger("id_vehiculo");
             $table->timestamps();
         });

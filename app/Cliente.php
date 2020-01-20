@@ -13,4 +13,7 @@ class Cliente extends Model
     public function vehiculo() {
         return $this->hasOne("App\Vehiculo");
     }
+
+
+    protected $fillable = ['nombre','dni','telefono','apellidos','edad','direccion','id_vehiculo'];
 }

@@ -18,4 +18,9 @@ class Incidencia extends Model
     public function cliente() {
         return $this->hasOne("App\Cliente");
     }
+
+
+
+
+    protected $fillable = ['localizacion','tipo','fechafin','fechainicio','estado','descripcion','observacion','id_tecnico','id_operador','id_cliente'];
 }
