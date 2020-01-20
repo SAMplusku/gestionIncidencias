@@ -15,12 +15,12 @@ class CreateIncidenciaTable extends Migration
     {
         Schema::create('incidencias', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("localizacion");
+            $table->string("localizacion")->default('calle pozoa');
             $table->string("tipo");
             $table->date("fechafin");
             $table->date("fechainicio");
-            $table->boolean("estado");
-            $table->string("descripion");
+            $table->boolean("estado")->default(1);
+            $table->string("descripcion");
             $table->string("observacion");
             $table->unsignedBigInteger("id_tecnico");
             $table->unsignedBigInteger("id_operador");
