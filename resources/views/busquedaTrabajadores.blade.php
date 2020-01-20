@@ -3,6 +3,25 @@
 
     @section("content")
                     <div class="main-box clearfix col-lg-12">
+                        <div class="dropdown show float-right mt-3 ml-3">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Filtrar por
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Trabajo</a>
+                                <a class="dropdown-item" href="#">Fecha de creación</a>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3 mt-3 w-25 float-right">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre del usuario" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+
+
                             <table class="table listaUsuarios">
                                 <thead>
                                 <tr>
@@ -10,6 +29,9 @@
                                     <th><span>Fecha creacion</span></th>
                                     <th><span>Telefono</span></th>
                                     <th><span>Email</span></th>
+                                    <th>
+
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
