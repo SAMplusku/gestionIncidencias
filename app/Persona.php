@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
-
+    public $timestamps = false;
     public function login() {
         return $this->hasOne("App\Login");
     }

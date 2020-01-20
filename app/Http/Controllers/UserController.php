@@ -20,7 +20,7 @@ class UserController extends Controller
         $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->first();
 
         if ($user != null){
-            $persona= Persona::find($user->id);
+            $persona= Persona::where('id_login', $user->id)->first();
             $_SESSION['id'] = $user->id;
             $_SESSION['nombre'] = $persona->nombre;
 
@@ -38,7 +38,58 @@ class UserController extends Controller
             return redirect()->route('login');
         }
     }
+    public function store(Request $request){
+       $persona = new Persona();
+       $login = new Login();
 
+       $login->usuario = request('email');
+       $login->contraseña = request('password');
+       $login->save();
+       $login_id = Login::all()->last();
+       $persona->nombre = request('name');
+       $persona->dni = request('dni');
+        $persona->email = request('email');
+        $persona->telefono = request('phone');
+        $persona->apellidos = request('lastname');
+        $persona->edad = request('edad');
+        $persona->direccion = request('direccion');
+        $persona->foto = 'foto';
+        $persona->id_login = $login_id->id;
+        $persona->save();
+
+        $tipo = request('tipo');
+        if ($tipo == 'operador'){
+            $operador = new Operadore();
+            $persona_id = Persona::all()->last();
+            $operador->id_persona = $persona_id->id;
+            $operador->save();
+        }elseif ($tipo == "tecnico"){
+            $tecnico = new Tecnico();
+            $persona_id = Persona::all()->last();
+            $tecnico->id_persona = $persona_id->id;
+            $tecnico->localizacion = request('localizacion');
+            $tecnico->especializacion = request('especializacion');
+            $tecnico->jornada = request('jornada');
+            $tecnico->disponibilidad = 1;
+            $tecnico->save();
+        }elseif ($tipo == 'coordinador'){
+            $coordinador = new Coordinadore();
+            $persona_id = Persona::all()->last();
+            $coordinador->id_persona = $persona_id->id;
+            $coordinador->save();
+        }elseif ($tipo == 'gerente'){
+            $gerente = new Gerente();
+            $persona_id = Persona::all()->last();
+            $gerente->id_persona = $persona_id->id;
+            $gerente->save();
+        }
+        session_start();
+        $_SESSION['persona'] = $tipo;
+        $_SESSION['id'] = $login_id->id;
+        $_SESSION['nombre'] = $persona_id->nombre;
+
+        return redirect()->route('index');
+    }
 
     public function enviarEmailCoordinador(Request $request){
         $mail = new PHPMailer();
