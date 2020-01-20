@@ -2,6 +2,7 @@
 @section('content')
     <?php
     $faker = Faker\Factory::create();
+    session_start();
     ?>
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
     <div class="d-flex justify-content-center align-items-center">
@@ -11,7 +12,7 @@
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
-                <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" required>
+                <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" required value="{{$_SESSION['nombre']}}">
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Cliente</h2>
                 <label>Cliente</label>
                 <div class="row">
