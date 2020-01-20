@@ -1,5 +1,14 @@
 @extends('master')
 @section('content')
-<div>
-    <p>{{$user->usuario}}</p>
-</div>
+<?php session_start() ?>
+
+    @if(isset($_SESSION['nombre']))
+        <div>
+        <p>{{$_SESSION['nombre']}}</p>
+            <p>{{$_SESSION['persona']}}</p>
+        </div>
+    @else
+        <p>No estas loggeado</p>
+    @endif
+
+@endsection

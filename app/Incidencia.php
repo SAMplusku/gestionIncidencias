@@ -12,7 +12,7 @@ class Incidencia extends Model
     }
 
     public function operador() {
-        return $this->hasOne("App\Operador");
+        return $this->hasOne("App\Operadore");
     }
 
     public function cliente() {

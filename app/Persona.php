@@ -12,7 +12,7 @@ class Persona extends Model
     }
 
     public function operador() {
-        return $this->belongsTo("App\Operador");
+        return $this->belongsTo("App\Operadore");
     }
 
     public function tecnico() {
@@ -24,7 +24,7 @@ class Persona extends Model
     }
 
     public function coordinador() {
-        return $this->belongsTo("App\Coordinador");
+        return $this->belongsTo("App\Coordinadore");
     }
 
 
