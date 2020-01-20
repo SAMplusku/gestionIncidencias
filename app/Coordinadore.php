@@ -12,6 +12,4 @@ class Coordinadore extends Persona
         return $this->hasOne("App\Persona");
     }
 
-
-
 }

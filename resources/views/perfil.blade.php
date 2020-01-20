@@ -1,9 +1,7 @@
 @extends("master")
 
 @section("content")
-
-        <div class="col-sm-10 w-100">
-            <h1>Miguel Barros</h1>
+        <div class="col-sm-10 mt-3 d-flex" >
         </div>
         <div class="row">
             <div class="col-sm-3"><!--left col-->
@@ -17,15 +15,43 @@
 
                 <ul class="list-group">
                     <li class="list-group-item text-center">Actividad</li>
+
+                    <li class="list-group-item text-center">
+                        <strong>Rol: </strong>
+                        @if(\App\Coordinadore::all()->where('id_persona',$persona2->id)->count()> 0)
+                            Coordinador
+                        @elseif(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
+                            Operador
+                        @elseif(\App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
+                            Tecnico
+                        @else
+                            Gerente
+                        @endif
+                    </li>
+
+                    @if(isset($persona))
+                    <li class="list-group-item text-center">
+                        <strong>Especializacion: </strong> {{$persona->especializacion}}
+                    </li>
+
                     <li class="list-group-item text-center">
                         <strong>Incidencias</strong> {{$tecnico}}
                     </li>
+
                     <li class="list-group-item text-center">
                         <strong>Estado: </strong> @if($persona->disponibilidad = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
                     </li>
+
+                     <li class="list-group-item text-center">
+                        <strong>Especializacion: </strong> {{$persona->especializacion}}
+                     </li>
+
+                     <li class="list-group-item text-center">
+                         <strong>Jornada: </strong> {{$persona->jornada}}
+                     </li>
+                        @endif
                 </ul>
             </div>
-
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="p-2">
@@ -43,73 +69,49 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
-                                    <input type="text" class="form-control" name="nombre" value="{{$persona2->nombre}}">
+                                    <input type="text" class="form-control" name="nombre" disabled value="{{$persona2->nombre}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Apellidos</h4>
-                                    <input type="text" class="form-control" name="apellidos" value="{{$persona2->apellidos}}">
+                                    <input type="text" class="form-control" name="apellidos" disabled value="{{$persona2->apellidos}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Telefono</h4>
-                                    <input type="text" class="form-control" name="telefono" value="{{$persona2->telefono}}">
+                                    <input type="text" class="form-control" name="telefono" disabled value="{{$persona2->telefono}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="email"><h4>Email</h4></label>
-                                    <input type="email" class="form-control" name="email" value="{{$persona2->email}}" >
+                                    <input type="email" class="form-control" name="email" disabled value="{{$persona2->email}}" >
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Direccion</h4>
-                                    <input type="text" class="form-control" name="direccion" value="{{$persona2->direccion}}">
+                                    <input type="text" class="form-control" name="direccion" disabled value="{{$persona2->direccion}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Dni</h4>
-                                    <input type="text" class="form-control" name="dni" value="{{$persona2->dni}}">
+                                    <input type="text" class="form-control" name="dni" disabled value="{{$persona2->dni}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Fecha de nacimiento</h4>
-                                    <input type="text" class="form-control" name="fecha" value="{{$persona2->edad}}">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h4>Especializacion</h4>
-                                    <select name="especializacion">
-                                        @if($persona->especializacion = "golpe")<option value="golpe" selected>Golpe</option> @else <option value="golpe">Golpe</option> @endif
-                                        @if($persona->especializacion = "golpe")<option value="pinchazo" selected>Pinchazo</option> @else <option value="pinchazo">Pinchazo</option> @endif
-                                        @if($persona->especializacion = "golpe")<option value="motor" selected>Motor</option> @else <option value="motor">Motor</option>@endif
-                                        @if($persona->especializacion = "bateria")<option value="bateria" selected>Bateria</option> @else <option value="bateria">Bateria</option> @endif
-                                        @if($persona->especializacion = "otros")<option value="otros" selected>Otros</option> @else <option value="otros">Otros</option>@endif
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <h4>Jornada</h4>
-                                    <select name="jornada">
-                                        @if($persona->jornada = "mañana")<option value="mañana" selected>Mañana</option> @else <option value="mañana">Mañana</option> @endif
-                                        @if($persona->jornada = "tarde")<option value="tarde" selected>Tarde</option> @else <option value="tarde">Tarde</option> @endif
-                                        @if($persona->jornada = "noche")<option value="noche" selected>Noche</option> @else <option value="noche">Noche</option> @endif
-                                    </select>
+                                    <input type="text" class="form-control" name="fecha" disabled  value="{{$persona2->edad}}">
                                 </div>
                             </div>
 

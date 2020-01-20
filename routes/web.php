@@ -45,9 +45,7 @@ Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store');
 
-Route::get('/busquedaTecnicos', function (){
-    return view('busquedaTecnicos');
-});
+Route::get('/busquedaTrabajadores', 'PersonaController@index');
 
 Route::get('/cerrarSesion', 'UserController@cerrarSesion');
 
