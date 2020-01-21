@@ -83,11 +83,6 @@ class UserController extends Controller
             $gerente->id_persona = $persona_id->id;
             $gerente->save();
         }
-        session_start();
-        $_SESSION['persona'] = $tipo;
-        $_SESSION['id'] = $login_id->id;
-        $_SESSION['nombre'] = $persona_id->nombre;
-
         return redirect()->route('index');
     }
 
