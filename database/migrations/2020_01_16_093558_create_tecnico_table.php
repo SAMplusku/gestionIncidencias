@@ -20,6 +20,7 @@ class CreateTecnicoTable extends migration
             $table->string("especializacion");
             $table->boolean("disponibilidad");
             $table->string("jornada");
+            $table->string("comunidad");
             $table->unsignedBigInteger("id_taller");
         });
     }
