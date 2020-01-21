@@ -23,6 +23,7 @@ class CreatePersonaTable extends Migration
             $table->integer("edad");
             $table->string("direccion");
             $table->string("foto");
+            $table->unsignedBigInteger("id_login");
             $table->timestamps();
         });
     }
