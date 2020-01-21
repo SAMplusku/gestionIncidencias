@@ -19,7 +19,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Contraseña" required><br>
                 <select name="tipo" onchange="añadirTec(this.value)" class="custom-select">
                     <option disabled selected>Tipo</option>
-                    <option value="operario">Operario</option>
+                    <option value="operador">Operario</option>
                     <option value="tecnico">Técnico</option>
                     <option value="coordinador">Coordinador</option>
                     <option value="gerente">Gerente</option>
