@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+    {{-- ChartScript --}}
+
 </head>
 <body>
 <!-- Header -->
@@ -27,6 +32,7 @@
 <div class="container-fluid">
     @yield('content')
 </div>
+
 <!-- Footer -->
 <footer class="footer">
     <div class="container text-center">

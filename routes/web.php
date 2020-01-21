@@ -41,6 +41,7 @@ Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store');
 
+Route::get('/estadisticas', 'IncidenciaChartController@index');
 
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index');
