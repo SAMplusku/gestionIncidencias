@@ -57,10 +57,6 @@
                     <li class="p-2">
                         <a href="/index">Home</a>
                     </li>
-
-                    <li class="p-2">
-                        <a href="">Editar</a>
-                    </li>
                 </ul><br>
 
                 <div>
