@@ -52,6 +52,6 @@ class IncidenciaController extends Controller
         );
 
         $incidencia->save();
-        return redirect()->route('');
+        return redirect()->route('index');
     }
 }

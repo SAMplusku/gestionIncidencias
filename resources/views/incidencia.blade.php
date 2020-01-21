@@ -12,12 +12,14 @@
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
-                <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" required value="{{$_SESSION['nombre']}}">
+                <input class="form-control" type="text" name="id_operador" value="{{$_SESSION['nombre']}}" disabled>
+                <input type="hidden" name="id_operador" value="{{$_SESSION['id']}}">
+                <input type="hidden" name="fechainicio" value="">
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Cliente</h2>
                 <label>Cliente</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="nombre" placeholder="Nombre" required>
+                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre"  autofocus required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="apellidos" placeholder="Apellidos" required>
@@ -71,7 +73,14 @@
 
 
                 <label>Tecnico</label>
-                <input class="form-control" type="text" name="nombre" placeholder="Nombre" required>
+
+
+                    <select name="id_tecnico" class="form-control">
+                        @foreach($tecnicos as $tecnico)
+                            <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                        @endforeach
+                    </select>
+
 
                 <label>Observaciones</label>
                 <textarea class="form-control" type="text" name="observacion" placeholder="Observaciones"
