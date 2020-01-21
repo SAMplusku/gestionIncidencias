@@ -13,7 +13,7 @@
 <!-- Header -->
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="/index">
-        <img src="https://anytech365.com/wp-content/uploads/2019/02/AnyTech365_vertical-transparent.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="https://guiadepescado.com/wp-content/uploads/2016/11/boqueron-especie.png" width="40" height="40" class="d-inline-block align-top" alt="">
         Road Tech Assistance SL
     </a>
     @if(isset($_SESSION['id']))
@@ -24,7 +24,7 @@
     @endif
 </nav>
 <!-- Container -->
-<div class="container-fluid" >
+<div class="container-fluid">
     @yield('content')
 </div>
 <!-- Footer -->

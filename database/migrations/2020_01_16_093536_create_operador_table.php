@@ -15,7 +15,6 @@ class CreateOperadorTable extends migration
     {
         Schema::create('operadores', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
-            $table->timestamps();
         });
     }
 

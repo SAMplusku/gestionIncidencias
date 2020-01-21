@@ -13,7 +13,12 @@ class Cliente extends Model
     public function vehiculo() {
         return $this->hasOne("App\Vehiculo");
     }
+  
+    public  function persona() {
+        return $this->belongsTo("App\Persona");
+    }
 
 
     protected $fillable = ['nombre','dni','telefono','apellidos','edad','direccion','id_vehiculo'];
+
 }

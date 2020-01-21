@@ -16,7 +16,6 @@ class CreateGerenteTable extends migration
 
         Schema::create('gerentes', function (Blueprint $table) {
             $table->unsignedBigInteger("id_persona");
-            $table->timestamps();
         });
     }
 
