@@ -12,7 +12,7 @@
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
-                <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" required value="{{$_SESSION['nombre']}}">
+                <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" required value="{{$_SESSION['nombre']}}" disabled>
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Cliente</h2>
                 <label>Cliente</label>
                 <div class="row">
