@@ -33,9 +33,7 @@ Route::get('/index', function(){return view('index');})->name('index');
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser');
 Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta');
-Route::get('/incidencia', function () {
-    return view('incidencia');
-})->name('incidencia');
+Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia');
 
 Route::get('/anadir', 'incidenciaController@store');
 

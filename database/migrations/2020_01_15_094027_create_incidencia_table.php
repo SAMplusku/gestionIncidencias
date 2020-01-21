@@ -17,8 +17,7 @@ class CreateIncidenciaTable extends Migration
             $table->bigIncrements('id');
             $table->string("localizacion")->default('calle pozoa');
             $table->string("tipo");
-            $table->date("fechafin");
-            $table->date("fechainicio");
+            $table->date("fechafin")->nullable();
             $table->boolean("estado")->default(1);
             $table->string("descripcion");
             $table->string("observacion");
