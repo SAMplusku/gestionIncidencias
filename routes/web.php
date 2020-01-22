@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil');
+Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 
 Route::get('/login', function (){ return view('login'); })->name('login');
 Route::get('/login/check', 'UserController@check')->name('login.check');
@@ -29,21 +29,24 @@ Route::get('/signup', function (){
 
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
 
-Route::get('/index', function(){return view('index');})->name('index');
+Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
 
-Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser');
-Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta');
+Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
+Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
 Route::get('/incidencia', function () {
     return view('incidencia');
-})->name('incidencia');
+})->name('incidencia')->middleware('auth');
 
-Route::get('/anadir', 'incidenciaController@store');
+Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
 
 Route::get('/signup/store', function (){
     return view('signup');
-})->name('signup.store');
+})->name('signup.store')->middleware('auth');
 
-Route::get('/busquedaTrabajadores', 'PersonaController@index');
+Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/cerrarSesion', 'UserController@cerrarSesion');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
