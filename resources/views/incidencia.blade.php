@@ -4,11 +4,16 @@
     $faker = Faker\Factory::create();
     session_start();
     ?>
+
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
     <div class="d-flex justify-content-center align-items-center">
         <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
 
             <form class="form-signin w-85" action="/anadir" method="get">
+
+                <h1>Mapa de la incidencia</h1>
+                <div id="map" style="height: 100%"></div>
+                <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
