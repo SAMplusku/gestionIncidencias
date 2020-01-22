@@ -30,6 +30,12 @@
                         @endif
                     </li>
 
+                    @if(isset($operador))
+                        <li class="list-group-item text-center">
+                            <strong>Incidencias</strong> {{$operador}}
+                        </li>
+                    @endif
+
                     @if(isset($persona))
                     <li class="list-group-item text-center">
                         <strong>Especializacion: </strong> {{$persona->especializacion}}
@@ -50,7 +56,8 @@
                      <li class="list-group-item text-center">
                          <strong>Jornada: </strong> {{$persona->jornada}}
                      </li>
-                        @endif
+                    @endif
+
                 </ul>
             </div>
             <div class="col-sm-9">
@@ -121,6 +128,33 @@
                         <hr>
                     </div>
                 </div>
+
+                @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
+                <div class="col-sm-3">
+                    <h2>Incidencias</h2>
+                        <table class="table table-responsive">
+                            @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
+                                {{$incidenciasOperador[0]->id}}
+                                @foreach($incidenciasOperador as $incidencia)
+                                    <thead>
+                                    <tr>
+                                        <th>I-{{$incidencia->id}}</th>
+                                    </tr>
+                                    </thead>
+                                @endforeach
+                                @else
+                                @foreach($incidenciasTecnico as $incidencia)
+                                <thead>
+                                <tr>
+                                    <th>I-{{$incidencia->id}}</th>
+                                </tr>
+                                </thead>
+                                @endforeach
+                            @endif
+                        </table>
+                </div>
+                @endif
             </div>
+
 
 @endsection
