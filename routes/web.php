@@ -34,10 +34,12 @@ Route::get('/index', function(){return view('index');})->name('index')->middlewa
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
 Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
-Route::get('/incidencia', function () {
-    return view('incidencia');
-})->name('incidencia')->middleware('auth');
 
+/*Route::get('/incidencia', function () {
+    return view('incidencia');
+})->name('incidencia')->middleware('auth');*/
+
+Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia')->middleware('auth');
 
 Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
 
