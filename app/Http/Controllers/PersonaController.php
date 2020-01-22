@@ -21,8 +21,10 @@ class PersonaController extends Controller
 
         $persona = Persona::all()->where('id',$id)->first();
         $tecnico = Tecnico::all()->where('id_persona',$id)->first();
-        $incidenciasOperador = Incidencia::all()->where('id_operador',$id)->count();
-        $incidenciasTecnico = Incidencia::all()->where('id_tecnico',$id)->count();
+        $numeroIncidenciasOperador = Incidencia::all()->where('id_operador',$id)->count();
+        $numeroIncidenciasTecnico = Incidencia::all()->where('id_tecnico',$id)->count();
+        $incidenciasOperador = Incidencia::all()->where('id_operador',$id);
+        $incidenciasTecnico = Incidencia::all()->where('id_tecnico',$id);
 
         if(Coordinadore::all()->where('id_persona',$id)->count()> 0) {
             return view("perfil", [
@@ -34,8 +36,10 @@ class PersonaController extends Controller
             return view("perfil", [
                 "persona" => $tecnico,
                 "persona2" => $persona,
-                "tecnico" => $incidenciasTecnico,
-                "operador" => $incidenciasOperador
+                "tecnico" => $numeroIncidenciasTecnico,
+                "operador" => $numeroIncidenciasOperador,
+                "incidenciasOperador" => $incidenciasOperador ,
+                "incidenciasTencico" => $incidenciasTecnico
             ]);
         }
     }

@@ -20,7 +20,7 @@ class IncidenciaChartController extends Controller
         $incidencias = Incidencia::whereDate('created_at', today())->count();
         $fechaIncidencias = Incidencia::whereDate('created_at', today());
 
-        $usersChart->labels([$fechaIncidencias->id]);
+        $usersChart->labels([$fechaIncidencias]);
         $usersChart->dataset('Incidencias por trimestre', 'line', [$incidencias])
             ->color("rgb(255, 99, 132)")
             ->backgroundcolor("rgb(255, 99, 132)");

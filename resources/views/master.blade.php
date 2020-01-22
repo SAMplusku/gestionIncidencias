@@ -22,16 +22,9 @@
         Road Tech Assistance SL
     </a>
     @if(isset($_SESSION['id']))
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-    @else
-                <a href="/login">Inicia sesión</a>
+
+        <a href="/cerrarSesion">Cerrar sesión</a>
+        
     @endif
 </nav>
 <!-- Container -->
