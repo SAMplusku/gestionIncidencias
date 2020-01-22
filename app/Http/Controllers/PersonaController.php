@@ -39,7 +39,7 @@ class PersonaController extends Controller
                 "tecnico" => $numeroIncidenciasTecnico,
                 "operador" => $numeroIncidenciasOperador,
                 "incidenciasOperador" => $incidenciasOperador ,
-                "incidenciasTencico" => $incidenciasTecnico
+                "incidenciasTecnico" => $incidenciasTecnico
             ]);
         }
     }

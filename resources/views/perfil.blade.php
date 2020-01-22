@@ -130,15 +130,14 @@
                 </div>
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
-                <div class="col-sm-3">
+                <div class="col-sm-9">
                     <h2>Incidencias</h2>
                         <table class="table table-responsive">
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
-                                {{$incidenciasOperador}}
                                 @foreach($incidenciasOperador as $incidencia)
                                     <thead>
                                     <tr>
-                                        <th>I-{{$incidencia->id}}</th>
+                                        <th>Incidencia-{{$incidencia->id}}</th>
                                     </tr>
                                     </thead>
                                 @endforeach
@@ -146,7 +145,8 @@
                                 @foreach($incidenciasTecnico as $incidencia)
                                 <thead>
                                 <tr>
-                                    <th>I-{{$incidencia->id}}</th>
+                                    <th>Incidencia - {{$incidencia->id}}</th>
+                                    <th>@if($incidencia->estado = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif </th>
                                 </tr>
                                 </thead>
                                 @endforeach

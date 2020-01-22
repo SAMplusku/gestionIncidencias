@@ -18,10 +18,17 @@ class IncidenciaChartController extends Controller
         $usersChart = new IncidenciaChart();
 
         $incidencias = Incidencia::whereDate('created_at', today())->count();
-        $fechaIncidencias = Incidencia::whereDate('created_at', today());
+        $fechaIncidencias = Incidencia::all();
 
-        $usersChart->labels([$fechaIncidencias]);
-        $usersChart->dataset('Incidencias por trimestre', 'line', [$incidencias])
+        foreach ($fechaIncidencias as $incidencia) {
+            $fechaIncidencia = substr($incidencia->created_at,0,10);
+            if (!$fechaIncidencia = $incidencia) {
+                $usersChart->labels([substr($fechaIncidencias[0]->created_at,0,10)]);
+            }
+        }
+
+        $usersChart->labels([substr($fechaIncidencias[0]->created_at,0,10)]);
+        $usersChart->dataset('Incidencias por mes', 'line', [$incidencias])
             ->color("rgb(255, 99, 132)")
             ->backgroundcolor("rgb(255, 99, 132)");
 
