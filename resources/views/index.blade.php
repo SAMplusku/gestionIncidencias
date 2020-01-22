@@ -4,7 +4,7 @@
 
     @if(isset($_SESSION['nombre']))
         @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-            <p><a href="/signup/darAlta">Dar de alta usuario</a></p>
+            <p><a href="/register">Dar de alta usuario</a></p>
         @endif
         <div>
         <p>{{$_SESSION['nombre']}}</p>

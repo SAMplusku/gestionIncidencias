@@ -25,7 +25,14 @@
         <p>Hola <?php echo $_SESSION['nombre'] ?></p>
         <p><a href="/cerrarSesion">cerrar sesión</a></p>
     @else
-        <p><a href="/login">Iniciar sesión</a></p>
+        <a href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     @endif
 </nav>
 <!-- Container -->
