@@ -17,17 +17,16 @@
         Road Tech Assistance SL
     </a>
     @if(isset($_SESSION['id']))
-        <p>Hola <?php echo $_SESSION['nombre'] ?></p>
-        <p><a href="/cerrarSesion">cerrar sesión</a></p>
-    @else
         <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
+           onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
-        {{ __('Logout') }}
+            {{ __('Logout') }}
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+    @else
+                <a href="/login">Inicia sesión</a>
     @endif
 </nav>
 <!-- Container -->
