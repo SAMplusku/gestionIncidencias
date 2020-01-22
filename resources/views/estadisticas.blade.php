@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <h1>Users Graphs</h1>
+    <h1>Grafica del numero de incidencias</h1>
 
     <div>
         {!! $usersChart->container() !!}

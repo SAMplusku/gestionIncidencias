@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\IncidenciaChart;
+use App\Incidencia;
 use Illuminate\Http\Request;
 
 class IncidenciaChartController extends Controller
@@ -15,8 +16,12 @@ class IncidenciaChartController extends Controller
     public function index()
     {
         $usersChart = new IncidenciaChart();
-        $usersChart->labels(['Jan', 'Feb', 'Mar']);
-        $usersChart->dataset('Users by trimester', 'line', [10, 25, 13])
+
+        $incidencias = Incidencia::whereDate('created_at', today())->count();
+        $fechaIncidencias = Incidencia::whereDate('created_at', today());
+
+        $usersChart->labels([$fechaIncidencias->id]);
+        $usersChart->dataset('Incidencias por trimestre', 'line', [$incidencias])
             ->color("rgb(255, 99, 132)")
             ->backgroundcolor("rgb(255, 99, 132)");
 
