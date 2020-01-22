@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 </head>
 <body>
 <!-- Header -->
