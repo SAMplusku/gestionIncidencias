@@ -4,11 +4,16 @@
     $faker = Faker\Factory::create();
     session_start();
     ?>
+
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
     <div class="d-flex justify-content-center align-items-center">
         <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
 
             <form class="form-signin w-85" action="/anadir" method="get">
+
+                <h1>Mapa de la incidencia</h1>
+                <div id="map" style="height: 100%"></div>
+                <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
@@ -19,7 +24,8 @@
                 <label>Cliente</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre"  autofocus required>
+                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" autofocus
+                               required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="apellidos" placeholder="Apellidos" required>
@@ -75,11 +81,11 @@
                 <label>Tecnico</label>
 
 
-                    <select name="id_tecnico" class="form-control">
-                        @foreach($tecnicos as $tecnico)
-                            <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
-                        @endforeach
-                    </select>
+                <select name="id_tecnico" class="form-control">
+                    @foreach($tecnicos as $tecnico)
+                        <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                    @endforeach
+                </select>
 
 
                 <label>Observaciones</label>

@@ -44,7 +44,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -100,6 +100,7 @@ class RegisterController extends Controller
             $tecnico->localizacion = $data['localizacion'];
             $tecnico->especializacion = $data['especializacion'];
             $tecnico->jornada = $data['jornada'];
+            $tecnico->comunidad = $data['comunidad'];
             $tecnico->disponibilidad = 1;
             $tecnico->save();
         }elseif ($data['tipo'] == 'coordinador'){
