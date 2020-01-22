@@ -133,7 +133,7 @@
                     <h2>Incidencias</h2>
                         <table class="table table-responsive">
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
-                                {{$incidenciasOperador[0]->id}}
+                                {{$incidenciasOperador}}
                                 @foreach($incidenciasOperador as $incidencia)
                                     <thead>
                                     <tr>
