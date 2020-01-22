@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Coordinadore;
+use App\Gerente;
 use App\Http\Controllers\Controller;
+use App\Login;
+use App\Operadore;
+use App\Persona;
 use App\Providers\RouteServiceProvider;
+use App\Tecnico;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +52,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
+
+
+
             return redirect()->intended('dashboard');
         }
     }

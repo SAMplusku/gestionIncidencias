@@ -1,6 +1,22 @@
 @extends('master')
 @section('content')
-<?php session_start() ?>
+
+<?php
+$user =  App\Login::find(Auth::id())->first();
+$persona= App\Persona::where('id_login', $user->id)->first();
+session_start();
+$_SESSION['id'] = $user->id;
+$_SESSION['nombre'] = $persona->nombre;
+if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
+    $_SESSION['persona'] = "operador";
+}elseif (App\Tecnico::where('id_persona','=',$persona->id)->count()> 0){
+    $_SESSION['persona'] = "tecnico";
+}elseif (App\Coordinadore::where('id_persona','=',$persona->id)->count()> 0){
+    $_SESSION['persona'] = "coordinador";
+}elseif (App\Gerente::where('id_persona','=',$persona->id)->count()> 0){
+    $_SESSION['persona'] = "gerente";
+}
+?>
 
     @if(isset($_SESSION['nombre']))
         @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
