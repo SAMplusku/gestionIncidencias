@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Redirect;
 use App\Coordinadore;
 use App\Gerente;
 use App\Http\Controllers\Controller;
@@ -117,5 +118,12 @@ class RegisterController extends Controller
         return $user;
         //redirect()->route('index');
     }
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
 
+    
 }
