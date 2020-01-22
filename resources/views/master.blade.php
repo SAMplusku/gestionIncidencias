@@ -8,6 +8,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/mapa.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/marcas.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>

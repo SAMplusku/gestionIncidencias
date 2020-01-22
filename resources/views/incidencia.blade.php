@@ -24,7 +24,8 @@
                 <label>Cliente</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre"  autofocus required>
+                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" autofocus
+                               required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="apellidos" placeholder="Apellidos" required>
@@ -80,11 +81,11 @@
                 <label>Tecnico</label>
 
 
-                    <select name="id_tecnico" class="form-control">
-                        @foreach($tecnicos as $tecnico)
-                            <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
-                        @endforeach
-                    </select>
+                <select name="id_tecnico" class="form-control">
+                    @foreach($tecnicos as $tecnico)
+                        <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                    @endforeach
+                </select>
 
 
                 <label>Observaciones</label>
