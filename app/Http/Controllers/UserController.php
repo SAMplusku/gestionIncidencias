@@ -114,6 +114,6 @@ class UserController extends Controller
         unset($_SESSION['id']);
         unset($_SESSION['nombre']);
         unset($_SESSION['persona']);
-        return redirect()->route('index');
+        return redirect()->route('login');
     }
 }
