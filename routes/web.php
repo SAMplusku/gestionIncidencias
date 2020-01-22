@@ -34,12 +34,16 @@ Route::get('/index', function(){return view('index');})->name('index')->middlewa
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
 Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
-Route::get('/incidencia', function () {
-    return view('incidencia');
-})->name('incidencia')->middleware('auth');
 
+/*Route::get('/incidencia', function () {
+    return view('incidencia');
+})->name('incidencia')->middleware('auth');*/
+
+Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia')->middleware('auth');
 
 Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
+
+Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
 Route::get('/signup/store', function (){
     return view('signup');
@@ -50,6 +54,12 @@ Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth
 Route::get('/estadisticas', 'IncidenciaChartController@index');
 
 Auth::routes();
+
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
 Route::get('/busquedaTrabajadores/fecha', 'PersonaController@showFecha')->middleware('auth');
 

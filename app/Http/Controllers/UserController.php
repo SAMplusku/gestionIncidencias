@@ -12,6 +12,7 @@ use Redirect;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -114,6 +115,9 @@ class UserController extends Controller
         unset($_SESSION['id']);
         unset($_SESSION['nombre']);
         unset($_SESSION['persona']);
-        return redirect()->route('login');
+        Auth::logout();
+        return Redirect::route('index');
+        //Auth::logout();
+        //return redirect()->route('login');
     }
 }
