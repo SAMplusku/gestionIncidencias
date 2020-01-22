@@ -11,9 +11,24 @@
 
             <form class="form-signin w-85" action="/anadir" method="get">
 
-                <h1>Mapa de la incidencia</h1>
-                <div id="map" style="height: 100%"></div>
-                <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+                <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
+                <div id="map"></div>
+                <script>
+
+                    var map = L.map('map').
+                    setView([41.66, -4.72],
+                        14);
+
+                    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+                        maxZoom: 18
+                    }).addTo(map);
+
+                    L.control.scale().addTo(map);
+                    L.marker([41.66, -4.71], {draggable: true}).addTo(map);
+
+                </script>
+
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
