@@ -1,6 +1,7 @@
 @extends("master")
 
 @section("content")
+    <?php session_start()?>
         <div class="col-sm-10 mt-3 d-flex" >
         </div>
         <div class="row">
