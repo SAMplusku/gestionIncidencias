@@ -41,6 +41,8 @@ Route::get('/incidencia', function () {
 
 Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
 
+Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
+
 Route::get('/signup/store', function (){
     return view('signup');
 })->name('signup.store')->middleware('auth');
@@ -50,6 +52,12 @@ Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth
 Route::get('/estadisticas', 'IncidenciaChartController@index');
 
 Auth::routes();
+
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
 Route::get('/busquedaTrabajadores/fecha', 'PersonaController@showFecha')->middleware('auth');
 

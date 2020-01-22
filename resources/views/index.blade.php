@@ -1,8 +1,7 @@
 @extends('master')
 @section('content')
-
 <?php
-$user =  App\Login::find(Auth::id())->first();
+$user =  App\Login::find(Auth::id());
 $persona= App\Persona::where('id_login', $user->id)->first();
 session_start();
 $_SESSION['id'] = $user->id;
