@@ -47,9 +47,7 @@ Route::get('/signup/store', function (){
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-
-Route::get('/busquedaTrabajadores', 'PersonaController@index');
-
+Route::get('/estadisticas', 'IncidenciaChartController@index');
 
 Auth::routes();
 
