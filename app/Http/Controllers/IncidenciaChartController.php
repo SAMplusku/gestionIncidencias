@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Charts\IncidenciaChart;
 use App\Incidencia;
 use Illuminate\Http\Request;
+use DB;
 
 class IncidenciaChartController extends Controller
 {
@@ -16,21 +17,22 @@ class IncidenciaChartController extends Controller
     public function index()
     {
         $usersChart = new IncidenciaChart();
+        $incidencias = Incidencia::all();
+        $incidencias = DB::table('incidencias')
+            ->select(DB::raw('count(*) as incidencias'))
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+            ->get();
 
-        $incidencias = Incidencia::whereDate('created_at', today())->count();
-        $fechaIncidencias = Incidencia::all();
+        //select count(id) from incidencias group by DATE(created_at);
 
-        foreach ($fechaIncidencias as $incidencia) {
-            $fechaIncidencia = substr($incidencia->created_at,0,10);
-            if (!$fechaIncidencia = $incidencia) {
-                $usersChart->labels([substr($fechaIncidencias[0]->created_at,0,10)]);
-            }
+        $usersChart->labels(["Hola"]);
+
+        foreach ($incidencias as $incidencia) {
+            $usersChart->dataset('Incidencias por mes', 'line', [$incidencia->incidencias])
+                ->color("rgb(255, 99, 132)")
+                ->backgroundcolor("rgb(255, 99, 132)");
         }
 
-        $usersChart->labels([substr($fechaIncidencias[0]->created_at,0,10)]);
-        $usersChart->dataset('Incidencias por mes', 'line', [$incidencias])
-            ->color("rgb(255, 99, 132)")
-            ->backgroundcolor("rgb(255, 99, 132)");
 
         return view('estadisticas', [
             'usersChart' => $usersChart
