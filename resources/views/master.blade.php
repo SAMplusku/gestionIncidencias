@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script type="javascript" src="{{ URL::asset('js/mapa.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
@@ -39,5 +40,6 @@
         <a href="https://github.com/SAMplusku/gestionIncidencias">GitHub</a>
     </div>
 </footer>
+
 </body>
 </html>

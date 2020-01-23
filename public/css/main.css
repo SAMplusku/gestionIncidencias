@@ -70,6 +70,4 @@ a:hover, a:visited{
     transform: rotate(-90deg);
 }
 
-#listaUsuarios {
-    margin:300px;
-}
+#map { height: 280px; }
