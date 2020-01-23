@@ -16,7 +16,7 @@ if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
     $_SESSION['persona'] = "gerente";
 }
 ?>
-
+<p>{{Auth::user()}}</p>
     @if(isset($_SESSION['nombre']))
         @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
             <p><a href="/register">Dar de alta usuario</a></p>
