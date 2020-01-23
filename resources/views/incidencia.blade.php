@@ -10,24 +10,20 @@
         <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
 
             <form class="form-signin w-85" action="/anadir" method="get">
-
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
                 <div id="map"></div>
                 <script>
+                    let map = L.map('map').setView([42.866924, -2.676800], 8);
 
-                    var map = L.map('map').
-                    setView([41.66, -4.72],
-                        14);
+                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
+                        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 
-                    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-                        maxZoom: 18
                     }).addTo(map);
 
-                    L.control.scale().addTo(map);
-                    L.marker([41.66, -4.71], {draggable: true}).addTo(map);
+                    let marker = L.marker([42.866924, -2.676800]).addTo(map);
 
                 </script>
+                <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
 
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
