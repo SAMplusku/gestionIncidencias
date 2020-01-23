@@ -69,3 +69,7 @@ a:hover, a:visited{
     text-decoration: underline;
     transform: rotate(-90deg);
 }
+
+#listaUsuarios {
+    margin:300px;
+}

@@ -19,9 +19,7 @@ foreach ($resultado as $row) {
     $data[] = $row;
 }
 
-
+mysqli_close($conexion);
 
 echo json_encode($data);
-
-mysqli_close($conexion);
 ?>
