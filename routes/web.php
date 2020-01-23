@@ -29,7 +29,7 @@ Route::get('/signup', function (){
 
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
 
-Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
+
 
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
@@ -53,13 +53,15 @@ Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth
 
 Route::get('/estadisticas', 'IncidenciaChartController@index');
 
+Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
+
 Auth::routes();
 
 Auth::routes([
-    'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
 
 Route::get('/busquedaTrabajadores/fecha', 'PersonaController@showFecha')->middleware('auth');
 
