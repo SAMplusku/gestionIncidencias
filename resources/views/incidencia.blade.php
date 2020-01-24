@@ -7,7 +7,7 @@
 
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
     <div class="d-flex justify-content-center align-items-center">
-        <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
+        <div class="d-flex justify-content-center align-items-center card login bg-light w-75">
 
             <form class="form-signin w-85" action="/anadir" method="get">
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
@@ -20,11 +20,27 @@
 
                     }).addTo(map);
 
-                    let marker = L.marker([42.866924, -2.676800]).addTo(map);
+
+
+                    let popup = L.popup();
+
+                    function onMapClick(e) {
+                        popup
+                            .setLatLng(e.latlng)
+                            .setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString())
+                            .openOn(map);
+
+                            let localizacion = localizacion.setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString());
+                            document.getElementById('localizacion').value = localizacion;
+                    }
+
+                    map.on('click', onMapClick);
+
+
 
                 </script>
-                <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
 
+                <input type="hidden" id="localizacion" name="localizacion">
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
