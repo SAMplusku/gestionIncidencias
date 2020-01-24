@@ -73,7 +73,7 @@ a:hover, a:visited{
     transform: rotate(-90deg);
 }
 
-#map { height: 280px; }
+#map { height: 360px; width: 100%;}
 
 
 .blur {
