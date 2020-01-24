@@ -46,7 +46,7 @@ class PersonaController extends Controller
     }
 
     public function index(){
-        $trabajadores = Persona::all();
+        $trabajadores = DB::table('personas')->paginate(10);
 
         return view('busquedaTrabajadores', [
             'trabajadores' => $trabajadores

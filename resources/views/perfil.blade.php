@@ -5,7 +5,7 @@
         <div class="col-sm-10 mt-3 d-flex" >
         </div>
         <div class="row d-flex justify-content-center">
-            <div class="col-sm-2"><!--left col-->
+            <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
                         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
                     <label class="btn btn-default bg-info">
@@ -130,28 +130,44 @@
                 </div>
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
-                <div class="col-sm-9">
-                    <h2>Incidencias</h2>
-                        <table class="table table-responsive">
+                <div class="col-sm-12">
+                    <h2>Mis Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
-                                    <thead>
-                                    <tr>
-                                        <th>Incidencia-{{$incidencia->id}}</th>
-                                    </tr>
-                                    </thead>
+                                    <div>
+                                        <a href="incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
+                                        @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
+                                        <hr>
+                                    </div>
                                 @endforeach
                                 @else
                                 @foreach($incidenciasTecnico as $incidencia)
-                                <thead>
-                                <tr>
-                                    <th>Incidencia - {{$incidencia->id}}</th>
-                                    <th>@if($incidencia->estado = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif </th>
-                                </tr>
-                                </thead>
+                                    <div>
+                                        <h3><a href="incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
+                                        Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
+                                        <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
+                                        Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
+                                        <div
+                                            id="descripcionIncidente"> Descripcion: {{$incidencia->descripcion}}
+                                        </div>
+                                        <hr>
+
+                                    </div>
                                 @endforeach
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                             @endif
-                        </table>
                 </div>
                 @endif
             </div>

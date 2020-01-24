@@ -11,7 +11,6 @@
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script type="javascript" src="{{ URL::asset('js/mapa.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
@@ -34,12 +33,12 @@
 
 
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer clearfix">
     <div class="container text-center">
         <span class="text-muted">© 2020 Copyright</span>
         <a href="https://github.com/SAMplusku/gestionIncidencias">GitHub</a>
     </div>
 </footer>
-
+<script type="javascript" src="{{ URL::asset('js/mapa.js')}}"></script>
 </body>
 </html>
