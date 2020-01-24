@@ -11,6 +11,9 @@ a:hover, a:visited{
     width: 30%;
     height: 50%;
 }
+.index{
+    margin-top: 2%;
+}
 .signup{
     width: 40%;
     height: 95%;
@@ -71,3 +74,21 @@ a:hover, a:visited{
 }
 
 #map { height: 280px; }
+
+
+.blur {
+    -webkit-filter: blur(5px); -moz-filter: blur(5px);
+    -o-filter: blur(5px); -ms-filter: blur(5px);
+    filter: url(#blur); filter: blur(5px);  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+    -webkit-transition: 1s -webkit-filter linear;
+    -o-transition: 1s -o-filter linear;
+
+}
+img.blur:hover{
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+    filter: blur(0px);
+}

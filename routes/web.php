@@ -34,7 +34,6 @@ Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('s
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
 Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
-
 /*Route::get('/incidencia', function () {
     return view('incidencia');
 })->name('incidencia')->middleware('auth');*/
