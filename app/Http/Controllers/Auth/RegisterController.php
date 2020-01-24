@@ -125,5 +125,5 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
+
 }
