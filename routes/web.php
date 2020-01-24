@@ -40,6 +40,8 @@ Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('sign
 
 Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia')->middleware('auth');
 
+Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
+
 Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
 
 Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
@@ -50,7 +52,9 @@ Route::get('/signup/store', function (){
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/estadisticas', 'IncidenciaChartController@index');
+Route::get('/estadisticas', function () {
+    return view("estadisticas");
+});
 
 Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
 

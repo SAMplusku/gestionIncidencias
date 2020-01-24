@@ -92,3 +92,9 @@ img.blur:hover{
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
     filter: blur(0px);
 }
+
+#descripcionIncidente {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

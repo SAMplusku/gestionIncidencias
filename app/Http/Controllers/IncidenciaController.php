@@ -54,4 +54,13 @@ class IncidenciaController extends Controller
         $incidencia->save();
         return redirect()->route('index');
     }
+
+    public function show($id)
+    {
+        $incidencia = Incidencia::all()->where('id',$id)->first();
+
+        return view("verIncidencia", [
+            "incidencia" => $incidencia
+        ]);
+    }
 }

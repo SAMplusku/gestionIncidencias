@@ -33,7 +33,7 @@
 
 
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer clearfix">
     <div class="container text-center">
         <span class="text-muted">© 2020 Copyright</span>
         <a href="https://github.com/SAMplusku/gestionIncidencias">GitHub</a>
