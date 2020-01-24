@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Gerente;
 use App\Taller;
 use App\Coordinadore;
 use App\Incidencia;
@@ -26,7 +27,7 @@ class PersonaController extends Controller
         $incidenciasOperador = Incidencia::all()->where('id_operador',$id);
         $incidenciasTecnico = Incidencia::all()->where('id_tecnico',$id);
 
-        if(Coordinadore::all()->where('id_persona',$id)->count()> 0) {
+        if(Coordinadore::all()->where('id_persona',$id)->count()> 0 || Gerente::all()->where('id_persona',$id)->count()> 0) {
             return view("perfil", [
                 "persona2" => $persona
             ]);

@@ -23,7 +23,7 @@
         Road Tech Assistance SL
     </a>
     @if(isset($_SESSION['id']))
-
+        <a href="/perfil/{{$_SESSION['id']}}">Perfil</a>
         <a href="/cerrarSesion">Cerrar sesión</a>
 
     @endif
