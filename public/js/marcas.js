@@ -1,1 +1,1 @@
-let marker = L.marker([42.866924, -2.676800]).addTo(map);
+let marker = L.marker([43.062459, -2.495897]).addTo(map);

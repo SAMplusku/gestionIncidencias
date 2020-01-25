@@ -94,5 +94,7 @@ Route::get('/busquedaTrabajadores/tecnico/vizcaya', 'PersonaController@showVizca
 
 Route::get('/buscadorTrabajadores', 'PersonaController@showTrabajadores')->middleware('auth');
 
+Route::get('/cookie/set','CookieController@setCookie');
 
+Route::get('/cookie/get','CookieController@getCookie');
 

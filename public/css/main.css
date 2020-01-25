@@ -73,13 +73,13 @@ a:hover, a:visited{
     transform: rotate(-90deg);
 }
 
-#map { height: 280px; }
+#map { height: 360px; width: 100%;}
 
 
 .blur {
-    -webkit-filter: blur(5px); -moz-filter: blur(5px);
-    -o-filter: blur(5px); -ms-filter: blur(5px);
-    filter: url(#blur); filter: blur(5px);  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+    -webkit-filter: blur(1px); -moz-filter: blur(1px);
+    -o-filter: blur(1px); -ms-filter: blur(1px);
+    filter: url(#blur); filter: blur(1px);  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
     -webkit-transition: 1s -webkit-filter linear;
     -o-transition: 1s -o-filter linear;
 
@@ -93,8 +93,15 @@ img.blur:hover{
     filter: blur(0px);
 }
 
+
+.indexador {
+    background-image: url("https://image.freepik.com/foto-gratis/hombre-mujer-trajes-negocios-estrictos-oficina_85574-2043.jpg");
+    background-size: cover;
+    height: 100%;}
+
 #descripcionIncidente {
     overflow:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
 }
+
