@@ -12,7 +12,7 @@
         function showGraph()
         {
             {
-                $.post("data.php",
+                $.post("/data.php",
                     function (data)
                     {
                         console.log(data);
