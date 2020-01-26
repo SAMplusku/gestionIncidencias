@@ -63,7 +63,10 @@
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
                     <li class="p-2">
-                        <a href="/index">Home</a>
+                        <a href="/perfil/{{$persona2->id}}}/incidencias">Incidencias</a>
+                    </li>
+                    <li class="p-2">
+                        <a href="/perfil/{{$persona2->id}}}/index">Datos personales</a>
                     </li>
                 </ul><br>
 

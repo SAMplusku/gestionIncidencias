@@ -58,9 +58,13 @@ class IncidenciaController extends Controller
     public function show($id)
     {
         $incidencia = Incidencia::all()->where('id',$id)->first();
+        $cliente = Cliente::all()->where('id',$incidencia->id_cliente)->first();
+        $vehiculo = Vehiculo::all()->where('id',$cliente->id_vehiculo)->first();
 
         return view("verIncidencia", [
-            "incidencia" => $incidencia
+            "incidencia" => $incidencia,
+            "cliente" => $cliente,
+            "vehiculo" => $vehiculo
         ]);
     }
 }
