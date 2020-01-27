@@ -104,7 +104,7 @@ class UserController extends Controller
         nombre -> '.request('name').'<br>Apellidos -> '.request('lastname').'<br>Teléfono -> '.request('phone').'<br>
         DNI -> '.request('dni').'<br>Fecha de nacimiento -> '.request('edad').'<br>Dirección -> '.request('direccion').'<br>
         Email -> '.request('email');
-        $mail->AddAddress('arkaitz.galisteo@ikasle.egibide.org');
+        $mail->AddAddress(request('coordinador'));
         $mail->Send();
 
         return redirect()->route('login');

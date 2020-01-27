@@ -69,7 +69,7 @@
 
                     <div class="col-md-6">
                         <label>DNI</label>
-                        <input class="form-control" type="text" name="dni" placeholder="DNI" required>
+                        <input class="form-control" type="text" id="dniCliente" name="dni" placeholder="DNI" onchange="existeDni()" required>
                     </div>
                     <div class="col-md-6">
                         <label>Telefono</label>
@@ -137,5 +137,7 @@
             </form>
         </div>
     </div>
-
+    <div id="prueba"></div>
+    <script type="text/javascript" src="{{ URL::asset('js/ajax.js') }}"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 @endsection
