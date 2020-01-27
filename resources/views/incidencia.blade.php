@@ -20,18 +20,26 @@
 
                     }).addTo(map);
 
+                    var searchCtrl = L.control.sea
+                    searchCtrl.addTo(map);
 
-
-                    let popup = L.popup();
+                    //let popup = L.popup();
+                    let marker = L.marker();
 
                     function onMapClick(e) {
-                        popup
+                       /* popup
                             .setLatLng(e.latlng)
-                            .setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString())
-                            .openOn(map);
+                            .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
+                            .openOn(map);*/
 
-                            let localizacion = localizacion.setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString());
-                            document.getElementById('localizacion').value = localizacion;
+                        marker
+                            .setLatLng(e.latlng)
+                            .addTo(map);
+
+                        let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
+
+                        document.getElementById('localizacion').value = localizacion1;
+                        console.log(localizacion1);
                     }
 
                     map.on('click', onMapClick);
@@ -61,7 +69,7 @@
 
                     <div class="col-md-6">
                         <label>DNI</label>
-                        <input class="form-control" type="text" name="dni" placeholder="DNI" required>
+                        <input class="form-control" type="text" id="dniCliente" name="dni" placeholder="DNI" onchange="existeDni()" required>
                     </div>
                     <div class="col-md-6">
                         <label>Telefono</label>
@@ -108,7 +116,14 @@
 
                 <select name="id_tecnico" class="form-control">
                     @foreach($tecnicos as $tecnico)
-                        <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                        @foreach($personas as $persona)
+                            @if($tecnico->disponible == 0)
+                                @if($tecnico->id_persona == $persona->id)
+                                    <option value="{{$tecnico->id_persona}}"
+                                            name="id_tecnico">{{$persona->nombre}}</option>
+                                @endif
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
 
@@ -122,5 +137,7 @@
             </form>
         </div>
     </div>
-
+    <div id="prueba"></div>
+    <script type="text/javascript" src="{{ URL::asset('js/ajax.js') }}"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 @endsection
