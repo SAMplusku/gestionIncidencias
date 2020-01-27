@@ -100,5 +100,12 @@
                 @endforeach
                 </tbody>
             </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                {{$trabajadores->links()}}
+                            </ul>
+                        </nav>
+
+
         </div>
 @endsection
