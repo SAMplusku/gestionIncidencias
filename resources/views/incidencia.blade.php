@@ -36,8 +36,6 @@
 
                     map.on('click', onMapClick);
 
-
-
                 </script>
 
                 <input type="hidden" id="localizacion" name="localizacion">
