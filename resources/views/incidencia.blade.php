@@ -42,9 +42,7 @@
                         console.log(localizacion1);
                     }
 
-
                     map.on('click', onMapClick);
-
 
                 </script>
 

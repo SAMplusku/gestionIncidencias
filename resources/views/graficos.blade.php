@@ -16,7 +16,7 @@
         </ul><br>
 
         <div class="float-left">
-            Tecnico:
+            Tecnico: Me cago en dios
             <select name="id_tecnico" class="form-control">
                 @foreach($tecnicos as $tecnico)
                     <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
@@ -34,10 +34,10 @@
             showGraph();
         });
 
-         function showGraph() {
-             document.getElementById('canvas').style.display = 'block';
-             document.getElementById('inSitu').style.display = 'none';
-             document.getElementById('tiempoMedio').style.display = 'none';
+        function showGraph() {
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('inSitu').style.display = 'none';
+            document.getElementById('tiempoMedio').style.display = 'none';
 
             $.ajax({
                 url: "/data.php",
@@ -47,14 +47,10 @@
                     var incidentes = [];
                     var fechas = [];
 
-                    console.log(data);
-
                     for (var i in data) {
                         incidentes.push(data[i].numIncidencias);
                         fechas.push(data[i].fechas.substring(0,11));
                     }
-
-                    console.log("uhñgrlenjk");
 
                     var chartdata = {
                         labels: fechas,
@@ -80,53 +76,6 @@
             });
         }
 
-        function resueltasInSitu() {
-            document.getElementById('canvas').style.display = 'none';
-            document.getElementById('tiempoMedio').style.display = 'none';
-            document.getElementById('inSitu').style.display = 'block';
-
-            $.ajax({
-                url: "/resueltasInSitu",
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    var incidentesInSitu = [];
-                    var incidentesTarde = [];
-
-                    for(var i in data){
-                        incidentesInSitu.push(data[i].inSitu)
-                        incidentesTarde.push(data[i].tarde)
-                    }
-
-                    var charData = {
-                        datasets: [
-                            {
-                                labels: [
-                                    'Resueltas in situ',
-                                    'Resueltas mas tarde'
-                                    ],
-                                backgroundColor: [
-                                    "#FF6384",
-                                    "#63FF84"
-                                ],
-                                data: [
-                                    incidentesInSitu,
-                                    incidentesTarde
-                                    ]
-                            }
-                        ]
-                    };
-
-                    var canvas = $("#inSitu");
-
-                    var inSituChart = new Chart(canvas, {
-                        type: 'pie',
-                        data: charData
-                    })
-                }
-            })
-        }
-
         function tiempoMedio() {
             document.getElementById('inSitu').style.display = 'none';
             document.getElementById('canvas').style.display = 'none';
@@ -134,7 +83,7 @@
 
             $.ajax({
                 url: '/tiempoMedio',
-                method: 'GET',
+                method: 'POST',
                 dataType: 'json',
                 success: function (data) {
                     var tiempoMedio = [];
@@ -158,7 +107,7 @@
 
                     var canvas = $("#tiempoMedio");
 
-                    var tiempoMedio = new Chart(canvas, {
+                    var tiempoMedioChart = new Chart(canvas, {
                         type: 'line',
                         data: chartdata
                     })
