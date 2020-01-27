@@ -10,10 +10,10 @@ class TecnicoController extends Controller
 {
     public function detalleTecnicos()
     {
-        $persona = Persona::all()->where('id');
+        $personas = Persona::all()->where('id');
         $tecnicos = Tecnico::all()->where('id_persona');
         return view('incidencia', [
-            'personas' => $persona,
+            'personas' => $personas,
             'tecnicos' => $tecnicos
         ]);
     }
