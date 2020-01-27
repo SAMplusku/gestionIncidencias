@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 </head>
 <body>
 <!-- Header -->
@@ -22,8 +23,30 @@
         Road Tech Assistance SL
     </a>
     @if(isset($_SESSION['id']))
-        <a href="/perfil/{{$_SESSION['id']}}">Perfil</a>
-        <a href="/cerrarSesion">Cerrar sesión</a>
+        @if($_SESSION['persona'] == 'tecnico')
+            <?php
+            $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
+            $incidencias = \App\Incidencia::all();
+            $notificacion = 0;
+            foreach ($incidencias as $incidencia){
+                if ($incidencia->id_tecnico == $persona->id){
+                    $notificacion = 1;
+                    $idIncidencia = $incidencia->id;
+                }
+            }
+
+            ?>
+            @if($notificacion == 1)
+                <a href="/incidencia/{{$idIncidencia}}"><img src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
+            @else
+                <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
+            @endif
+        @endif
+        <div>
+            <a href="/perfil/{{$_SESSION['id']}}">Perfil</a>
+            <a href="/cerrarSesion">Cerrar sesión</a>
+        </div>
+
 
     @endif
 </nav>

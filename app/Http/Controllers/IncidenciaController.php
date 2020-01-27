@@ -55,6 +55,27 @@ class IncidenciaController extends Controller
         $incidencia->save();
         return redirect()->route('index');
     }
+    public function datosCliente(){
+        $dni = Request('dniCliente');
+        $cliente = Incidencia::where('dni', $dni)->first();
+        if ($cliente.count()>0){
+            $datos = array(
+                'nombre' => $cliente->nombre,
+                'telefono' => $cliente->telefono,
+                'apellidos' => $cliente->apellidos,
+                'edad' => $cliente->edad,
+                'direccion' => $cliente->direccion
+            );
+            return response()->json($datos, 200);
+
+        }else{
+            $datos = array(
+                'nombre' => 'msn',
+            );
+            return response()->json($datos, 200);
+
+        }
+    }
 
     public function show($id)
     {
