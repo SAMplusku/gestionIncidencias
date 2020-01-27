@@ -102,7 +102,9 @@
             </table>
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                {{$trabajadores->links()}}
+                                @if(Request::is('busquedaTrabajadores') || Request::is('busquedaTrabajadores/fecha') )
+                                    {{$trabajadores->links()}}
+                                @endif
                             </ul>
                         </nav>
 

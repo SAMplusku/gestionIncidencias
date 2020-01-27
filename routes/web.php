@@ -27,16 +27,25 @@ Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
 
-Route::get('/data.php', function (){
+Route::post('/data.php', function (){
     ob_start();
     require(path("public")."data.php");
     return ob_get_clean();
 });
 
+Route::get('/resueltasInSitu', function (){
+    ob_start();
+    require(path("public")."inSitu.php");
+    return ob_get_clean();
+});
+
+Route::post('/tiempoMedio', function (){
+    ob_start();
+    require(path("public")."tiempoMedio.php");
+    return ob_get_clean();
+});
+
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
-
-
-
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
 //Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
@@ -60,9 +69,7 @@ Route::get('/signup/store', function (){
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/estadisticas', function () {
-    return view("estadisticas");
-});
+Route::get('/estadisticas', 'EstadisticasController@index');
 
 Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
 
