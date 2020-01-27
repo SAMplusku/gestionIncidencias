@@ -21,8 +21,8 @@ Route::get('/', function () {
 
 Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 
-Route::get('/login', function (){ return view('login'); })->name('login');
-Route::get('/login/check', 'UserController@check')->name('login.check');
+//Route::get('/login', function (){ return view('login'); })->name('login');
+//Route::get('/login/check', 'UserController@check')->name('login.check');
 Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
@@ -39,7 +39,7 @@ Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('s
 
 
 Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser')->middleware('auth');
-Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
+//Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('signup.darAlta')->middleware('auth');
 /*Route::get('/incidencia', function () {
     return view('incidencia');
 })->name('incidencia')->middleware('auth');*/
@@ -47,6 +47,8 @@ Route::get('/signup/darAlta', function(){ return view('darAlta'); })->name('sign
 Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia')->middleware('auth');
 
 Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
+
+Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->name('datosCliente')->middleware('auth');
 
 Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
 
