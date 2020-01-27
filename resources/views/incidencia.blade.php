@@ -20,22 +20,30 @@
 
                     }).addTo(map);
 
+                    var searchCtrl = L.control.sea
+                    searchCtrl.addTo(map);
 
-
-                    let popup = L.popup();
+                    //let popup = L.popup();
+                    let marker = L.marker();
 
                     function onMapClick(e) {
-                        popup
+                       /* popup
                             .setLatLng(e.latlng)
-                            .setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString())
-                            .openOn(map);
+                            .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
+                            .openOn(map);*/
 
-                            let localizacion = localizacion.setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString());
-                            document.getElementById('localizacion').value = localizacion;
+                        marker
+                            .setLatLng(e.latlng)
+                            .addTo(map);
+
+                        let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
+
+                        document.getElementById('localizacion').value = localizacion1;
+                        console.log(localizacion1);
                     }
 
-                    map.on('click', onMapClick);
 
+                    map.on('click', onMapClick);
 
 
                 </script>
@@ -110,7 +118,14 @@
 
                 <select name="id_tecnico" class="form-control">
                     @foreach($tecnicos as $tecnico)
-                        <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                        @foreach($personas as $persona)
+                            @if($tecnico->disponible == 0)
+                                @if($tecnico->id_persona == $persona->id)
+                                    <option value="{{$tecnico->id_persona}}"
+                                            name="id_tecnico">{{$persona->nombre}}</option>
+                                @endif
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
 

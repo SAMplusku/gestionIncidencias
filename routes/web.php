@@ -27,6 +27,12 @@ Route::get('/signup', function (){
     return view('signup');
 })->name('signup');
 
+Route::get('/data.php', function (){
+    ob_start();
+    require(path("public")."data.php");
+    return ob_get_clean();
+});
+
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
 
 

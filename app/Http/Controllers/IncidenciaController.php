@@ -45,6 +45,7 @@ class IncidenciaController extends Controller
                 'fecha'=>$request->get('fecha'),
                 'descripcion'=>$request->get('descripcion'),
                 'observacion'=>$request->get('observacion'),
+                'localizacion'=>$request->get('localizacion'),
                 'id_tecnico'=>$request->get('id_tecnico'),
                 'id_operador'=>$request->get('id_operador'),
                 'id_cliente'=>$cliente2->id
@@ -58,9 +59,13 @@ class IncidenciaController extends Controller
     public function show($id)
     {
         $incidencia = Incidencia::all()->where('id',$id)->first();
+        $cliente = Cliente::all()->where('id',$incidencia->id_cliente)->first();
+        $vehiculo = Vehiculo::all()->where('id',$cliente->id_vehiculo)->first();
 
         return view("verIncidencia", [
-            "incidencia" => $incidencia
+            "incidencia" => $incidencia,
+            "cliente" => $cliente,
+            "vehiculo" => $vehiculo
         ]);
     }
 }
