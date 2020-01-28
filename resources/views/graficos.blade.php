@@ -3,20 +3,14 @@
 @section('content')
     <?php session_start()?>
     <nav class="p-2">
-        <ul class="nav nav-tabs">
-            <li class="p-2">
-                <button onclick="showGraph()">Numero de incidencias por dia</button>
-            </li>
-            <li class="p-2">
-                <button onclick="tiempoMedio()">Tiempo medio de resolucion</button>
-            </li>
-            <li class="p-2">
-                <button onclick="resueltasInSitu()">Resueltas en in situ</button>
-            </li>
-        </ul><br>
+        <div class="">
+            <select id="select">
+                <option value="IncidenciasDia">Numero incidencias por dia</option>
+                <option value="tiempoMedio">Tiempo medio de resolucion</option>
+                <option value="inSitu">Resueltas in situ</option>
+            </select>
 
-        <div class="float-left">
-            Tecnico: Me cago en dios
+            Tecnico:
             <select name="id_tecnico" class="form-control">
                 @foreach($tecnicos as $tecnico)
                     <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
@@ -26,94 +20,125 @@
     </nav>
 
     <canvas id="canvas"></canvas>
-    <canvas id="tiempoMedio"></canvas>
-    <canvas id="inSitu"></canvas>
 
     <script>
+        let chart;
         $(document).ready(function () {
-            showGraph();
-        });
-
-        function showGraph() {
-            document.getElementById('canvas').style.display = 'block';
-            document.getElementById('inSitu').style.display = 'none';
-            document.getElementById('tiempoMedio').style.display = 'none';
+            if(chart !== undefined)
+                chart.destroy()
 
             $.ajax({
-                url: "/data.php",
-                method: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    var incidentes = [];
-                    var fechas = [];
-
-                    for (var i in data) {
-                        incidentes.push(data[i].numIncidencias);
-                        fechas.push(data[i].fechas.substring(0,11));
-                    }
-
-                    var chartdata = {
-                        labels: fechas,
-                        datasets: [
-                            {
-                                label: 'Numero incidencias',
-                                backgroundColor: '#49e2ff',
-                                borderColor: '#46d5f1',
-                                hoverBackgroundColor: '#CCCCCC',
-                                hoverBorderColor: '#666666',
-                                data: incidentes
-                            }
-                        ]
-                    };
-
-                    var canvas = $("#canvas");
-
-                    var numeroIncidenciasChart = new Chart(canvas, {
-                        type: 'line',
-                        data: chartdata
-                    })
+               url: '/estadisticas/cargarGrafica',
+               method: 'POST',
+                data: {grafico: 'IncidenciasDia'},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data){
+                    console.log("De puta madre")
+                    console.log(data);
+                    incidenciaPorDia(data)
+                },
+                error: function (data) {
+                    console.log("Error ");
+                    console.log(data);
                 }
             });
-        }
+        });
 
-        function tiempoMedio() {
-            document.getElementById('inSitu').style.display = 'none';
-            document.getElementById('canvas').style.display = 'none';
-            document.getElementById('tiempoMedio').style.display = 'block';
+        function incidenciaPorDia(data) {
+            var incidentes = [];
+            var fechas = [];
 
-            $.ajax({
-                url: '/tiempoMedio',
-                method: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    var tiempoMedio = [];
+            for (var i in data) {
+                incidentes.push(data[i].numIncidencias);
+                fechas.push(data[i].fechas.substring(0,11));
+            }
 
-                    for(var i in data) {
-                        tiempoMedio.push(data[i].tiempoMedio);
+            var chartdata = {
+                labels: fechas,
+                datasets: [
+                    {
+                        label: 'Numero incidencias',
+                        backgroundColor: '#49e2ff',
+                        borderColor: '#46d5f1',
+                        hoverBackgroundColor: '#CCCCCC',
+                        hoverBorderColor: '#666666',
+                        data: incidentes
                     }
+                ]
+            };
 
-                    var chartdata = {
-                        datasets: [
-                            {
-                                label: 'Numero incidencias',
-                                backgroundColor: '#49e2ff',
-                                borderColor: '#46d5f1',
-                                hoverBackgroundColor: '#CCCCCC',
-                                hoverBorderColor: '#666666',
-                                data: tiempoMedio
-                            }
-                        ]
-                    };
+            var canvas = $("#canvas");
 
-                    var canvas = $("#tiempoMedio");
-
-                    var tiempoMedioChart = new Chart(canvas, {
-                        type: 'line',
-                        data: chartdata
-                    })
-                }
+            var numeroIncidenciasChart = new Chart(canvas, {
+                type: 'line',
+                data: chartdata
             })
         }
+
+        $('#select').on('change', function () {
+            if(chart !== undefined)
+                chart.destroy()
+            $.ajax({
+                type: 'POST',
+                url: '/estadisticas/cargarGrafica',
+                data: {grafico: $('#select').val() },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data){
+                    filtro = $('#select').val()
+                    switch (filtro){
+                        case 'IncidenciasDia':
+                            incidenciaPorDia(data);
+                            break;
+                        case 'inSitu':
+                            resueltasInSitu(data);
+                            break;
+                        case 'tiempoMedio':
+                            tiempoMedio(data);
+                            break;
+                    }
+                },
+                error: function (result) {
+                    console.log("ERROR");
+                    console.log(result);
+                }
+            });
+        });
+
+        function tiempoMedio(data) {
+            let $tecnico = [];
+            let $dias = [];
+
+            for(let i in data) {
+                $tecnico.push(data[i].id_tecnico);
+                $dias.push(data[i].dias);
+            }
+            var chartdata = {
+                labels: $dias,
+                datasets: [
+                    {
+                        label: 'Numero incidencias',
+                        backgroundColor: '#49e2ff',
+                        borderColor: '#46d5f1',
+                        hoverBackgroundColor: '#CCCCCC',
+                        hoverBorderColor: '#666666',
+                        data: $tecnico
+                    }
+                ]
+            };
+
+            var canvas = $("#canvas");
+
+            var numeroIncidenciasChart = new Chart(canvas, {
+                type: 'line',
+                data: chartdata
+            })
+        }
+
+
     </script>
 @endsection
 <div>
