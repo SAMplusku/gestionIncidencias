@@ -1,5 +1,5 @@
 @extends("master")
-
+<?php session_start() ?>
 
     @section("content")
                     <div class="main-box clearfix col-lg-12 p-0">
