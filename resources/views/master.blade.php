@@ -23,7 +23,7 @@
         Road Tech Assistance SL
     </a>
 
-    @if(isset($_SESSION['id']))
+    @if(isset($_SESSION['id'])  )
         <div>
             <nav class="nav">
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
