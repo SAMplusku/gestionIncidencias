@@ -1,8 +1,28 @@
-let map = L.map('map').setView([43.06365, -2.8541], 7);
-let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-let osmAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-let osm = new L.TileLayer(osmUrl, {
-    minZoom: 5,
-    maxZoom: 16,
-    attribution: osmAttrib
-});
+
+function mapa(){
+    console.log("Error")
+
+    let map = L.map('map').setView([42.866924, -2.676800], 8);
+
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+
+    }).addTo(map);
+
+    console.log("Error")
+
+    let popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString())
+            .openOn(map);
+
+        let localizacion = localizacion.setContent(e.latlng.lat.toString() + ", " +  e.latlng.lng.toString());
+    }
+
+    map.on('click', onMapClick);
+
+
+}

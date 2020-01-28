@@ -12,6 +12,7 @@ use Redirect;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -103,7 +104,7 @@ class UserController extends Controller
         nombre -> '.request('name').'<br>Apellidos -> '.request('lastname').'<br>Teléfono -> '.request('phone').'<br>
         DNI -> '.request('dni').'<br>Fecha de nacimiento -> '.request('edad').'<br>Dirección -> '.request('direccion').'<br>
         Email -> '.request('email');
-        $mail->AddAddress('arkaitz.galisteo@ikasle.egibide.org');
+        $mail->AddAddress(request('coordinador'));
         $mail->Send();
 
         return redirect()->route('login');
@@ -114,6 +115,9 @@ class UserController extends Controller
         unset($_SESSION['id']);
         unset($_SESSION['nombre']);
         unset($_SESSION['persona']);
-        return redirect()->route('login');
+        Auth::logout();
+        return Redirect::route('index');
+        //Auth::logout();
+        //return redirect()->route('login');
     }
 }

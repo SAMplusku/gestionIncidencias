@@ -14,6 +14,16 @@
                     Subir foto de perfil <input type="file" hidden>
                 </label>-->
                 <input type="text" name="email" class="form-control" placeholder="Email" required><br>
+                <select name="coordinador" class="form-control">
+                    <option disabled selected>Coordinador</option>
+                <?php
+                $coordinadores = \App\Coordinadore::all();
+                foreach($coordinadores as $coordinador){
+                    $persona = \App\Persona::find($coordinador->id_persona);
+                    echo "<option value='$persona->email'>$persona->nombre</option>";
+                }
+                ?>
+                </select><br><br>
                 <!--<input type="password" name="password" class="form-control" placeholder="Password" required><br>-->
                 <button class="btn btn-success btn-block" type="submit">Enviar</button>
             </form>

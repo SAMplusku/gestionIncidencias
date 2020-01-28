@@ -4,7 +4,7 @@
     <?php session_start()?>
         <div class="col-sm-10 mt-3 d-flex" >
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
                         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
@@ -30,6 +30,12 @@
                         @endif
                     </li>
 
+                    @if(isset($operador))
+                        <li class="list-group-item text-center">
+                            <strong>Incidencias</strong> {{$operador}}
+                        </li>
+                    @endif
+
                     @if(isset($persona))
                     <li class="list-group-item text-center">
                         <strong>Especializacion: </strong> {{$persona->especializacion}}
@@ -50,13 +56,17 @@
                      <li class="list-group-item text-center">
                          <strong>Jornada: </strong> {{$persona->jornada}}
                      </li>
-                        @endif
+                    @endif
+
                 </ul>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <ul class="nav nav-tabs">
                     <li class="p-2">
-                        <a href="/index">Home</a>
+                        <a href="/perfil/{{$persona2->id}}}/incidencias">Incidencias</a>
+                    </li>
+                    <li class="p-2">
+                        <a href="/perfil/{{$persona2->id}}}/index">Datos personales</a>
                     </li>
                 </ul><br>
 
@@ -121,6 +131,49 @@
                         <hr>
                     </div>
                 </div>
+
+                @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
+                <div class="col-sm-12">
+                    <h2>Mis Incidencias</h2> <br>
+                            @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
+                                @foreach($incidenciasOperador as $incidencia)
+                                    <div>
+                                        <a href="incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
+                                        @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
+                                        <hr>
+                                    </div>
+                                @endforeach
+                                @else
+                                @foreach($incidenciasTecnico as $incidencia)
+                                    <div>
+                                        <h3><a href="incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
+                                        Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
+                                        <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
+                                        Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
+                                        <div
+                                            id="descripcionIncidente"> Descripcion: {{$incidencia->descripcion}}
+                                        </div>
+                                        <hr>
+
+                                    </div>
+                                @endforeach
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                            @endif
+                </div>
+                @endif
             </div>
+
 
 @endsection

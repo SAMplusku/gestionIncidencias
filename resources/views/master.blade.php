@@ -9,40 +9,79 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 </head>
 <body>
 <!-- Header -->
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="/index">
-        <img src="https://guiadepescado.com/wp-content/uploads/2016/11/boqueron-especie.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="40" class="d-inline-block align-top" alt="">
         Road Tech Assistance SL
     </a>
+
     @if(isset($_SESSION['id']))
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-    @else
-                <a href="/login">Inicia sesión</a>
+        <div>
+            <nav class="nav">
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
+                    <a class="nav-link" href="/incidencia">Añadir Incidencia</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' ||$_SESSION['persona'] == 'tecnico')
+                    <a class="nav-link" href="#">Ver Incidencia</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="#">Estadísticas</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="/register">Dar de alta usuario</a>
+                @endif
+            </nav>
+        </div>
+        @if($_SESSION['persona'] == 'tecnico')
+            <?php
+            $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
+            $incidencias = \App\Incidencia::all();
+            $notificacion = 0;
+            foreach ($incidencias as $incidencia){
+                if ($incidencia->id_tecnico == $persona->id){
+                    $notificacion = 1;
+                    $idIncidencia = $incidencia->id;
+                }
+            }
+            ?>
+            @if($notificacion == 1)
+                <a href="/incidencia/{{$idIncidencia}}"><img src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
+            @else
+                <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
+            @endif
+        @endif
+            <div class="btn-group dropleft">
+                <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menú</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/perfil/{{$_SESSION['id']}}">Perfil</a>
+                    <a class="dropdown-item" href="/cerrarSesion">Cerrar sesión</a>
+                </div>
+            </div>
     @endif
 </nav>
 <!-- Container -->
-<div class="container-fluid">
+
     @yield('content')
-</div>
+
 
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer clearfix">
     <div class="container text-center">
         <span class="text-muted">© 2020 Copyright</span>
         <a href="https://github.com/SAMplusku/gestionIncidencias">GitHub</a>
     </div>
 </footer>
+<script type="javascript" src="{{ URL::asset('js/mapa.js')}}"></script>
 </body>
 </html>

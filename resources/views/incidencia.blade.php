@@ -7,13 +7,46 @@
 
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
     <div class="d-flex justify-content-center align-items-center">
-        <div class="d-flex justify-content-center align-items-center card login bg-light h-120">
+        <div class="d-flex justify-content-center align-items-center card login bg-light w-75">
 
             <form class="form-signin w-85" action="/anadir" method="get">
+                <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
+                <div id="map"></div>
+                <script>
+                    let map = L.map('map').setView([42.866924, -2.676800], 8);
 
-                <h1>Mapa de la incidencia</h1>
-                <div id="map" style="height: 100%"></div>
-                <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
+                        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+
+                    }).addTo(map);
+
+                    var searchCtrl = L.control.sea
+                    searchCtrl.addTo(map);
+
+                    //let popup = L.popup();
+                    let marker = L.marker();
+
+                    function onMapClick(e) {
+                       /* popup
+                            .setLatLng(e.latlng)
+                            .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
+                            .openOn(map);*/
+
+                        marker
+                            .setLatLng(e.latlng)
+                            .addTo(map);
+
+                        let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
+
+                        document.getElementById('localizacion').value = localizacion1;
+                        console.log(localizacion1);
+                    }
+
+                    map.on('click', onMapClick);
+
+                </script>
+
+                <input type="hidden" id="localizacion" name="localizacion">
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
@@ -24,7 +57,8 @@
                 <label>Cliente</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre"  autofocus required>
+                        <input class="form-control" type="text" name="nombrecliente" placeholder="Nombre" autofocus
+                               required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="apellidos" placeholder="Apellidos" required>
@@ -35,7 +69,7 @@
 
                     <div class="col-md-6">
                         <label>DNI</label>
-                        <input class="form-control" type="text" name="dni" placeholder="DNI" required>
+                        <input class="form-control" type="text" id="dniCliente" name="dni" placeholder="DNI" onchange="existeDni()" required>
                     </div>
                     <div class="col-md-6">
                         <label>Telefono</label>
@@ -80,11 +114,18 @@
                 <label>Tecnico</label>
 
 
-                    <select name="id_tecnico" class="form-control">
-                        @foreach($tecnicos as $tecnico)
-                            <option value="{{$tecnico->id_persona}}" name="id_tecnico">{{$tecnico->id_persona}}</option>
+                <select name="id_tecnico" class="form-control">
+                    @foreach($tecnicos as $tecnico)
+                        @foreach($personas as $persona)
+                            @if($tecnico->disponible == 0)
+                                @if($tecnico->id_persona == $persona->id)
+                                    <option value="{{$tecnico->id_persona}}"
+                                            name="id_tecnico">{{$persona->nombre}}</option>
+                                @endif
+                            @endif
                         @endforeach
-                    </select>
+                    @endforeach
+                </select>
 
 
                 <label>Observaciones</label>
@@ -96,5 +137,7 @@
             </form>
         </div>
     </div>
-
+    <div id="prueba"></div>
+    <script type="text/javascript" src="{{ URL::asset('js/ajax.js') }}"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 @endsection
