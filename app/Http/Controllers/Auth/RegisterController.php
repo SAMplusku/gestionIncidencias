@@ -11,7 +11,6 @@ use App\Operadore;
 use App\Persona;
 use App\Providers\RouteServiceProvider;
 use App\Tecnico;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
