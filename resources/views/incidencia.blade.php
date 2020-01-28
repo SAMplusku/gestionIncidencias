@@ -3,6 +3,17 @@
     <?php
     $faker = Faker\Factory::create();
     session_start();
+    $tecnicos = \App\Tecnico::all();
+    $personas = \App\Persona::all();
+    $localizacionesT = array();
+    foreach ($personas as $persona) {
+        foreach ($tecnicos as $tecnico) {
+            if ($persona->id == $tecnico->id_persona) {
+                array_push($localizacionesT, array($persona->id => $tecnico->localizacion));
+            }
+
+        }
+    }
     ?>
 
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
@@ -12,25 +23,23 @@
             <form class="form-signin w-85" action="/anadir" method="get">
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
                 <div id="map"></div>
-                <script>
+                <script type="text/javascript">
                     let map = L.map('map').setView([42.866924, -2.676800], 8);
-
+                    //'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
                         attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 
                     }).addTo(map);
 
-                    var searchCtrl = L.control.sea
-                    searchCtrl.addTo(map);
-
                     //let popup = L.popup();
                     let marker = L.marker();
 
+
                     function onMapClick(e) {
-                       /* popup
-                            .setLatLng(e.latlng)
-                            .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
-                            .openOn(map);*/
+                        /* popup
+                             .setLatLng(e.latlng)
+                             .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
+                             .openOn(map);*/
 
                         marker
                             .setLatLng(e.latlng)
@@ -38,11 +47,46 @@
 
                         let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
 
+
+
                         document.getElementById('localizacion').value = localizacion1;
-                        console.log(localizacion1);
+                        console.log(localizacion1.toString());
+/*
+                        let locTec = 0;
+                        let localizacionesTec =<?php echo json_encode($localizacionesT);?>;
+                        let idtec = document.getElementById('id_tecnico').value;
+                        for (let i = 0; i < localizacionesTec.length; i++) {
+                            if (localizacionesTec[i][idtec]) {
+                                locTec = localizacionesTec[i][idtec];
+                            }
+
+                        }
+
+                        console.log(locTec)
+
+                        let numero1 = locTec.substring(0,17);
+                        let numero2 = locTec.substring(19);
+                        let locTecnico = numero1+ ", "+ numero2;
+
+                        console.log(locTecnico.toString());
+
+                        L.Routing.control({
+                            waypoints: [
+                                L.latLng(e.latlng.lat.toString() + ", " + e.latlng.lng.toString()),
+                                L.latLng(numero1 + ", " + numero2)
+                            ],
+                            routeWhileDragging: true
+                        }).addTo(map);
+
+                        https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
+*/
+
                     }
 
                     map.on('click', onMapClick);
+
+                  
+
 
                 </script>
 
@@ -69,7 +113,8 @@
 
                     <div class="col-md-6">
                         <label>DNI</label>
-                        <input class="form-control" type="text" id="dniCliente" name="dni" placeholder="DNI" onchange="existeDni()" required>
+                        <input class="form-control" type="text" id="dniCliente" name="dni" placeholder="DNI"
+                               onchange="existeDni()" required>
                     </div>
                     <div class="col-md-6">
                         <label>Telefono</label>
@@ -114,19 +159,20 @@
                 <label>Tecnico</label>
 
 
-                <select name="id_tecnico" class="form-control">
+                <select name="id_tecnico" id="id_tecnico" class="form-control">
                     @foreach($tecnicos as $tecnico)
                         @foreach($personas as $persona)
                             @if($tecnico->disponible == 0)
                                 @if($tecnico->id_persona == $persona->id)
                                     <option value="{{$tecnico->id_persona}}"
                                             name="id_tecnico">{{$persona->nombre}}</option>
+
+
                                 @endif
                             @endif
                         @endforeach
                     @endforeach
                 </select>
-
 
                 <label>Observaciones</label>
                 <textarea class="form-control" type="text" name="observacion" placeholder="Observaciones"
@@ -139,5 +185,5 @@
     </div>
     <div id="prueba"></div>
     <script type="text/javascript" src="{{ URL::asset('js/ajax.js') }}"></script>
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 @endsection

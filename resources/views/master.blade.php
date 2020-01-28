@@ -14,15 +14,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 </head>
 <body>
 <!-- Header -->
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="/index">
-        <img src="https://guiadepescado.com/wp-content/uploads/2016/11/boqueron-especie.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="40" class="d-inline-block align-top" alt="">
         Road Tech Assistance SL
     </a>
-    @if(isset($_SESSION['id']))
+
+    @if(isset($_SESSION['id'])  )
+        <div>
+            <nav class="nav">
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
+                    <a class="nav-link" href="/incidencia">Añadir Incidencia</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' ||$_SESSION['persona'] == 'tecnico')
+                    <a class="nav-link" href="#">Ver Incidencia</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="#">Estadísticas</a>
+                @endif
+                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link" href="/register">Dar de alta usuario</a>
+                @endif
+            </nav>
+        </div>
         @if($_SESSION['persona'] == 'tecnico')
             <?php
             $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
@@ -34,7 +59,6 @@
                     $idIncidencia = $incidencia->id;
                 }
             }
-
             ?>
             @if($notificacion == 1)
                 <a href="/incidencia/{{$idIncidencia}}"><img src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
@@ -43,17 +67,12 @@
             @endif
         @endif
             <div class="btn-group dropleft">
-                <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Menú
-                </button>
+                <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menú</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/perfil/{{$_SESSION['id']}}">Perfil</a>
                     <a class="dropdown-item" href="/cerrarSesion">Cerrar sesión</a>
                 </div>
             </div>
-
-
-
     @endif
 </nav>
 <!-- Container -->

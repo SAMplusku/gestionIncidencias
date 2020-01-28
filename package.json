@@ -21,6 +21,7 @@
     "dependencies": {
         "chart.js": "^2.9.3",
         "fuse.js": "^3.4.6",
-        "leaflet": "^1.6.0"
+        "leaflet": "^1.6.0",
+        "leaflet-routing-machine": "^3.2.12"
     }
 }
