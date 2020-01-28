@@ -42,10 +42,16 @@
                 <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
             @endif
         @endif
-        <div>
-            <a href="/perfil/{{$_SESSION['id']}}">Perfil</a>
-            <a href="/cerrarSesion">Cerrar sesión</a>
-        </div>
+            <div class="btn-group dropleft">
+                <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menú
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/perfil/{{$_SESSION['id']}}">Perfil</a>
+                    <a class="dropdown-item" href="/cerrarSesion">Cerrar sesión</a>
+                </div>
+            </div>
+
 
 
     @endif
