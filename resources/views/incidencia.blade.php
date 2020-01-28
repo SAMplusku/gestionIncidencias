@@ -20,8 +20,7 @@
 
                     }).addTo(map);
 
-                    var searchCtrl = L.control.sea
-                    searchCtrl.addTo(map);
+                    
 
                     //let popup = L.popup();
                     let marker = L.marker();
