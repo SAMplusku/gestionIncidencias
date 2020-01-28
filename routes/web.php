@@ -59,7 +59,7 @@ Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
 
 Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->name('datosCliente')->middleware('auth');
 
-Route::get('/anadir', 'incidenciaController@store')->middleware('auth');
+Route::get('/anadir', 'IncidenciaController@store')->middleware('auth');
 
 Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
