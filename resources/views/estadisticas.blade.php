@@ -43,6 +43,9 @@
                 url: "/data.php",
                 method: 'POST',
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
                     var incidentes = [];
                     var fechas = [];
@@ -87,8 +90,11 @@
 
             $.ajax({
                 url: "/resueltasInSitu",
-                method: 'GET',
+                method: 'POST',
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
                     var incidentesInSitu = [];
                     var incidentesTarde = [];
@@ -134,8 +140,11 @@
 
             $.ajax({
                 url: '/tiempoMedio',
-                method: 'GET',
+                method: 'POST',
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
                     var tiempoMedio = [];
 
