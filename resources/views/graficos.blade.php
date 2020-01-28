@@ -7,9 +7,9 @@
             <select id="select">
                 <option value="IncidenciasDia">Numero incidencias por dia</option>
                 <option value="incidenciasHora">Numero incidencias por hora</option>
+                <option value="incidenciasMes">Numero incidencias por Mes</option>
                 <option value="tiempoMedio">Tiempo medio de resolucion</option>
                 <option value="inSitu">Resueltas in situ</option>
-
             </select>
 
             Tecnico:
@@ -72,6 +72,9 @@
                             break;
                         case 'incidenciasHora':
                             incidenciaPorHora(data);
+                            break;
+                        case 'incidenciasMes':
+                            incidenciaPorMes(data);
                             break;
                     }
                 },
@@ -146,6 +149,38 @@
             })
         }
 
+        function incidenciaPorMes(data) {
+            var incidentes = [];
+            var fechas = [];
+
+            console.log(data);
+
+            for (var i in data) {
+                incidentes.push(data[i].numIncidencias);
+                fechas.push(data[i].fechas);
+            }
+
+            var chartdata = {
+                labels: fechas,
+                datasets: [
+                    {
+                        label: 'Numero incidencias',
+                        backgroundColor: '#49e2ff',
+                        borderColor: '#46d5f1',
+                        hoverBackgroundColor: '#CCCCCC',
+                        hoverBorderColor: '#666666',
+                        data: incidentes
+                    }
+                ]
+            };
+
+            var canvas = $("#canvas");
+
+            var numeroIncidenciasChart = new Chart(canvas, {
+                type: 'line',
+                data: chartdata
+            })
+        }
 
 
         function tiempoMedio(data) {

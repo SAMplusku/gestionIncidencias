@@ -35,6 +35,9 @@ class EstadisticasController extends Controller
             case 'incidenciasHora':
                 $array = EstadisticasController::incidenciasPorHora();
                 break;
+            case 'incidenciasMes':
+                $array = EstadisticasController::incidenciasPorMes();
+                break;
         }
         return $array;
     }
@@ -65,6 +68,15 @@ class EstadisticasController extends Controller
         $incidencias = DB::table('incidencias')
             ->select(DB::raw('hour(created_at) as fechas'), DB::raw('COUNT(*) as numIncidencias'))
             ->groupBy(DB::raw('hour(created_at)'))
+            ->get();
+
+        return $incidencias;
+    }
+
+    public function incidenciasPorMes() {
+        $incidencias = DB::table('incidencias')
+            ->select(DB::raw('month(created_at) as fechas'), DB::raw('COUNT(*) as numIncidencias'))
+            ->groupBy(DB::raw('month(created_at)'))
             ->get();
 
         return $incidencias;
