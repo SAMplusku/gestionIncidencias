@@ -2,9 +2,9 @@
 
 @section('content')
     <?php session_start() ?>
-    <div class="d-flex justify-content-center align-items-center divSign">
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 40px; width: 100%">
         <div class="d-flex justify-content-center align-items-center card signup bg-light">
-            <h3>Dar de alta trabajador</h3>
+            <h3 class="text-center">Dar de alta trabajador</h3>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 

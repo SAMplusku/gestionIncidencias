@@ -11356,3 +11356,7 @@ a.text-dark:focus {
   }
 }
 
+.bg-light {
+  background-color: #b3bec9 !important;
+}
+
