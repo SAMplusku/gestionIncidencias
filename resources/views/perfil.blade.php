@@ -2,8 +2,23 @@
 
 @section("content")
     <?php session_start()?>
-        <div class="col-sm-10 mt-3 d-flex" >
-        </div>
+    <script>
+        $(document).ready(function () {
+            document.getElementById('divIncidencias').style.display = 'none';
+        });
+
+        function ocultarIncidencias() {
+            document.getElementById('divIncidencias').style.display = 'none';
+            document.getElementById('divDatos').style.display = 'block';
+
+
+        }
+
+        function ocultarDatos() {
+            document.getElementById('divIncidencias').style.display = 'block';
+            document.getElementById('divDatos').style.display = 'none';
+        }
+    </script>
         <div class="row d-flex justify-content-center">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
@@ -15,7 +30,6 @@
                     </label>
                 </div>
                 <br>
-
                 <ul class="list-group">
                     <li class="list-group-item text-center">Actividad</li>
 
@@ -33,7 +47,7 @@
                     </li>
 
                     @if(isset($operador))
-                        <li class="list-group-item text-center">
+                        <li  class="list-group-item text-center">
                             <strong>Incidencias</strong> {{$operador}}
                         </li>
                     @endif
@@ -64,17 +78,16 @@
             </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
-                    <li class="p-2">
-                        <a href="/perfil/{{$persona2->id}}}/incidencias">Incidencias</a>
+                    <li class="p-2" id="liIncidencia">
+                        <input type="button" onclick="ocultarDatos()" value="Incidencias">
                     </li>
-                    <li class="p-2">
-                        <a href="/perfil/{{$persona2->id}}}/index">Datos personales</a>
+                    <li class="p-2" id="liDatos">
+                        <input type="button" onclick="ocultarIncidencias()" value="Datos Personales">
                     </li>
                 </ul><br>
 
                 <div>
-                    <div class="active">
-
+                    <div id="divDatos">
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
@@ -135,7 +148,7 @@
                 </div>
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
-                <div class="col-sm-12">
+                <div class="col-sm-12" id="divIncidencias">
                     <h2>Mis Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)

@@ -23,13 +23,42 @@
             <form class="form-signin w-85" action="/anadir" method="get">
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Mapa de la incidencia</h2>
                 <div id="map"></div>
+                <div class="pointer">dsfg</div>
+                <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+                <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
                 <script type="text/javascript">
                     let map = L.map('map').setView([42.866924, -2.676800], 8);
                     //'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                    L.control.scale().addTo(map);
+
                     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
                         attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 
                     }).addTo(map);
+
+                    var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+                    var results = new L.LayerGroup().addTo(map);
+
+                    searchControl.on('results', function(data){
+                        results.clearLayers();
+                        for (var i = data.results.length - 1; i >= 0; i--) {
+                            results.addLayer(L.marker(data.results[i].latlng));
+                        }
+                    });
+
+                    setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
+
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(43.17313537107136, -2.751388549804688),
+                            L.latLng(42.62587560259137, -2.921676635742188)
+                        ],
+                        routeWhileDragging: true
+                    }).addTo(map);
+
+
+
                     //let popup = L.popup();
                     let marker = L.marker();
 
@@ -46,13 +75,11 @@
 
                         let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
 
-
-
                         document.getElementById('localizacion').value = localizacion1;
                         console.log(localizacion1.toString());
-/*
+
                         let locTec = 0;
-                        let localizacionesTec =<?php echo json_encode($localizacionesT);?>;
+                        let localizacionesTec ="<?php echo json_encode($localizacionesT);?>";
                         let idtec = document.getElementById('id_tecnico').value;
                         for (let i = 0; i < localizacionesTec.length; i++) {
                             if (localizacionesTec[i][idtec]) {
@@ -69,23 +96,20 @@
 
                         console.log(locTecnico.toString());
 
-                        L.Routing.control({
-                            waypoints: [
-                                L.latLng(e.latlng.lat.toString() + ", " + e.latlng.lng.toString()),
-                                L.latLng(numero1 + ", " + numero2)
-                            ],
-                            routeWhileDragging: true
-                        }).addTo(map);
-
-                        https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
-*/
-
+                        //https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
                     }
 
                     map.on('click', onMapClick);
 
-                  
-
+/*
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(43.17313537107136, -2.751388549804688),
+                            L.latLng(42.62587560259137, -2.921676635742188)
+                        ],
+                        routeWhileDragging: true
+                    }).addTo(map);
+*/
 
                 </script>
 
@@ -156,7 +180,6 @@
 
 
                 <label>Tecnico</label>
-
 
                 <select name="id_tecnico" id="id_tecnico" class="form-control">
                     @foreach($tecnicos as $tecnico)
