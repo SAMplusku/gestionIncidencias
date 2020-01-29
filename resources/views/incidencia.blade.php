@@ -17,7 +17,7 @@
     ?>
 
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 70px">
         <div class="d-flex justify-content-center align-items-center card login bg-light w-75">
 
             <form class="form-signin w-85" action="/anadir" method="get">
