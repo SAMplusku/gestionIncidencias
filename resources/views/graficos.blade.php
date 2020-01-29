@@ -86,6 +86,8 @@
 
             document.getElementById('botonTecnicos').style.display = 'none';
 
+            if(chart !== undefined)
+                chart.destroy();
             $.ajax({
                 url: '/estadisticas/cargarGraficaTecnicos',
                 method: 'POST',
@@ -97,6 +99,39 @@
                     console.log("Succes")
                     console.log(data);
                     incidenciaPorDiaTecnico(data)
+                },
+                error: function (data) {
+                    console.log("Error");
+                    console.log(data);
+                }
+            });
+        });
+
+        $('#volver').on('click', function () {
+            document.getElementById('labelGrafica').style.display = 'block';
+
+            document.getElementById('labelTecnicos').style.display = 'none';
+
+            document.getElementById('labelIdTecnicos').style.display = 'none';
+
+            document.getElementById('volver').style.display = 'none';
+
+            document.getElementById('botonTecnicos').style.display = 'block';
+
+            if(chart !== undefined)
+                chart.destroy();
+
+            $.ajax({
+                url: '/estadisticas/cargarGrafica',
+                method: 'POST',
+                data: {grafico: 'IncidenciasDia'},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data){
+                    console.log("Succes")
+                    console.log(data);
+                    incidenciaPorDia(data)
                 },
                 error: function (data) {
                     console.log("Error");
