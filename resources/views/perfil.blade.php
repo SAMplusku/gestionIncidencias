@@ -19,7 +19,7 @@
             document.getElementById('divDatos').style.display = 'none';
         }
     </script>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" style="margin-bottom: 50px; margin-top: 10px">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
                     <form class="form" action="/perfil/CambiarFoto/{{$persona2->id}}" method="post" enctype="multipart/form-data">

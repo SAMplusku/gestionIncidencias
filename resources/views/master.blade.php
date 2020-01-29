@@ -38,9 +38,6 @@
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
                     <a class="nav-link" href="/incidencia">Añadir Incidencia</a>
                 @endif
-                @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' ||$_SESSION['persona'] == 'tecnico')
-                    <a class="nav-link" href="#">Ver Incidencia</a>
-                @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
                 <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
                 @endif

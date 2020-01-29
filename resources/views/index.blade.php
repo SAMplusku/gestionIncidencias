@@ -21,12 +21,12 @@ if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
 }
 ?>
 
-    <div class="index d-flex justify-content-center">
+    <div class="index d-flex justify-content-center" style="margin-bottom: 40px">
         <div class="row">
 
 
         @if(isset($_SESSION['nombre']))
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador' || $_SESSION['persona'] == 'tecnico')
+            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
                 <div class="col-md-6">
                     <div class="jumbotron p-3">
                         <div class="d-flex justify-content-center"><img src="https://estaticos.elperiodico.com/resources/jpg/3/8/fcasals25757716-madrid-autopista-radial-foto-jose-luis-roc161213172509-1481646513783.jpg" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
@@ -46,7 +46,7 @@ if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
                 <div class="col-md-6">
                     <div class="jumbotron p-3">
                         <div class="d-flex justify-content-center"><img src="https://eduliticas.com/wp-content/uploads/2015/07/diagrama-de-sectores.png" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
-                        <h1 class="d-flex justify-content-center">Estadísticas</h1>
+                        <h1 class="d-flex justify-content-center"><a href="/estadisticas">Estadísticas</a></h1>
                     </div>
                 </div>
             @endif
