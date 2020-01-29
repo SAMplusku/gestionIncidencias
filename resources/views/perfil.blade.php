@@ -7,9 +7,11 @@
         <div class="row d-flex justify-content-center">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
-                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
+                    <form class="form" action="/perfil/CambiarFoto/{{$persona2->id}}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <img src="{{ URL::asset('images/' . $persona2->foto) }}" class="img-circle img-thumbnail img-fluid" style="width: 60%"><br><br>
                     <label class="btn btn-default bg-info">
-                        Cambia de foto <input type="file" hidden>
+                        Cambia de foto <input name="image" type="file" hidden>
                     </label>
                 </div>
                 <br>
@@ -72,7 +74,7 @@
 
                 <div>
                     <div class="active">
-                        <form class="form" action="" method="post">
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
