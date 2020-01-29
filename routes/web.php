@@ -69,6 +69,8 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
+Route::post('/perfil/CambiarFoto/{id}', 'UserController@subirImagen')->middleware('auth');
+
 
 Route::get('/busquedaTrabajadores/fecha', 'PersonaController@showFecha')->middleware('auth');
 
