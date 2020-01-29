@@ -3,6 +3,10 @@
 <?php
 $user =  App\Login::find(Auth::id());
 $persona= App\Persona::where('id_login', $user->id)->first();
+session_cache_limiter('private');
+$cache_limiter = session_cache_limiter();
+session_cache_expire(60);
+$cache_expire = session_cache_expire();
 session_start();
 $_SESSION['id'] = $user->id;
 $_SESSION['nombre'] = $persona->nombre;
@@ -16,8 +20,11 @@ if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
     $_SESSION['persona'] = "gerente";
 }
 ?>
-<div class="container-fluid p-0">
-    <div class="row index d-flex justify-content-center">
+
+    <div class="index d-flex justify-content-center">
+        <div class="row">
+
+
         @if(isset($_SESSION['nombre']))
             @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador' || $_SESSION['persona'] == 'tecnico')
                 <div class="col-md-6">
@@ -52,6 +59,7 @@ if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
                 </div>
             @endif
         @endif
+        </div>
 </div>
 
 @endsection
