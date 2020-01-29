@@ -57,6 +57,9 @@ Route::get('/estadisticas', 'EstadisticasController@index');
 
 Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show');
 
+Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos');
+
+
 Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
 
 Auth::routes();
