@@ -45,6 +45,10 @@ Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->nam
 
 Route::get('/anadir', 'IncidenciaController@store')->middleware('auth');
 
+Route::get('/modificarIncidencia/{id}', 'IncidenciaController@update')->middleware('auth');
+
+Route::get('/cerrarIncidencia/{id}', 'IncidenciaController@cerrar')->middleware('auth');
+
 Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
 Route::get('/signup/store', function (){

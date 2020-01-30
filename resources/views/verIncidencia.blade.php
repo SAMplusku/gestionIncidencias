@@ -59,8 +59,8 @@
 
                 @if($incidencia->estado = 1)
                     <div class="d-flex justify-content-center mb-3">
-                        <button class="btn btn-lg btn-success m-1" type="submit">Modificar</button>
-                        <button class="btn btn-lg btn-danger m-1" type="submit">Cerrar</button>
+                        <a class="btn btn-lg btn-success m-1" href="/modificarIncidencia/{{$incidencia->id}}">Modificar</a>
+                        <a class="btn btn-lg btn-danger m-1" href="/cerrarIncidencia/{{$incidencia->id}}">Cerrar</a>
                     </div>
                 @endif
             </div>
