@@ -2,7 +2,17 @@
     width: 100%;
     height: 60px; /* Set the fixed height of the footer here */
     line-height: 60px; /* Vertically center the text there */
-    background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    margin-top: 40px;
+}
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+
+    margin-bottom: 40px;
 }
 a:hover, a:visited{
     text-decoration: none;
@@ -15,23 +25,25 @@ a:hover, a:visited{
     margin-top: 2%;
 }
 .signup{
-    width: 40%;
+    width: 30%;
     height: 95%;
     margin-top: 2%;
-    margin-bottom: 2%;
-    overflow: hidden;
-    overflow-y: scroll;
+    margin-bottom: 3%;
+
     padding-top: 3%;
     -ms-overflow-style: none;
 }
-
-.signup::-webkit-scrollbar {
-    display: none;
+@media only screen and (max-width: 600px) {
+    .signup {
+        width: 70%;
+        margin-bottom: 7%;
+    }
 }
-
-.divSign{
-    height: 84%;
-
+@media only screen and (max-width: 800px) {
+    .signup {
+        width: 70%;
+        margin-bottom: 7%;
+    }
 }
 
 #login{
@@ -55,6 +67,7 @@ a:hover, a:visited{
     text-transform: capitalize;
 }
 
+
 .navbar-nav li:hover > ul.dropdown-menu {
     display: block;
 }
@@ -74,6 +87,25 @@ a:hover, a:visited{
 }
 
 #map { height: 360px; width: 100%;}
+
+#mapSearchContainer{
+    position:fixed;
+    top:20px;
+    right: 40px;
+    height:30px;
+    width:180px;
+    z-index:110;
+    font-size:10pt;
+    color:#5d5d5d;
+    border:solid 1px #bbb;
+    background-color:#f8f8f8;
+}
+.pointer{
+    position:absolute;
+    top:86px;
+    left:60px;
+    z-index:99999;
+}
 
 
 .blur {

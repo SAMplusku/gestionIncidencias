@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Road Tech Assistance SL</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -13,6 +14,14 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+
 
 </head>
 <body>
@@ -56,7 +65,7 @@
             }
             ?>
             @if($notificacion == 1)
-                <a href="/incidencia/{{$idIncidencia}}"><img src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
+                <a  href="/incidencia/{{$idIncidencia}}"><img class="noti" src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
             @else
                 <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
             @endif
@@ -76,12 +85,13 @@
 
 
 <!-- Footer -->
-<footer class="footer clearfix">
+<footer class="footer clearfix bg-light">
     <div class="container text-center">
         <span class="text-muted">© 2020 Copyright</span>
         <a href="https://github.com/SAMplusku/gestionIncidencias">GitHub</a>
     </div>
 </footer>
+
 <script type="javascript" src="{{ URL::asset('js/mapa.js')}}"></script>
 </body>
 </html>

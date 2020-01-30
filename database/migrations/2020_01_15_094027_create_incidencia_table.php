@@ -19,6 +19,7 @@ class CreateIncidenciaTable extends Migration
             $table->string("tipo");
             $table->date("fechafin")->nullable();
             $table->boolean("estado")->default(1);
+            $table->boolean("inSitu")->default(1);
             $table->string("descripcion");
             $table->string("observacion");
             $table->unsignedBigInteger("id_tecnico");
