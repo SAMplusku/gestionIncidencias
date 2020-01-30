@@ -77,7 +77,7 @@
                     @endif
 
                 </ul>
-            </div>
+                </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
                     <li class="p-2" id="liIncidencia">
