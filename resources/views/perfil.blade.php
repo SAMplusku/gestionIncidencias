@@ -25,9 +25,11 @@
                     <form class="form" action="/perfil/CambiarFoto/{{$persona2->id}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <img src="{{ URL::asset('images/' . $persona2->foto) }}" class="img-circle img-thumbnail img-fluid" style="width: 60%"><br><br>
-                    <label class="btn btn-default bg-info">
+                        @if($persona2->id_login ==$_SESSION['id'])
+                        <label class="btn btn-default bg-info">
                         Cambia de foto <input name="image" type="file" hidden>
                     </label>
+                            @endif
                 </div>
                 <br>
                 <ul class="list-group">
@@ -136,12 +138,13 @@
                                     <input type="text" class="form-control" name="fecha" disabled  value="{{$persona2->edad}}">
                                 </div>
                             </div>
-
+                        @if($persona2->id_login ==$_SESSION['id'])
                             <div class="form-group">
                                 <div class="col-xs-12"> <br>
                                     <button class="btn btn-lg btn-success" type="submit">Guardar</button>
                                 </div>
                             </div>
+                            @endif
                         </form>
                         <hr>
                     </div>
@@ -153,7 +156,7 @@
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
                                     <div>
-                                        <a href="incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
+                                        <a href="/incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
                                         @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
                                         <hr>
                                     </div>

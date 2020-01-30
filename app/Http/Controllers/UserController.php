@@ -122,19 +122,24 @@ class UserController extends Controller
         //return redirect()->route('login');
     }
     public function subirImagen(Request $request ,$id){
-        $persona = Persona::find($id);
+        if ($request->file('image') != null || $request->file('image') != ""){
+            $persona = Persona::find($id);
+            $image = $request->file('image');
+            $input['imagename'] = $persona->email . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
 
-        $image = $request->file('image');
-        $input['imagename'] = $persona->email . '.' . $image->getClientOriginalExtension();
-        $destinationPath = public_path('/images');
-        $image->move($destinationPath, $input['imagename']);
 
 
+            $persona->foto = $input['imagename'];
 
-        $persona->foto = $input['imagename'];
+            $persona->save();
+            return Redirect::route('perfil', $id);
+        }else{
+            return Redirect::route('perfil', $id);
+        }
 
-        $persona->save();
-        return Redirect::route('perfil', $id);
+
     }
 
 }

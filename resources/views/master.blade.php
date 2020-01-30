@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/validaciones.js') }}">
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
@@ -42,32 +43,34 @@
                 <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <a class="nav-link" href="#">Estadísticas</a>
+                <a class="nav-link" href="/estadisticas">Estadísticas</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
                 <a class="nav-link" href="/register">Dar de alta usuario</a>
                 @endif
+                @if($_SESSION['persona'] == 'tecnico')
+                    <?php
+                    $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
+                    $incidencias = \App\Incidencia::all();
+                    $notificacion = 0;
+                    foreach ($incidencias as $incidencia){
+                        if ($incidencia->id_tecnico == $persona->id){
+                            $notificacion = 1;
+                            $idIncidencia = $incidencia->id;
+                        }
+                    }
+                    ?>
+                    @if($notificacion == 1)
+                        <a  href="/incidencia/{{$idIncidencia}}"><img class="noti" src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
+                    @else
+                        <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
+                    @endif
+                @endif
             </nav>
         </div>
-        @if($_SESSION['persona'] == 'tecnico')
-            <?php
-            $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
-            $incidencias = \App\Incidencia::all();
-            $notificacion = 0;
-            foreach ($incidencias as $incidencia){
-                if ($incidencia->id_tecnico == $persona->id){
-                    $notificacion = 1;
-                    $idIncidencia = $incidencia->id;
-                }
-            }
-            ?>
-            @if($notificacion == 1)
-                <a  href="/incidencia/{{$idIncidencia}}"><img class="noti" src="https://image.flaticon.com/icons/svg/565/565423.svg" style="width: 25%"></a>
-            @else
-                <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
-            @endif
-        @endif
-            <div class="btn-group dropleft">
+
+
+            <div class="btn-group dropdown" style="margin-right: 40px">
                 <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menú</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/perfil/{{$_SESSION['id']}}">Perfil</a>
