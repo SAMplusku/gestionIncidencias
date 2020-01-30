@@ -2,7 +2,7 @@
 <?php session_start() ?>
 
     @section("content")
-                    <div class="main-box clearfix col-lg-12 p-0">
+                    <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
 
                         <nav class="navbar navbar-expand-md navbar-light bg-light">
 
@@ -122,7 +122,6 @@
                                 @endif
                             </ul>
                         </nav>
-
-
         </div>
+
 @endsection

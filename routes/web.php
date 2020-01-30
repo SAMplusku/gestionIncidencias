@@ -108,3 +108,6 @@ Route::get('/cookie/set','CookieController@setCookie');
 
 Route::get('/cookie/get','CookieController@getCookie');
 
+Route::get('/prueba', function (){
+    return view('pruebaBorrar');
+})->middleware('auth');
