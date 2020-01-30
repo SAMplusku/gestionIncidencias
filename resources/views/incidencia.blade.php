@@ -17,7 +17,7 @@
     ?>
 
     <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Incidencia</h1>
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 70px">
         <div class="d-flex justify-content-center align-items-center card login bg-light w-75">
 
             <form class="form-signin w-85" action="/anadir" method="get">
@@ -36,8 +36,6 @@
 
                     }).addTo(map);
 
-
-
                     var searchControl = new L.esri.Controls.Geosearch().addTo(map);
 
                     var results = new L.LayerGroup().addTo(map);
@@ -50,14 +48,6 @@
                     });
 
                     setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
-
-
-
-
-
-
-
-
 
                     L.Routing.control({
                         waypoints: [
@@ -85,13 +75,11 @@
 
                         let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
 
-
-
                         document.getElementById('localizacion').value = localizacion1;
                         console.log(localizacion1.toString());
 
                         let locTec = 0;
-                        let localizacionesTec =<?php echo json_encode($localizacionesT);?>;
+                        let localizacionesTec ="<?php echo json_encode($localizacionesT);?>";
                         let idtec = document.getElementById('id_tecnico').value;
                         for (let i = 0; i < localizacionesTec.length; i++) {
                             if (localizacionesTec[i][idtec]) {
@@ -108,18 +96,10 @@
 
                         console.log(locTecnico.toString());
 
-
-
-
                         //https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
-
-
                     }
 
                     map.on('click', onMapClick);
-
-
-
 
 /*
                     L.Routing.control({
@@ -200,7 +180,6 @@
 
 
                 <label>Tecnico</label>
-
 
                 <select name="id_tecnico" id="id_tecnico" class="form-control">
                     @foreach($tecnicos as $tecnico)

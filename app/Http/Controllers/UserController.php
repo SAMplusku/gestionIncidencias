@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-   public function check(Request $request){
+   /*public function check(Request $request){
        session_start();
         $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->first();
 
@@ -38,8 +38,9 @@ class UserController extends Controller
         }else{
             return redirect()->route('login');
         }
-    }
-    public function store(Request $request){
+    }*/
+
+    /*public function store(Request $request){
        $persona = new Persona();
        $login = new Login();
 
@@ -85,7 +86,7 @@ class UserController extends Controller
             $gerente->save();
         }
         return redirect()->route('index');
-    }
+    }*/
 
     public function enviarEmailCoordinador(Request $request){
         $mail = new PHPMailer();
@@ -120,4 +121,25 @@ class UserController extends Controller
         //Auth::logout();
         //return redirect()->route('login');
     }
+    public function subirImagen(Request $request ,$id){
+        if ($request->file('image') != null || $request->file('image') != ""){
+            $persona = Persona::find($id);
+            $image = $request->file('image');
+            $input['imagename'] = $persona->email . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
+
+
+
+            $persona->foto = $input['imagename'];
+
+            $persona->save();
+            return Redirect::route('perfil', $id);
+        }else{
+            return Redirect::route('perfil', $id);
+        }
+
+
+    }
+
 }

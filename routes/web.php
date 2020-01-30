@@ -57,6 +57,9 @@ Route::get('/estadisticas', 'EstadisticasController@index');
 
 Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show');
 
+Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos');
+
+
 Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
 
 Auth::routes();
@@ -65,6 +68,8 @@ Auth::routes([
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
+Route::post('/perfil/CambiarFoto/{id}', 'UserController@subirImagen')->middleware('auth');
 
 
 Route::get('/busquedaTrabajadores/fecha', 'PersonaController@showFecha')->middleware('auth');
@@ -99,3 +104,6 @@ Route::get('/cookie/set','CookieController@setCookie');
 
 Route::get('/cookie/get','CookieController@getCookie');
 
+Route::get('/prueba', function (){
+    return view('pruebaBorrar');
+})->middleware('auth');
