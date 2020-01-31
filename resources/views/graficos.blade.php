@@ -44,7 +44,7 @@
 
     <canvas id="canvas"></canvas>
     <div id="map"></div>
-
+    <script src="leaflet-heat.js"></script>
     <script>
         let chart;
         $(document).ready(function () {
@@ -632,17 +632,30 @@
         }
         function mapaCalor(data) {
 
-
-
-
-
         let map = L.map('map').setView([42.866924, -2.676800], 8);
-
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        map
+
+            var addressPoints = [
+                [-37.8839, 175.3745188667, "571"],
+                [-37.8869090667, 175.3657417333, "486"],
+                [-37.9024718333, 175.47689145, "79"],
+                [-37.9010265333, 175.4781286667, "62"],
+                [-37.9051546167, 175.4761810167, "108"],
+                [-37.9027743667, 175.4772973, "82"],
+                [-37.9113692333, 175.4732625, "242"],
+                [-37.9061175, 175.4761095667, "140"],
+                [-37.9126536833, 175.4718492, "283"],
+                [-37.89984655, 175.47884775, "50"],
+                [-37.8996625, 175.4783593833, "51"]
+                ];
+            addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+
+            var heat = L.heatLayer(addressPoints).addTo(map);
+
         }
 
 
