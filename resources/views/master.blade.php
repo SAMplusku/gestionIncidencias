@@ -67,7 +67,7 @@
 <body>
 <!-- Header -->
 
-<nav class="navbar navbar-light bg-light" id="navGrande" style="height: 8%">
+<nav class="navbar navbar-light bg-light" id="navGrande">
     <a class="navbar-brand m-0 float-left mr-2" href="/">
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
@@ -129,13 +129,14 @@
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
     </a>
-
+    @if(isset($_SESSION['persona']))
     <div class="dropdown show float-right mt-3 pr-5">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Ajustes
         </a>
 
         <div class="dropdown-menu">
+
             @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
                 <a class="nav-link text-dark p-3 dropdown-item" href="/incidencia">Añadir Incidencia</a>
             @endif
@@ -176,7 +177,9 @@
                     </li>
                 </ul>
         </div>
+
     </div>
+    @endif
 </nav>
 <!-- Container -->
 
