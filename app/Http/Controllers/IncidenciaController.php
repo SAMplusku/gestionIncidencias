@@ -116,4 +116,58 @@ class IncidenciaController extends Controller
             "vehiculo" => $vehiculo
         ]);
     }
+
+
+
+    public function update($id) {
+
+        if (Request('action') == 'Modificar'){
+            $incidencia = Incidencia::find($id);
+            $cliente = Cliente::find($incidencia->id_cliente);
+            $vehiculo = Vehiculo::find($cliente->id_vehiculo);
+            $vehiculo->matricula = Request('matricula');
+            $vehiculo->marca = Request('marca');
+            $vehiculo->modelo = Request('modelo');
+            $vehiculo->save();
+
+            $cliente->nombre = Request('nombre');
+            $cliente->dni = Request('dni');
+            $cliente->edad = Request('edad');
+            $cliente->telefono = Request('telefono');
+            $cliente->apellidos = Request('apellidos');
+            $cliente->direccion = Request('direccion');
+            $cliente->save();
+
+
+            $incidencia->descripcion = Request('descripcion');
+            $incidencia->observacion = Request('observacion');
+            $incidencia->id_tecnico = Request('id_tecnico');
+            $incidencia->id_operador = Request('id_operador');
+            $incidencia->save();
+        }else{
+            $incidencia = Incidencia::find($id);
+
+            $incidencia->fechafin = date('Y-m-d H:i:s');
+            $incidencia->estado = 0;
+
+            $incidencia->save();
+        }
+
+
+        return redirect()->route('index');
+    }
+
+
+
+    public function cerrar($id) {
+
+
+        $incidencia = Incidencia::find($id);
+        $incidencia->fechafin = date('Y-m-d H:i:s');
+        $incidencia->estado = 0;
+
+
+        return redirect()->route('index');
+    }
+
 }

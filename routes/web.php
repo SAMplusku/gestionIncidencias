@@ -21,6 +21,10 @@ Route::get('/', function () {
 
 Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 
+Route::get('busquedaTrabajadores/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
+Route::get('busquedaTrabajadores/tecnico/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
 //Route::get('/login', function (){ return view('login'); })->name('login');
 //Route::get('/login/check', 'UserController@check')->name('login.check');
 Route::get('/signup', function () {
@@ -40,9 +44,15 @@ Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia
 
 Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
 
+Route::get('/incidencia/{id}/cerrar', 'IncidenciaController@cerrar')->middleware('auth');
+
 Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->name('datosCliente')->middleware('auth');
 
 Route::get('/anadir', 'IncidenciaController@store')->middleware('auth');
+
+Route::get('/modificarIncidencia/{id}', 'IncidenciaController@update')->middleware('auth');
+
+Route::get('/cerrarIncidencia/{id}', 'IncidenciaController@cerrar')->middleware('auth');
 
 Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
