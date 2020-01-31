@@ -60,11 +60,11 @@ Route::get('/signup/store', function () {
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/estadisticas', 'EstadisticasController@index');
+Route::get('/estadisticas', 'EstadisticasController@index')->middleware('auth');
 
-Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show');
+Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show')->middleware('auth');
 
-Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos');
+Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos')->middleware('auth');
 
 
 Route::get('/index', function () {
