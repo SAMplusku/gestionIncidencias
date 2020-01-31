@@ -64,7 +64,7 @@
                     </li>
 
                     <li class="list-group-item text-center">
-                        <strong>Estado: </strong> @if($persona->disponibilidad = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
+                        <strong>Estado: </strong> @if($persona->disponibilidad == 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
                     </li>
 
                      <li class="list-group-item text-center">
@@ -80,11 +80,13 @@
                 </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
+                    @if(\App\Tecnico::all()->where('id_persona',$persona2->id)->count()> 0 || \App\Operadore::all()->where('id_persona',$persona2->id)->count()> 0)
                     <li class="p-2" id="liIncidencia">
-                        <input type="button" onclick="ocultarDatos()" value="Incidencias">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarDatos()" value="Incidencias">
                     </li>
+                    @endif
                     <li class="p-2" id="liDatos">
-                        <input type="button" onclick="ocultarIncidencias()" value="Datos Personales">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarIncidencias()" value="Datos Personales">
                     </li>
                 </ul><br>
 
@@ -152,12 +154,12 @@
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
                 <div class="col-sm-12" id="divIncidencias">
-                    <h2>Mis Incidencias</h2> <br>
+                    <h2>Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
                                     <div>
                                         <a href="/incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
-                                        @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
+                                        @if($incidencia->estado == 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
                                         <hr>
                                     </div>
                                 @endforeach
@@ -165,7 +167,7 @@
                                 @foreach($incidenciasTecnico as $incidencia)
                                     <div>
                                         <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
-                                        Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
+                                        Estado: @if($incidencia->estado == 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
                                         <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
                                         Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
                                         <div
@@ -193,5 +195,5 @@
                 @endif
             </div>
 
-
+        </div>
 @endsection

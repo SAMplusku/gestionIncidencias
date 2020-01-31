@@ -69,14 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $logs = Login::all();
-        $existe = true;
-        foreach ($logs as $log) {
-            if ($data['email'] == $log->email){
-                $existe = false;
-            }
-        }
-        if ($existe == true){
+
             $login = new Login();
 
             $login->email =  $data['email'];
@@ -123,9 +116,6 @@ class RegisterController extends Controller
 
             $user = Login::all()->last();
             return $user;
-        }else{
-            return false;
-        }
 
         //redirect()->route('index');
     }

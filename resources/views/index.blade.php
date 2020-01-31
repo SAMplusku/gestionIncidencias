@@ -19,43 +19,17 @@
     } elseif (App\Gerente::where('id_persona', '=', $persona->id)->count() > 0) {
         $_SESSION['persona'] = "gerente";
     }
-    $incidencias = \App\Incidencia::all();
+    $incidencias = DB::table('incidencias')->paginate(5);
     ?>
 
     <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <form class="input-group mb-3 mt-3 w-25 float-right" method="get" action="/">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control " placeholder="Nombre incidencia" name="busqueda">
-            </form>
 
-            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    @if(!Request::is('busquedaTrabajadores'))
-                        <li class="nav-item mr-3"><a class="nav-link" href="/">Inicio</a>
-                        </li> @endif
+        <div class="container mt-4">
 
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Filtrar Por
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/operador">Operador</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/coordinador">Coordinador</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/gerente">Gerente</a></li>
-                        </ul>
-                    </div>
-                </ul>
-            </div>
-        </nav>
-        <div class="container">
             @foreach($incidencias as $incidencia)
                 <div>
                     <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
-                    Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label
+                    Estado: @if($incidencia->estado == 1) <label class="text-success">Abierta </label> @else<label
                         class="text-danger"> Cerrada </label>@endif
                     <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
                     Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
@@ -65,6 +39,7 @@
                     <hr>
                 </div>
             @endforeach
+            {{$incidencias->links()}}
         </div>
     </div>
     <script>

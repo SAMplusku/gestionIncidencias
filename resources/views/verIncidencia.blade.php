@@ -2,17 +2,15 @@
 
 @section("content")
     <?php session_start() ?>
-    @if($_SESSION['persona'] == 'tecnico' && $_SESSION['id'] == $incidencia->id_tecnico  || $_SESSION['persona'] == 'operador' && $_SESSION['id'] == $incidencia->id_operador )
-
+    @if($_SESSION['persona'] == 'tecnico' && $_SESSION['id'] == $incidencia->id_tecnico && $incidencia->estado == 1  || $_SESSION['persona'] == 'operador' && $_SESSION['id'] == $incidencia->id_operador && $incidencia->estado == 1)
         <div class="container-fluid p-2" style="margin-bottom: 70px">
             <div class="col-sm-11">
                 <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center">Incidencia - {{$incidencia->id}}</h1>
-                <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado = 1)<label
+                <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado == 1)<label
                         class="text-success">Activa </label> @else<label class="text-danger">Cerrada </label> @endif
                 </h5>
             </div>
-
-            <form class="form " action="" method="post">
+            <form class="form " action="/modificarIncidencia/{{$incidencia->id}}" method="get">
                 <div class="float-right col-xs-12 col-sm-6 w-50">
                     <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion de la incidencia </h2>
 
@@ -62,15 +60,14 @@
                                    value="{{$incidencia->id_operador}}">
                         </div>
                     </div>
+                @if($incidencia->estado == 1)
+                    <div class="d-flex justify-content-center mb-3" >
+                        <button type="submit" class="btn btn-lg btn-success m-1" value="moodificar" name="action">Modificar</button>
+                        <button type="submit" name="action" class="btn btn-lg btn-danger m-1">Cerrar</button>
+                    </div>
+                @endif
+            </div>
 
-                    @if($incidencia->estado = 1)
-                        <div class="d-flex justify-content-center mb-3">
-                            <button class="btn btn-lg btn-success m-1" type="submit">Modificar</button>
-                            <button class="btn btn-lg btn-danger m-1" type="submit">Cerrar</button>
-                        </div>
-                    @endif
-                </div>
-            </form>
             <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion del cliente </h2>
             <div class="form-group col-sm-6">
                 <div class="col-xs-6">
@@ -93,12 +90,6 @@
                 </div>
             </div>
 
-            <div class="form-group col-sm-6">
-                <div class="col-xs-6">
-                    <label for="email"><h5>Email</h5></label>
-                    <input type="email" class="form-control" name="email" value="{{$cliente->email}}">
-                </div>
-            </div>
 
             <div class="form-group col-sm-6">
                 <div class="col-xs-6">
@@ -116,8 +107,8 @@
 
             <div class="form-group col-sm-6">
                 <div class="col-xs-6">
-                    <h5>Fecha de nacimiento</h5>
-                    <input type="text" class="form-control" name="fecha" value="{{$cliente->edad}}">
+                    <h5>Edad</h5>
+                    <input type="text" class="form-control" name="edad" value="{{$cliente->edad}}">
                 </div>
             </div>
 
@@ -148,25 +139,25 @@
                 <div class="form-group col-sm-6">
                     <h5>Tipo</h5>
                     <select name="tipo" class="form-control">
-                        @if($vehiculo->tipo = "pinchazo")
+                        @if($vehiculo->tipo == "pinchazo")
                             <option value="pinchazo" selected name="tipo">Pinchazo</option>
                             <option value="motor" name="tipo">Motor</option>
                             <option value="bateria" name="tipo">Bateria</option>
                             <option value="golpe" name="tipo">Golpe</option>
                             <option value="otros" name="tipo">Otros</option>
-                        @elseif($vehiculo->tipo = "motor")
+                        @elseif($vehiculo->tipo == "motor")
                             <option value="pinchazo" name="tipo">Pinchazo</option>
                             <option value="motor" selected name="tipo">Motor</option>
                             <option value="bateria" name="tipo">Bateria</option>
                             <option value="golpe" name="tipo">Golpe</option>
                             <option value="otros" name="tipo">Otros</option>
-                        @elseif($vehiculo->tipo = "bateria")
+                        @elseif($vehiculo->tipo == "bateria")
                             <option value="pinchazo" name="tipo">Pinchazo</option>
                             <option value="motor" name="tipo">Motor</option>
                             <option value="bateria" selected name="tipo">Bateria</option>
                             <option value="golpe" name="tipo">Golpe</option>
                             <option value="otros" name="tipo">Otros</option>
-                        @elseif($vehiculo->tipo = "golpe")
+                        @elseif($vehiculo->tipo == "golpe")
                             <option value="pinchazo" name="tipo">Pinchazo</option>
                             <option value="motor" name="tipo">Motor</option>
                             <option value="bateria" name="tipo">Bateria</option>
@@ -182,19 +173,16 @@
                     </select>
                 </div>
             </div>
+        </form>
             @else
                 <div class="container-fluid p-2" style="margin-bottom: 70px">
                     <div class="col-sm-11">
-                        <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center">Incidencia - {{$incidencia->id}}</h1>
-                        <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado = 1)
-                                <label class="text-success">Activa </label> @else<label
-                                    class="text-danger">Cerrada </label> @endif</h5>
+                        <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center" >Incidencia - {{$incidencia->id}}</h1>
+                        <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado == 1)<label class="text-success">Activa </label> @else<label class="text-danger">Cerrada </label> @endif</h5>
                     </div>
-
-                    <form class="form" action="" method="post">
+                    <form class="form" action="" method="get">
                         <div class="float-right col-xs-12 col-sm-6 w-50">
                             <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion de la incidencia </h2>
-
                             <h5>Localizacion</h5>
                             <div id="map"></div>
                             <script>
@@ -293,7 +281,7 @@
 
                         <div class="form-group col-sm-6">
                             <div class="col-xs-6">
-                                <h5>Fecha de nacimiento</h5>
+                                <h5>Edad</h5>
                                 <input type="text" class="form-control" disabled name="fecha"
                                        value="{{$cliente->edad}}">
                             </div>
@@ -329,25 +317,25 @@
                             <div class="form-group col-sm-6">
                                 <h5>Tipo</h5>
                                 <select name="tipo" class="form-control" disabled>
-                                    @if($vehiculo->tipo = "pinchazo")
+                                    @if($vehiculo->tipo == "pinchazo")
                                         <option value="pinchazo" selected name="tipo">Pinchazo</option>
                                         <option value="motor" name="tipo">Motor</option>
                                         <option value="bateria" name="tipo">Bateria</option>
                                         <option value="golpe" name="tipo">Golpe</option>
                                         <option value="otros" name="tipo">Otros</option>
-                                    @elseif($vehiculo->tipo = "motor")
+                                    @elseif($vehiculo->tipo == "motor")
                                         <option value="pinchazo" name="tipo">Pinchazo</option>
                                         <option value="motor" selected name="tipo">Motor</option>
                                         <option value="bateria" name="tipo">Bateria</option>
                                         <option value="golpe" name="tipo">Golpe</option>
                                         <option value="otros" name="tipo">Otros</option>
-                                    @elseif($vehiculo->tipo = "bateria")
+                                    @elseif($vehiculo->tipo == "bateria")
                                         <option value="pinchazo" name="tipo">Pinchazo</option>
                                         <option value="motor" name="tipo">Motor</option>
                                         <option value="bateria" selected name="tipo">Bateria</option>
                                         <option value="golpe" name="tipo">Golpe</option>
                                         <option value="otros" name="tipo">Otros</option>
-                                    @elseif($vehiculo->tipo = "golpe")
+                                    @elseif($vehiculo->tipo == "golpe")
                                         <option value="pinchazo" name="tipo">Pinchazo</option>
                                         <option value="motor" name="tipo">Motor</option>
                                         <option value="bateria" name="tipo">Bateria</option>
@@ -366,6 +354,5 @@
                         @endif
                     </form>
                 </div>
-
-
+        </div>
 @endsection

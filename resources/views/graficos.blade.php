@@ -13,7 +13,7 @@
                     <option value="incidenciasJornada">Numero de incidencias por jornada</option>
                     <option value="incidenciasComunidad">Numero de incidencias por comunidad</option>
                     <option value="tiposAveria">Tipo de averia</option>
-                    <option value="inSitu">Resueltas in situ</option>
+                    <option value="mapaCalor">Mapa de calor</option>
                 </select>
             </label>
 
@@ -43,6 +43,7 @@
     </nav>
 
     <canvas id="canvas"></canvas>
+    <div id="map"></div>
 
     <script>
         let chart;
@@ -224,8 +225,8 @@
                         case 'IncidenciasDia':
                             incidenciaPorDia(data);
                             break;
-                        case 'inSitu':
-                            resueltasInSitu(data);
+                        case 'mapaCalor':
+                            mapaCalor(data);
                             break;
                         case 'tiempoMedio':
                             tiempoMedio(data);
@@ -629,8 +630,19 @@
                 data: chartdata
             })
         }
-        function inSitu() {
+        function mapaCalor(data) {
 
+
+
+
+
+        let map = L.map('map').setView([42.866924, -2.676800], 8);
+
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        map
         }
 
 
