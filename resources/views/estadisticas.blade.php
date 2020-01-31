@@ -13,7 +13,8 @@
             <li class="p-2">
                 <button onclick="resueltasInSitu()">Resueltas en in situ</button>
             </li>
-        </ul><br>
+        </ul>
+        <br>
 
         <div class="float-left">
             Tecnico:
@@ -34,10 +35,10 @@
             showGraph();
         });
 
-         function showGraph() {
-             document.getElementById('canvas').style.display = 'block';
-             document.getElementById('inSitu').style.display = 'none';
-             document.getElementById('tiempoMedio').style.display = 'none';
+        function showGraph() {
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('inSitu').style.display = 'none';
+            document.getElementById('tiempoMedio').style.display = 'none';
 
             $.ajax({
                 url: "/data.php",
@@ -54,7 +55,7 @@
 
                     for (var i in data) {
                         incidentes.push(data[i].numIncidencias);
-                        fechas.push(data[i].fechas.substring(0,11));
+                        fechas.push(data[i].fechas.substring(0, 11));
                     }
 
                     console.log("uhñgrlenjk");
@@ -99,7 +100,7 @@
                     var incidentesInSitu = [];
                     var incidentesTarde = [];
 
-                    for(var i in data){
+                    for (var i in data) {
                         incidentesInSitu.push(data[i].inSitu)
                         incidentesTarde.push(data[i].tarde)
                     }
@@ -110,7 +111,7 @@
                                 labels: [
                                     'Resueltas in situ',
                                     'Resueltas mas tarde'
-                                    ],
+                                ],
                                 backgroundColor: [
                                     "#FF6384",
                                     "#63FF84"
@@ -118,7 +119,7 @@
                                 data: [
                                     incidentesInSitu,
                                     incidentesTarde
-                                    ]
+                                ]
                             }
                         ]
                     };
@@ -148,7 +149,7 @@
                 success: function (data) {
                     var tiempoMedio = [];
 
-                    for(var i in data) {
+                    for (var i in data) {
                         tiempoMedio.push(data[i].tiempoMedio);
                     }
 

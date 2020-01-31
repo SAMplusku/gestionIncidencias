@@ -11361,6 +11361,6 @@ a.text-dark:focus {
 }
 
 .btn-info {
-  background-color: #17b87e;
+  background-color: #17b87e !important;
 }
 

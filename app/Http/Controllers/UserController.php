@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Coordinadore;
 use App\Gerente;
 use App\Operadore;
@@ -16,29 +17,29 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-   /*public function check(Request $request){
-       session_start();
-        $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->first();
+    /*public function check(Request $request){
+        session_start();
+         $user =  Login::where('usuario', request('email'))->where('contraseña', request('password'))->first();
 
-        if ($user != null){
-            $persona= Persona::where('id_login', $user->id)->first();
-            $_SESSION['id'] = $user->id;
-            $_SESSION['nombre'] = $persona->nombre;
+         if ($user != null){
+             $persona= Persona::where('id_login', $user->id)->first();
+             $_SESSION['id'] = $user->id;
+             $_SESSION['nombre'] = $persona->nombre;
 
-            if (Operadore::where('id_persona','=',$persona->id)->count()> 0){
-                $_SESSION['persona'] = "operador";
-            }elseif (Tecnico::where('id_persona','=',$persona->id)->count()> 0){
-                $_SESSION['persona'] = "tecnico";
-            }elseif (Coordinadore::where('id_persona','=',$persona->id)->count()> 0){
-                $_SESSION['persona'] = "coordinador";
-            }elseif (Gerente::where('id_persona','=',$persona->id)->count()> 0){
-                $_SESSION['persona'] = "gerente";
-            }
-            return redirect()->route('index');
-        }else{
-            return redirect()->route('login');
-        }
-    }*/
+             if (Operadore::where('id_persona','=',$persona->id)->count()> 0){
+                 $_SESSION['persona'] = "operador";
+             }elseif (Tecnico::where('id_persona','=',$persona->id)->count()> 0){
+                 $_SESSION['persona'] = "tecnico";
+             }elseif (Coordinadore::where('id_persona','=',$persona->id)->count()> 0){
+                 $_SESSION['persona'] = "coordinador";
+             }elseif (Gerente::where('id_persona','=',$persona->id)->count()> 0){
+                 $_SESSION['persona'] = "gerente";
+             }
+             return redirect()->route('index');
+         }else{
+             return redirect()->route('login');
+         }
+     }*/
 
     /*public function store(Request $request){
        $persona = new Persona();
@@ -88,7 +89,8 @@ class UserController extends Controller
         return redirect()->route('index');
     }*/
 
-    public function enviarEmailCoordinador(Request $request){
+    public function enviarEmailCoordinador(Request $request)
+    {
         $mail = new PHPMailer();
         $mail->isSmtp();
         $mail->SMTPDebug = 0;
@@ -102,17 +104,18 @@ class UserController extends Controller
         $mail->SetFrom('samplusku@gmail.com');
         $mail->Subject = 'Agregar usuario a la empresa';
         $mail->Body = 'Un nuevo trabajador quiere registrarse en la aplicación. Estos son sus datos: <br>
-        nombre -> '.request('name').'<br>Apellidos -> '.request('lastname').'<br>Teléfono -> '.request('phone').'<br>
-        DNI -> '.request('dni').'<br>Fecha de nacimiento -> '.request('edad').'<br>Dirección -> '.request('direccion').'<br>
-        Email -> '.request('email');
+        nombre -> ' . request('name') . '<br>Apellidos -> ' . request('lastname') . '<br>Teléfono -> ' . request('phone') . '<br>
+        DNI -> ' . request('dni') . '<br>Fecha de nacimiento -> ' . request('edad') . '<br>Dirección -> ' . request('direccion') . '<br>
+        Email -> ' . request('email');
         $mail->AddAddress(request('coordinador'));
         $mail->Send();
 
         return redirect()->route('login');
     }
 
-    public function cerrarSesion(){
-       session_start();
+    public function cerrarSesion()
+    {
+        session_start();
         unset($_SESSION['id']);
         unset($_SESSION['nombre']);
         unset($_SESSION['persona']);
@@ -121,8 +124,10 @@ class UserController extends Controller
         //Auth::logout();
         //return redirect()->route('login');
     }
-    public function subirImagen(Request $request ,$id){
-        if ($request->file('image') != null || $request->file('image') != ""){
+
+    public function subirImagen(Request $request, $id)
+    {
+        if ($request->file('image') != null || $request->file('image') != "") {
             $persona = Persona::find($id);
             $image = $request->file('image');
             $input['imagename'] = $persona->email . '.' . $image->getClientOriginalExtension();
@@ -130,16 +135,37 @@ class UserController extends Controller
             $image->move($destinationPath, $input['imagename']);
 
 
-
             $persona->foto = $input['imagename'];
 
             $persona->save();
             return Redirect::route('perfil', $id);
-        }else{
+        } else {
             return Redirect::route('perfil', $id);
         }
 
 
+    }
+
+    public function contactar()
+    {
+        $persona = Persona::find(request()->all()['idTrabajador']);
+
+        $mail = new PHPMailer();
+        $mail->isSmtp();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '465';
+        $mail->isHTML(true);
+        $mail->Username = 'samplusku@gmail.com';
+        $mail->Password = '12345Abcde';
+        $mail->SetFrom('samplusku@gmail.com');
+        $mail->Subject = 'Te han contactado de Road Tech assistance SL';
+        $mail->Body = request()->all()['mensaje'];;
+        $mail->AddAddress($persona->email);
+        $mail->Send();
+        return 'Se ha enviado';
     }
 
 }
