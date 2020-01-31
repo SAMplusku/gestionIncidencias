@@ -23,7 +23,9 @@
     ?>
 
     <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
+
         <div class="container mt-4">
+
             @foreach($incidencias as $incidencia)
                 <div>
                     <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
@@ -35,12 +37,32 @@
                         id="descripcionIncidente"> Descripcion: {{$incidencia->descripcion}}
                     </div>
                     <hr>
-
                 </div>
             @endforeach
             {{$incidencias->links()}}
         </div>
-
     </div>
+    <script>
 
+        function contactarTrabajador() {
+            $.ajax({
+                url: "/contactarTrabajador",
+                method: 'POST',
+                data: {idTrabajador: $('#idTrabajador').val(), mensaje: $('#mensaje').val()},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:
+                    function (data) {
+                        $('#mensaje').val("")
+                        $('body').removeClass('modal-open');
+                    },
+                error: function (data) {
+                    console.log("Error");
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
 @endsection

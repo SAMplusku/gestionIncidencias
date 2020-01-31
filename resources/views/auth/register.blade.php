@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 40px; width: 100%">
         <div class="d-flex justify-content-center align-items-center card signup bg-light">
             <h3 class="text-center">Dar de alta trabajador</h3>
-                <form method="POST" action="{{ route('register') }}" onsubmit="return validacionRegistro()">
+                <form method="POST" action="{{ route('register') }}" onsubmit="//return validacionRegistro()">
                     @csrf
 
                     <div class="form-group row">
@@ -43,8 +43,6 @@
                                 </span>
                         @enderror
                     </div>
-
-
 
                     <div class="form-group row">
                         <input type="number" id="edad" name="edad" class="form-control @error('edad') is-invalid @enderror" min="18" max="65" placeholder="Edad" required>
