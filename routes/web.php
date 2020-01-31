@@ -52,7 +52,7 @@ Route::get('/modificarIncidencia/{id}', 'IncidenciaController@update')->middlewa
 
 Route::get('/cerrarIncidencia/{id}', 'IncidenciaController@cerrar')->middleware('auth');
 
-Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
+Route::get('/cerrarSesion', 'UserController@cerrarSesion');
 
 Route::get('/signup/store', function () {
     return view('signup');

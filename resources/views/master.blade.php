@@ -65,15 +65,15 @@
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
     </a>
-
-    @if(isset($_SESSION['id'])  )
+<?php session_start()?>
+    @if(isset($_SESSION['id']))
         <div class="float-left">
             <nav class="nav ">
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
                     <a class="nav-link text-dark p-3" href="/incidencia">Añadir Incidencia</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link text-dark p-3" href="/busquedaTrabajadores">Perfiles</a>
+                    <a class="nav-link text-dark p-3" href="/busquedaTrabajadores">Buscar Trabajadores</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
                     <a class="nav-link text-dark p-3" href="/estadisticas">Estadísticas</a>
