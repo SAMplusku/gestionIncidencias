@@ -46,7 +46,7 @@ class PersonaController extends Controller
     }
 
     public function index(){
-        $trabajadores = DB::table('personas')->paginate(2);
+        $trabajadores = DB::table('personas')->paginate(10);
 
         return view('busquedaTrabajadores', [
             'trabajadores' => $trabajadores
@@ -68,7 +68,7 @@ class PersonaController extends Controller
     }
 
     public function showOperadores() {
-        $operadores = DB::table('operadores')->paginate(2);
+        $operadores = DB::table('operadores')->paginate(10);
         $personas = [];
 
         foreach ($operadores as $operador) {
@@ -82,7 +82,7 @@ class PersonaController extends Controller
     }
 
     public function showCoordinador() {
-        $coordinadores = DB::table('coordinadores')->paginate(2);
+        $coordinadores = DB::table('coordinadores')->paginate(10);
         $personas = [];
 
         foreach ($coordinadores as $coordinador) {
@@ -96,7 +96,7 @@ class PersonaController extends Controller
     }
 
     public function showGerente() {
-        $gerentes = DB::table('gerentes')->paginate(2);
+        $gerentes = DB::table('gerentes')->paginate(10);
         $personas = [];
 
         foreach ($gerentes as $gerente) {
@@ -110,7 +110,7 @@ class PersonaController extends Controller
     }
 
     public function showMañana() {
-        $tecnicos = DB::table('tecnicos')->where('jornada','mañana')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('jornada','mañana')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -123,7 +123,7 @@ class PersonaController extends Controller
     }
 
     public function showTarde() {
-        $tecnicos = DB::table('tecnicos')->where('jornada','tarde')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('jornada','tarde')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -136,7 +136,7 @@ class PersonaController extends Controller
     }
 
     public function showNoche() {
-        $tecnicos = DB::table('tecnicos')->where('jornada','noche')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('jornada','noche')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -149,7 +149,7 @@ class PersonaController extends Controller
     }
 
     public function showNodisponible() {
-        $tecnicos = DB::table('tecnicos')->where('disponibilidad',0)->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('disponibilidad',0)->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -172,7 +172,7 @@ class PersonaController extends Controller
     }
 
     public function showDisponible() {
-        $tecnicos = DB::table('tecnicos')->where('disponibilidad',1)->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('disponibilidad',1)->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -194,7 +194,7 @@ class PersonaController extends Controller
     }
 
     public function showAlava() {
-        $tecnicos = DB::table('tecnicos')->where('comunidad','alava')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('comunidad','alava')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -206,7 +206,7 @@ class PersonaController extends Controller
         ]);
     }
     public function showVizcaya() {
-        $tecnicos = DB::table('tecnicos')->where('comunidad','vizcaya')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('comunidad','vizcaya')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {
@@ -218,7 +218,7 @@ class PersonaController extends Controller
         ]);
     }
     public function showGuipuzcoa() {
-        $tecnicos = DB::table('tecnicos')->where('comunidad','guipuzcoa')->paginate(2);
+        $tecnicos = DB::table('tecnicos')->where('comunidad','guipuzcoa')->paginate(10);
         $personasTecnicos = [];
 
         foreach ($tecnicos as $tecnico) {

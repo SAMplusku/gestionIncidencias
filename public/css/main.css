@@ -99,3 +99,22 @@ a:hover, a:visited{
     white-space: nowrap;
 }
 
+@media (max-width: 800px) {
+    #navGrande {
+        display: none;
+    }
+
+    #navResponsive {
+        display: block;
+    }
+}
+
+@media (min-width: 800px) {
+    #navGrande {
+        display: block;
+    }
+
+    #navResponsive {
+        display: none;
+    }
+}

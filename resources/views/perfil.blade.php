@@ -80,11 +80,13 @@
                 </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
+                    @if(\App\Tecnico::all()->where('id_persona',$persona2->id)->count()> 0 || \App\Operadore::all()->where('id_persona',$persona2->id)->count()> 0)
                     <li class="p-2" id="liIncidencia">
-                        <input type="button" onclick="ocultarDatos()" value="Incidencias">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarDatos()" value="Incidencias">
                     </li>
+                    @endif
                     <li class="p-2" id="liDatos">
-                        <input type="button" onclick="ocultarIncidencias()" value="Datos Personales">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarIncidencias()" value="Datos Personales">
                     </li>
                 </ul><br>
 
@@ -152,7 +154,7 @@
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
                 <div class="col-sm-12" id="divIncidencias">
-                    <h2>Mis Incidencias</h2> <br>
+                    <h2>Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
                                     <div>
@@ -193,5 +195,5 @@
                 @endif
             </div>
 
-
+        </div>
 @endsection
