@@ -55,6 +55,11 @@ class IncidenciaController extends Controller
         $incidencia->save();
         return redirect()->route('index');
     }
+
+    public function update() {
+        
+    }
+
     public function datosCliente(){
         $dni = Request('dniCliente');
         $cliente = Incidencia::where('dni', $dni)->first();

@@ -59,8 +59,13 @@
 
                 @if($incidencia->estado = 1)
                     <div class="d-flex justify-content-center mb-3">
+<<<<<<< HEAD
                         <a href="/modificar" class="btn btn-lg btn-success m-1">Modificar</a>
                         <a href="/cerrar" class="btn btn-lg btn-danger m-1">Cerrar</a>
+=======
+                        <a class="btn btn-lg btn-success m-1" href="/modificarIncidencia/{{$incidencia->id}}">Modificar</a>
+                        <a class="btn btn-lg btn-danger m-1" href="/cerrarIncidencia/{{$incidencia->id}}">Cerrar</a>
+>>>>>>> c5755e7ecb5ca49f7bcb1148531182c5a01d7236
                     </div>
                 @endif
             </div>
