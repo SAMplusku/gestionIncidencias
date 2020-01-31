@@ -47,8 +47,8 @@ class EstadisticasController extends Controller
             case 'IncidenciasDia':
                 $array = EstadisticasController::incidenciasPorDia();
                 break;
-            case 'inSitu':
-                $array = EstadisticasController::inSitu();
+            case 'mapaCalor':
+                $array = EstadisticasController::mapaCalor();
                 break;
             case 'tiempoMedio':
                 $array = EstadisticasController::tiempoMedio();
@@ -91,7 +91,7 @@ class EstadisticasController extends Controller
         return $incidencias;
     }
 
-    public function inSitu() {
+    public function mapaCalor() {
 
     }
 
@@ -178,7 +178,5 @@ class EstadisticasController extends Controller
 
         return $incidencias;
     }
-
-
 
 }

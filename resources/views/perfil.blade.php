@@ -64,7 +64,7 @@
                     </li>
 
                     <li class="list-group-item text-center">
-                        <strong>Estado: </strong> @if($persona->disponibilidad = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
+                        <strong>Estado: </strong> @if($persona->disponibilidad == 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
                     </li>
 
                      <li class="list-group-item text-center">
@@ -157,7 +157,7 @@
                                 @foreach($incidenciasOperador as $incidencia)
                                     <div>
                                         <a href="/incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
-                                        @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
+                                        @if($incidencia->estado == 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
                                         <hr>
                                     </div>
                                 @endforeach
@@ -165,7 +165,7 @@
                                 @foreach($incidenciasTecnico as $incidencia)
                                     <div>
                                         <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
-                                        Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
+                                        Estado: @if($incidencia->estado == 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
                                         <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
                                         Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
                                         <div

@@ -21,6 +21,10 @@ Route::get('/', function () {
 
 Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 
+Route::get('busquedaTrabajadores/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
+Route::get('busquedaTrabajadores/tecnico/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
 //Route::get('/login', function (){ return view('login'); })->name('login');
 //Route::get('/login/check', 'UserController@check')->name('login.check');
 Route::get('/signup', function () {
@@ -39,8 +43,6 @@ Route::get('/signup/storeUser', 'UserController@store')->name('signup.storeUser'
 Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia')->middleware('auth');
 
 Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
-
-Route::get('/incidencia/{id}/modificar', 'IncidenciaController@update')->middleware('auth');
 
 Route::get('/incidencia/{id}/cerrar', 'IncidenciaController@cerrar')->middleware('auth');
 
