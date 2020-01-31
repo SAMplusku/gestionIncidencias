@@ -31,7 +31,7 @@ function validacionRegistro() {
     var tipo = document.getElementById("tipo");
     var exprTel = /^(\+34|0034|34)?[6|7|8|9][0-9]{8}$/;
     var exprDNI = /(0?[1-9]|[1-9][0-9])[0-9]{6}(-| )?[trwagmyfpdxbnjzsqvhlcke]/;
-    if (tipo.value = 'tecnico') {
+    if (tipo.value == 'tecnico') {
         var localizacion = document.getElementById("localizacion");
         var especializacion = document.getElementById("especializacion");
         var jornada = document.getElementById("jornada");
@@ -41,10 +41,12 @@ function validacionRegistro() {
                 return true;
             }
             else {
+                console.log('fallo');
                 return false;
             }
         }
         else {
+            console.log('fallo');
             return false;
         }
     }
@@ -54,10 +56,12 @@ function validacionRegistro() {
                 return true;
             }
             else {
+                console.log('fallo');
                 return false;
             }
         }
         else {
+            console.log('fallo');
             return false;
         }
     }

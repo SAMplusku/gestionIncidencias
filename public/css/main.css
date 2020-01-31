@@ -38,6 +38,9 @@ a:hover, a:visited{
         width: 70%;
         margin-bottom: 7%;
     }
+    #buscador{
+        margin-right: 0;
+    }
 }
 @media only screen and (max-width: 800px) {
     .signup {
@@ -99,6 +102,13 @@ a:hover, a:visited{
     white-space: nowrap;
 }
 
+
+#buscador{
+    width: 10%;
+    margin-right: 2%;
+}
+#menuDesp{
+    padding-left: 3%;
 @media (max-width: 800px) {
     #navGrande {
         display: none;
