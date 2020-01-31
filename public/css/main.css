@@ -18,8 +18,8 @@ a:hover, a:visited{
     text-decoration: none;
 }
 .login{
-    width: 30%;
-    height: 50%;
+    width: 40%;
+    height: 60%;
 }
 .index{
     margin-top: 2%;
@@ -37,6 +37,9 @@ a:hover, a:visited{
     .signup {
         width: 70%;
         margin-bottom: 7%;
+    }
+    #buscador{
+        margin-right: 0;
     }
 }
 @media only screen and (max-width: 800px) {
@@ -86,45 +89,7 @@ a:hover, a:visited{
     transform: rotate(-90deg);
 }
 
-#map { height: 360px; width: 100%;}
-
-#mapSearchContainer{
-    position:fixed;
-    top:20px;
-    right: 40px;
-    height:30px;
-    width:180px;
-    z-index:110;
-    font-size:10pt;
-    color:#5d5d5d;
-    border:solid 1px #bbb;
-    background-color:#f8f8f8;
-}
-.pointer{
-    position:absolute;
-    top:86px;
-    left:60px;
-    z-index:99999;
-}
-
-
-.blur {
-    -webkit-filter: blur(1px); -moz-filter: blur(1px);
-    -o-filter: blur(1px); -ms-filter: blur(1px);
-    filter: url(#blur); filter: blur(1px);  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
-    -webkit-transition: 1s -webkit-filter linear;
-    -o-transition: 1s -o-filter linear;
-
-}
-img.blur:hover{
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
-    filter: blur(0px);
-}
-
+#map { height: 460px; width: 100%;}
 
 .indexador {
     background-image: url("https://image.freepik.com/foto-gratis/hombre-mujer-trajes-negocios-estrictos-oficina_85574-2043.jpg");
@@ -137,3 +102,30 @@ img.blur:hover{
     white-space: nowrap;
 }
 
+
+#buscador{
+    width: 10%;
+    margin-right: 2%;
+}
+#menuDesp {
+    padding-left: 3%;
+}
+@media (max-width: 800px) {
+    #navGrande {
+        display: none;
+    }
+    #navResponsive {
+        display: block;
+    }
+}
+
+@media (min-width: 800px) {
+    #navGrande {
+        display: block;
+        height: 10%  ;
+    }
+
+    #navResponsive {
+        display: none;
+    }
+}

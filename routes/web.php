@@ -15,18 +15,19 @@ use App\Incidencia;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IncidenciaController@index')->middleware('auth');
 
 Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 
+Route::get('busquedaTrabajadores/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
+Route::get('busquedaTrabajadores/tecnico/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
+
 //Route::get('/login', function (){ return view('login'); })->name('login');
 //Route::get('/login/check', 'UserController@check')->name('login.check');
-Route::get('/signup', function (){
+Route::get('/signup', function () {
     return view('signup');
 })->name('signup');
-
 
 
 Route::get('/signup/sendMail', 'UserController@enviarEmailCoordinador')->name('signup.enviarEmail');
@@ -41,26 +42,34 @@ Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia
 
 Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
 
+Route::get('/incidencia/{id}/cerrar', 'IncidenciaController@cerrar')->middleware('auth');
+
 Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->name('datosCliente')->middleware('auth');
 
 Route::get('/anadir', 'IncidenciaController@store')->middleware('auth');
 
+Route::get('/modificarIncidencia/{id}', 'IncidenciaController@update')->middleware('auth');
+
+Route::get('/cerrarIncidencia/{id}', 'IncidenciaController@cerrar')->middleware('auth');
+
 Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
-Route::get('/signup/store', function (){
+Route::get('/signup/store', function () {
     return view('signup');
 })->name('signup.store')->middleware('auth');
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/estadisticas', 'EstadisticasController@index');
+Route::get('/estadisticas', 'EstadisticasController@index')->middleware('auth');
 
-Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show');
+Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show')->middleware('auth');
 
-Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos');
+Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos')->middleware('auth');
 
 
-Route::get('/index', function(){return view('index');})->name('index')->middleware('auth');
+Route::get('/index', function () {
+    return view('index');
+})->name('index')->middleware('auth');
 
 Auth::routes();
 
@@ -100,7 +109,9 @@ Route::get('/busquedaTrabajadores/tecnico/vizcaya', 'PersonaController@showVizca
 
 Route::get('/buscadorTrabajadores', 'PersonaController@showTrabajadores')->middleware('auth');
 
-Route::get('/cookie/set','CookieController@setCookie');
+Route::get('/cookie/set', 'CookieController@setCookie')->middleware('auth');
 
-Route::get('/cookie/get','CookieController@getCookie');
+Route::get('/cookie/get', 'CookieController@getCookie')->middleware('auth');
 
+
+Route::post('/contactarTrabajador', 'UserController@contactar')->middleware('auth');

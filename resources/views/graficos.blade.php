@@ -13,7 +13,7 @@
                     <option value="incidenciasJornada">Numero de incidencias por jornada</option>
                     <option value="incidenciasComunidad">Numero de incidencias por comunidad</option>
                     <option value="tiposAveria">Tipo de averia</option>
-                    <option value="inSitu">Resueltas in situ</option>
+                    <option value="mapaCalor">Mapa de calor</option>
                 </select>
             </label>
 
@@ -43,7 +43,7 @@
     </nav>
 
     <canvas id="canvas"></canvas>
-
+    <div id="map"></div>
     <script>
         let chart;
         $(document).ready(function () {
@@ -224,8 +224,8 @@
                         case 'IncidenciasDia':
                             incidenciaPorDia(data);
                             break;
-                        case 'inSitu':
-                            resueltasInSitu(data);
+                        case 'mapaCalor':
+                            mapaCalor(data);
                             break;
                         case 'tiempoMedio':
                             tiempoMedio(data);
@@ -629,7 +629,23 @@
                 data: chartdata
             })
         }
-        function inSitu() {
+        function mapaCalor(data) {
+
+            //https://esri.github.io/esri-leaflet/examples/visualize-points-as-a-heatmap.html
+
+        let map = L.map('map').setView([42.866924, -2.676800], 8);
+
+            L.esri.basemapLayer('Gray').addTo(map);
+
+
+            L.esri.Heat.featureLayer({
+                url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
+                radius: 10
+            }).addTo(map);
+
+ 
+
+
 
         }
 

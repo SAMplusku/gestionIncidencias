@@ -5,11 +5,11 @@
     <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 40px; width: 100%">
         <div class="d-flex justify-content-center align-items-center card signup bg-light">
             <h3 class="text-center">Dar de alta trabajador</h3>
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" onsubmit="//return validacionRegistro()">
                     @csrf
 
                     <div class="form-group row">
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nombre" required autofocus>
+                        <input type="text" id="nombre" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nombre" required autofocus>
                         @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="text" name="lastname" class="form-control @error('lastname') is-invalid @enderror" placeholder="Apellidos" required>
+                        <input type="text" id="apellido" name="lastname" class="form-control @error('lastname') is-invalid @enderror" placeholder="Apellidos" required>
                         @error('lastname')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="text" name="dni" class="form-control @error('dni') is-invalid @enderror" placeholder="DNI" required><br>
+                        <input type="text" id="dni" name="dni" class="form-control @error('dni') is-invalid @enderror" placeholder="DNI" required><br>
                         @error('dni')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Teléfono" required>
+                        <input type="text" id="telefono" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Teléfono" required>
                         @error('phone')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -44,10 +44,8 @@
                         @enderror
                     </div>
 
-
-
                     <div class="form-group row">
-                        <input type="number" name="edad" class="form-control @error('edad') is-invalid @enderror" min="18" max="65" placeholder="Edad" required>
+                        <input type="number" id="edad" name="edad" class="form-control @error('edad') is-invalid @enderror" min="18" max="65" placeholder="Edad" required>
                         @error('edad')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -56,7 +54,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="text" name="direccion" class="form-control @error('direccion') is-invalid @enderror" placeholder="Dirección " required>
+                        <input type="text" id="direccion" name="direccion" class="form-control @error('direccion') is-invalid @enderror" placeholder="Dirección " required>
                         @error('direccion')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -85,8 +83,8 @@
                         <input id="password-confirm" type="password" class="form-control" placeholder="Repite contraseña" name="password_confirmation" required autocomplete="new-password">
                     </div>
                     <div class="form-group row">
-                        <select name="tipo" class="form-control @error('tipo') is-invalid @enderror" onchange="añadirTec(this.value)" class="custom-select">
-                            <option disabled selected>Tipo</option>
+                        <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror" onchange="añadirTec(this.value)" class="custom-select">
+                            <option value="" disabled selected>Tipo</option>
                             <option value="operador">Operario</option>
                             <option value="tecnico">Técnico</option>
                             <option value="coordinador">Coordinador</option>
