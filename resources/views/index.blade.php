@@ -1,65 +1,115 @@
 @extends('master')
 @section('content')
-<?php
-$user =  App\Login::find(Auth::id());
-$persona= App\Persona::where('id_login', $user->id)->first();
-session_cache_limiter('private');
-$cache_limiter = session_cache_limiter();
-session_cache_expire(60);
-$cache_expire = session_cache_expire();
-session_start();
-$_SESSION['id'] = $user->id;
-$_SESSION['nombre'] = $persona->nombre;
-if (App\Operadore::where('id_persona','=',$persona->id)->count()> 0){
-    $_SESSION['persona'] = "operador";
-}elseif (App\Tecnico::where('id_persona','=',$persona->id)->count()> 0){
-    $_SESSION['persona'] = "tecnico";
-}elseif (App\Coordinadore::where('id_persona','=',$persona->id)->count()> 0){
-    $_SESSION['persona'] = "coordinador";
-}elseif (App\Gerente::where('id_persona','=',$persona->id)->count()> 0){
-    $_SESSION['persona'] = "gerente";
-}
-?>
+    <?php
+    $user = App\Login::find(Auth::id());
+    $persona = App\Persona::where('id_login', $user->id)->first();
+    session_cache_limiter('private');
+    $cache_limiter = session_cache_limiter();
+    session_cache_expire(60);
+    $cache_expire = session_cache_expire();
+    session_start();
+    $_SESSION['id'] = $user->id;
+    $_SESSION['nombre'] = $persona->nombre;
+    if (App\Operadore::where('id_persona', '=', $persona->id)->count() > 0) {
+        $_SESSION['persona'] = "operador";
+    } elseif (App\Tecnico::where('id_persona', '=', $persona->id)->count() > 0) {
+        $_SESSION['persona'] = "tecnico";
+    } elseif (App\Coordinadore::where('id_persona', '=', $persona->id)->count() > 0) {
+        $_SESSION['persona'] = "coordinador";
+    } elseif (App\Gerente::where('id_persona', '=', $persona->id)->count() > 0) {
+        $_SESSION['persona'] = "gerente";
+    }
+    $incidencias = \App\Incidencia::all();
+    ?>
 
-    <div class="index d-flex justify-content-center">
-        <div class="row">
+    <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <form class="input-group mb-3 mt-3 w-25 float-right" method="get" action="/buscadorTrabajadores">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control " placeholder="Nombre del usuario" name="busqueda">
+            </form>
 
+            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    @if(!Request::is('busquedaTrabajadores'))
+                        <li class="nav-item mr-3"><a class="nav-link" href="/busquedaTrabajadores">Inicio</a>
+                        </li> @endif
 
-        @if(isset($_SESSION['nombre']))
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador' || $_SESSION['persona'] == 'tecnico')
-                <div class="col-md-6">
-                    <div class="jumbotron p-3">
-                        <div class="d-flex justify-content-center"><img src="https://estaticos.elperiodico.com/resources/jpg/3/8/fcasals25757716-madrid-autopista-radial-foto-jose-luis-roc161213172509-1481646513783.jpg" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
-                        <h1 class="d-flex justify-content-center"><a href="/incidencia">Añadir incidencia</a></h1>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Filtrar Por
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/operador">Operador</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/coordinador">Coordinador</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/gerente">Gerente</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="/busquedaTrabajadores/tecnico"
+                                   id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false"> Tecnico </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle">Comunidad</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/alava">Álava</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/guipuzcoa">Guipúzcoa</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/vizcaya">Vizcaya</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle">Jornada</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/mañana">Mañana</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/tarde">Tarde</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="/busquedaTrabajadores/tecnico/noche">Noche</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle">Estado</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item"
+                                                   href="/busquedaTrabajadores/tecnico/disponible">No disponnible</a>
+                                            </li>
+                                            <li><a class="dropdown-item"
+                                                   href="/busquedaTrabajadores/tecnico/noDisponible">Disponible</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' )
-                <div class="col-md-6">
-                    <div class="jumbotron p-3">
-                        <div class="d-flex justify-content-center"><img src="https://us.123rf.com/450wm/bbtreesubmission/bbtreesubmission1709/bbtreesubmission170902685/85678291-hombre-asi%C3%A1tico-y-mujer-en-traje-de-negocios-posando-en-un-estudio-con-gesto.jpg?ver=6" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
-                        <h1 class="d-flex justify-content-center"><a href="/busquedaTrabajadores">Perfiles</a></h1>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            @foreach($incidencias as $incidencia)
+                <div>
+                    <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
+                    Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label
+                        class="text-danger"> Cerrada </label>@endif
+                    <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
+                    Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
+                    <div
+                        id="descripcionIncidente"> Descripcion: {{$incidencia->descripcion}}
                     </div>
+                    <hr>
+
                 </div>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <div class="col-md-6">
-                    <div class="jumbotron p-3">
-                        <div class="d-flex justify-content-center"><img src="https://eduliticas.com/wp-content/uploads/2015/07/diagrama-de-sectores.png" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
-                        <h1 class="d-flex justify-content-center">Estadísticas</h1>
-                    </div>
-                </div>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <div class="col-md-6">
-                    <div class="jumbotron p-3">
-                        <div class="d-flex justify-content-center"><img src="https://image.freepik.com/foto-gratis/hombre-mujer-trajes-negocios-estrictos-oficina_85574-2043.jpg" style="width: 9em; height: 9em;"class="card-img-top blur d-flex justify-content-center" alt="..."></div><br>
-                        <h1 class="d-flex justify-content-center"><a href="/register">Dar de alta usuario</a></h1>
-                    </div>
-                </div>
-            @endif
-        @endif
+            @endforeach
         </div>
-</div>
+
+    </div>
 
 @endsection

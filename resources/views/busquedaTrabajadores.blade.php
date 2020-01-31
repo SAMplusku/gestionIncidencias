@@ -2,7 +2,7 @@
 <?php session_start() ?>
 
     @section("content")
-                    <div class="main-box clearfix col-lg-12 p-0">
+                    <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
 
                         <nav class="navbar navbar-expand-md navbar-light bg-light">
 
@@ -100,7 +100,7 @@
                             </span>
                         </td>
                         <td>
-                            {{$trabajador->created_at}}
+                            {{substr($trabajador->created_at, 0, 10)}}
                         </td>
                         <td>
                             <span class="label label-default">{{$trabajador->telefono}}</span>
@@ -109,9 +109,10 @@
                             <a href="#">{{$trabajador->email}}</a>
                         </td>
                         <td style="width: 20%;">
-                            <button class="btn btn-success">Contactar</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#contactar">Contactar</button>
                         </td>
                     </tr>
+                    <input type="hidden" id="idTrabajador" value="{{$trabajador->id}}">
                 @endforeach
                 </tbody>
             </table>
@@ -122,7 +123,50 @@
                                 @endif
                             </ul>
                         </nav>
-
-
         </div>
+
+
+                    <div class="modal fade" id="contactar" tabindex="-1" role="dialog" aria-labelledby="contactar" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="contactarLabel">Contactar Trabajador</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea placeholder="Mensaje" id="mensaje" name="mensaje" style="width: 100%"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" onclick="contactarTrabajador()">Enviar</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <script>
+
+            function contactarTrabajador() {
+                $.ajax({
+                    url: "/contactarTrabajador",
+                    method: 'POST',
+                    data: {idTrabajador: $('#idTrabajador').val(), mensaje: $('#mensaje').val()},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success:
+                        function (data) {
+                            $('#mensaje').val("")
+                            $('body').removeClass('modal-open');
+                        },
+                    error: function (data) {
+                        console.log("Error");
+                        console.log(data);
+                    }
+                });
+            }
+
+        </script>
 @endsection
