@@ -117,88 +117,54 @@ class IncidenciaController extends Controller
 
 
 
-    public function update(Request $request, $id) {
-        $vehiculo = new Vehiculo(
-            array(
-                'matricula'=>$request->get('matricula'),
-                'marca'=>$request->get('marca'),
-                'modelo'=>$request->get('modelo'),
-            )
-        );
-        $vehiculo->save();
-        $vehiculo2 = Vehiculo::all()->last();
-        $cliente = new Cliente(
-            array(
-                'nombre'=>$request->get('nombrecliente'),
-                'dni'=>$request->get('dni'),
-                'edad'=>$request->get('edad'),
-                'telefono'=>$request->get('telefono'),
-                'apellidos'=>$request->get('apellidos'),
-                'direccion'=>$request->get('direccion'),
-                'id_vehiculo'=>$vehiculo2->id
-            )
-        );
-        $cliente->save();
-        $cliente2= Cliente::all()->last();
+    public function update($id) {
+
+        if (Request('action') == 'Modificar'){
+            $incidencia = Incidencia::find($id);
+            $cliente = Cliente::find($incidencia->id_cliente);
+            $vehiculo = Vehiculo::find($cliente->id_vehiculo);
+            $vehiculo->matricula = Request('matricula');
+            $vehiculo->marca = Request('marca');
+            $vehiculo->modelo = Request('modelo');
+            $vehiculo->save();
+
+            $cliente->nombre = Request('nombre');
+            $cliente->dni = Request('dni');
+            $cliente->edad = Request('edad');
+            $cliente->telefono = Request('telefono');
+            $cliente->apellidos = Request('apellidos');
+            $cliente->direccion = Request('direccion');
+            $cliente->save();
 
 
-        $incidencia = new Incidencia(
-            array(
-                'tipo'=>$request->get('tipo'),
-                'fecha'=>$request->get('fecha'),
-                'descripcion'=>$request->get('descripcion'),
-                'observacion'=>$request->get('observacion'),
-                'localizacion'=>$request->get('localizacion'),
-                'id_tecnico'=>$request->get('id_tecnico'),
-                'id_operador'=>$request->get('id_operador'),
-                'id_cliente'=>$cliente2->id
-            )
-        );
+            $incidencia->descripcion = Request('descripcion');
+            $incidencia->observacion = Request('observacion');
+            $incidencia->id_tecnico = Request('id_tecnico');
+            $incidencia->id_operador = Request('id_operador');
+            $incidencia->save();
+        }else{
+            $incidencia = Incidencia::find($id);
 
-        $incidencia->save();
+            $incidencia->fechafin = date('Y-m-d H:i:s');
+            $incidencia->estado = 0;
+
+            $incidencia->save();
+        }
+
+
         return redirect()->route('index');
     }
 
-    public function cerrar(Request $request, $id) {
-        $vehiculo = new Vehiculo(
-            array(
-                'matricula'=>$request->get('matricula'),
-                'marca'=>$request->get('marca'),
-                'modelo'=>$request->get('modelo'),
-            )
-        );
-        $vehiculo->save();
-        $vehiculo2 = Vehiculo::all()->last();
-        $cliente = new Cliente(
-            array(
-                'nombre'=>$request->get('nombrecliente'),
-                'dni'=>$request->get('dni'),
-                'edad'=>$request->get('edad'),
-                'telefono'=>$request->get('telefono'),
-                'apellidos'=>$request->get('apellidos'),
-                'direccion'=>$request->get('direccion'),
-                'id_vehiculo'=>$vehiculo2->id
-            )
-        );
-        $cliente->save();
-        $cliente2= Cliente::all()->last();
 
 
-        $incidencia = new Incidencia(
-            array(
-                'tipo'=>$request->get('tipo'),
-                'fecha'=>$request->get('fecha'),
-                'descripcion'=>$request->get('descripcion'),
-                'observacion'=>$request->get('observacion'),
-                'localizacion'=>$request->get('localizacion'),
-                'id_tecnico'=>$request->get('id_tecnico'),
-                'id_operador'=>$request->get('id_operador'),
-                'estado'=>('0'),
-                'id_cliente'=>$cliente2->id
-            )
-        );
+    public function cerrar($id) {
 
-        $incidencia->save();
+
+        $incidencia = Incidencia::find($id);
+        $incidencia->fechafin = date('Y-m-d H:i:s');
+        $incidencia->estado = 0;
+
+
         return redirect()->route('index');
     }
 
