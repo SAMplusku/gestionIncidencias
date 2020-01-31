@@ -124,63 +124,7 @@
         </div>
     @endif
 </nav>
-<nav class="navbar navbar-light bg-light w-100" id="navResponsive">
-    <a class="navbar-brand m-0" href="/index">
-        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
-             class="d-inline-block align-top" alt="">
-    </a>
-    @if(isset($_SESSION['persona']))
-    <div class="dropdown show float-right mt-3 pr-5">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ajustes
-        </a>
 
-        <div class="dropdown-menu">
-
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
-                <a class="nav-link text-dark p-3 dropdown-item" href="/incidencia">Añadir Incidencia</a>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <a class="nav-link text-dark p-3 dropdown-item" href="/busquedaTrabajadores">Perfiles</a>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <a class="nav-link text-dark p-3 dropdown-item" href="/estadisticas">Estadísticas</a>
-            @endif
-            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                <a class="nav-link text-dark p-3 dropdown-item" href="/register">Dar de alta usuario</a>
-            @endif
-            @if($_SESSION['persona'] == 'tecnico')
-                <?php
-                $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
-                $incidencias = \App\Incidencia::all();
-                $notificacion = 0;
-                foreach ($incidencias as $incidencia) {
-                    if ($incidencia->id_tecnico == $persona->id) {
-                        $notificacion = 1;
-                        $idIncidencia = $incidencia->id;
-                    }
-                }
-                ?>
-                @if($notificacion == 1)
-                    <a href="/incidencia/{{$idIncidencia}}"><img class="noti"
-                                                                 src="https://image.flaticon.com/icons/svg/565/565423.svg"
-                                                                 style="width: 25%"></a>
-                @else
-                    <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
-                @endif
-            @endif
-             <a class="nav-link dropdown-toggle text-dark" href="/busquedaTrabajadores/tecnico" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item " href="/perfil/{{$_SESSION['id']}}">Perfil</a>
-                        <a class="dropdown-item " href="/cerrarSesion">Cerrar sesión</a>
-                    </li>
-                </ul>
-        </div>
-
-    </div>
-    @endif
-</nav>
 <!-- Container -->
 
 @yield('content')
