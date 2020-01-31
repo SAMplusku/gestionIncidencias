@@ -56,9 +56,6 @@ class IncidenciaController extends Controller
         return redirect()->route('index');
     }
 
-    public function update() {
-        
-    }
 
     public function datosCliente(){
         $dni = Request('dniCliente');
