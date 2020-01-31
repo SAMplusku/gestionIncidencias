@@ -68,13 +68,13 @@
                             }
                         });
 
-                        //let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
+                        let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
 
                         let latitud = e.latlng.lng.toString();
                         let longitud = e.latlng.lat.toString();
 
 
-                        //document.getElementById('localizacion').value = localizacion1;
+                        document.getElementById('localizacion').value = localizacion1;
                         document.getElementById('latitud').value = latitud;
                         document.getElementById('longitud').value = longitud;
                         console.log(latitud.toString());
@@ -118,8 +118,9 @@
                 </script>
 
                 <input type="hidden" id="localizacion" name="localizacion">
-                <input type="hidden" id="longitud" name="longitud">
                 <input type="hidden" id="latitud" name="latitud">
+                <input type="hidden" id="longitud" name="longitud">
+
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>
