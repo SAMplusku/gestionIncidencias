@@ -2,18 +2,34 @@
 
 @section("content")
     <?php session_start()?>
-        <div class="col-sm-10 mt-3 d-flex" >
-        </div>
+    <script>
+        $(document).ready(function () {
+            document.getElementById('divIncidencias').style.display = 'none';
+        });
+
+        function ocultarIncidencias() {
+            document.getElementById('divIncidencias').style.display = 'none';
+            document.getElementById('divDatos').style.display = 'block';
+
+
+        }
+
+        function ocultarDatos() {
+            document.getElementById('divIncidencias').style.display = 'block';
+            document.getElementById('divDatos').style.display = 'none';
+        }
+    </script>
         <div class="row d-flex justify-content-center">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
-                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle img-thumbnail"><br><br>
+                    <form class="form" action="/perfil/CambiarFoto/{{$persona2->id}}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <img src="{{ URL::asset('images/' . $persona2->foto) }}" class="img-circle img-thumbnail img-fluid" style="width: 60%"><br><br>
                     <label class="btn btn-default bg-info">
-                        Cambia de foto <input type="file" hidden>
+                        Cambia de foto <input name="image" type="file" hidden>
                     </label>
                 </div>
                 <br>
-
                 <ul class="list-group">
                     <li class="list-group-item text-center">Actividad</li>
 
@@ -31,7 +47,7 @@
                     </li>
 
                     @if(isset($operador))
-                        <li class="list-group-item text-center">
+                        <li  class="list-group-item text-center">
                             <strong>Incidencias</strong> {{$operador}}
                         </li>
                     @endif
@@ -62,17 +78,16 @@
             </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
-                    <li class="p-2">
-                        <a href="/perfil/{{$persona2->id}}}/incidencias">Incidencias</a>
+                    <li class="p-2" id="liIncidencia">
+                        <input type="button" onclick="ocultarDatos()" value="Incidencias">
                     </li>
-                    <li class="p-2">
-                        <a href="/perfil/{{$persona2->id}}}/index">Datos personales</a>
+                    <li class="p-2" id="liDatos">
+                        <input type="button" onclick="ocultarIncidencias()" value="Datos Personales">
                     </li>
                 </ul><br>
 
                 <div>
-                    <div class="active">
-                        <form class="form" action="" method="post">
+                    <div id="divDatos">
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <h4>Nombre</h4>
@@ -133,7 +148,7 @@
                 </div>
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
-                <div class="col-sm-12">
+                <div class="col-sm-12" id="divIncidencias">
                     <h2>Mis Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
@@ -146,7 +161,7 @@
                                 @else
                                 @foreach($incidenciasTecnico as $incidencia)
                                     <div>
-                                        <h3><a href="incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
+                                        <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
                                         Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
                                         <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
                                         Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>

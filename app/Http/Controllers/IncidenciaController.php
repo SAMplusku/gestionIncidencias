@@ -53,6 +53,8 @@ class IncidenciaController extends Controller
         );
 
         $incidencia->save();
+        $tec = Persona::find($request->get('id_tecnico'));
+        $this->contactarTecnico($tec->email);
         return redirect()->route('index');
     }
     public function datosCliente(){
@@ -88,5 +90,24 @@ class IncidenciaController extends Controller
             "cliente" => $cliente,
             "vehiculo" => $vehiculo
         ]);
+    }
+
+    public function contactarTecnico($correo)
+    {
+        $mail = new PHPMailer();
+        $mail->isSmtp();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '465';
+        $mail->isHTML(true);
+        $mail->Username = 'samplusku@gmail.com';
+        $mail->Password = '12345Abcde';
+        $mail->SetFrom('samplusku@gmail.com');
+        $mail->Subject = 'Se te ha añadido una inidencia';
+        $mail->Body = 'Se te ha añadido una incidencia. Por favor, entra a la aplicación web para obtener más información.<br><a href="homestead.test">Pincha aquí para ir a la página web</a>';
+        $mail->AddAddress($correo);
+        $mail->Send();
     }
 }
