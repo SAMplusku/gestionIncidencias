@@ -25,7 +25,9 @@
                 <div id="map"></div>
                 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
                 <script type="text/javascript">
+
                     let map = L.map('map').setView([42.866924, -2.676800], 8);
+
                     //'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 
 
@@ -44,13 +46,6 @@
 
                     var results = L.layerGroup().addTo(map);
 
-                    L.Routing.control({
-                        waypoints: [
-                            L.latLng(43.17313537107136, -2.751388549804688),
-                            L.latLng(42.62587560259137, -2.921676635742188)
-                        ],
-                        routeWhileDragging: true
-                    }).addTo(map);
 
                     //let popup = L.popup();
                     let marker = L.marker();
@@ -60,6 +55,7 @@
                              .setLatLng(e.latlng)
                              .setContent(e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
                              .openOn(map);*/
+
 
                         marker
                             .setLatLng(e.latlng)
@@ -72,19 +68,26 @@
                             }
                         });
 
-                        let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
+                        //let localizacion1 = e.latlng.lat.toString() + ", " + e.latlng.lng.toString();
 
-                        document.getElementById('localizacion').value = localizacion1;
-                        console.log(localizacion1.toString());
+                        let latitud = e.latlng.lng.toString();
+                        let longitud = e.latlng.lat.toString();
+
+
+                        //document.getElementById('localizacion').value = localizacion1;
+                        document.getElementById('latitud').value = latitud;
+                        document.getElementById('longitud').value = longitud;
+                        console.log(latitud.toString());
+                        console.log(longitud.toString());
+
 
                         let locTec = 0;
-                        let localizacionesTec = "<?php echo json_encode($localizacionesT);?>";
+                        let localizacionesTec =<?php echo json_encode($localizacionesT);?>;
                         let idtec = document.getElementById('id_tecnico').value;
                         for (let i = 0; i < localizacionesTec.length; i++) {
                             if (localizacionesTec[i][idtec]) {
                                 locTec = localizacionesTec[i][idtec];
                             }
-
                         }
 
                         console.log(locTec)
@@ -95,24 +98,28 @@
 
                         console.log(locTecnico.toString());
 
+
+
+                        L.Routing.control({
+                            waypoints: [
+                                L.latLng(longitud, latitud),
+                                L.latLng(numero1, numero2)
+                            ],
+                            routeWhileDragging: true
+                        }).addTo(map);
+
+
+
                         //https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
                     }
 
                     map.on('click', onMapClick);
 
-                    /*
-                                        L.Routing.control({
-                                            waypoints: [
-                                                L.latLng(43.17313537107136, -2.751388549804688),
-                                                L.latLng(42.62587560259137, -2.921676635742188)
-                                            ],
-                                            routeWhileDragging: true
-                                        }).addTo(map);
-                    */
-
                 </script>
 
                 <input type="hidden" id="localizacion" name="localizacion">
+                <input type="hidden" id="longitud" name="longitud">
+                <input type="hidden" id="latitud" name="latitud">
 
                 <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Operador</h2>
                 <label>Operador</label>

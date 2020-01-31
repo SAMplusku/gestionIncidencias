@@ -48,6 +48,8 @@ class IncidenciaController extends Controller
                 'descripcion' => $request->get('descripcion'),
                 'observacion' => $request->get('observacion'),
                 'localizacion' => $request->get('localizacion'),
+                'latitud' => $request->get('latitud'),
+                'longitud' => $request->get('longitud'),
                 'id_tecnico' => $request->get('id_tecnico'),
                 'id_operador' => $request->get('id_operador'),
                 'id_cliente' => $cliente2->id
