@@ -43,6 +43,7 @@
     </nav>
 
     <canvas id="canvas"></canvas>
+    <div id="map"></div>
 
     <script>
         let chart;
@@ -631,6 +632,17 @@
         }
         function mapaCalor(data) {
 
+
+
+
+
+        let map = L.map('map').setView([42.866924, -2.676800], 8);
+
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        map
         }
 
 
