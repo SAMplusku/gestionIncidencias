@@ -32,7 +32,7 @@ function validacionRegistro():boolean{
     let exprTel = /^(\+34|0034|34)?[6|7|8|9][0-9]{8}$/;
     let exprDNI = /(0?[1-9]|[1-9][0-9])[0-9]{6}(-| )?[trwagmyfpdxbnjzsqvhlcke]/;
 
-    if (tipo.value='tecnico'){
+    if (tipo.value=='tecnico'){
         let localizacion = <HTMLInputElement>document.getElementById("localizacion");
         let especializacion = <HTMLInputElement>document.getElementById("especializacion");
         let jornada = <HTMLInputElement>document.getElementById("jornada");
@@ -42,9 +42,11 @@ function validacionRegistro():boolean{
             if (nombre.size > 3 && apellido.size > 2 && direccion.size > 4 && exprDNI.exec(dni.value) && exprTel.exec(telefono.value)){
                 return true;
             }else{
+                console.log('fallo')
                 return false;
             }
         }else{
+            console.log('fallo')
             return false
         }
     }else{
@@ -52,9 +54,11 @@ function validacionRegistro():boolean{
             if (nombre.size > 3 && apellido.size > 2 && direccion.size > 4 && exprDNI.exec(dni.value) && exprTel.exec(telefono.value)){
                 return true;
             }else{
+                console.log('fallo')
                 return false;
             }
         }else{
+            console.log('fallo')
             return false;
         }
     }

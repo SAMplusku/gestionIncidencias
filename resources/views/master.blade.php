@@ -15,7 +15,7 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/validaciones.js') }}">
+    <script rel="stylesheet" src="{{ asset('js/validaciones.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
@@ -60,8 +60,9 @@
 </head>
 <body>
 <!-- Header -->
+
 <nav class="navbar navbar-light bg-light" id="navGrande" style="height: 8%">
-    <a class="navbar-brand m-0 float-left mr-2" href="/index">
+    <a class="navbar-brand m-0 float-left mr-2" href="/">
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
     </a>
@@ -104,7 +105,9 @@
             </nav>
         </div>
 
+
         <div class="btn-group dropdown float-right mt-2" style="margin-right: 60px">
+
             <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Menú
             </button>
