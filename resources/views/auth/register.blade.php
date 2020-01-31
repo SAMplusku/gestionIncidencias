@@ -88,9 +88,9 @@
                             <option value="operador">Operario</option>
                             <option value="tecnico">Técnico</option>
                             <option value="coordinador">Coordinador</option>
-                            @if($_SESSION['persona'] == 'gerente')
+                            
                             <option value="gerente">Gerente</option>
-                            @endif
+                          
                         </select>
                         @error('tipo')
                         <span class="invalid-feedback" role="alert">
