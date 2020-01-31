@@ -72,7 +72,7 @@
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
     </a>
-<?php session_start()?>
+
     @if(isset($_SESSION['id']))
         <div class="float-left">
             <nav class="nav ">
