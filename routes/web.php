@@ -41,6 +41,10 @@ Route::get('/incidencia', 'TecnicoController@detalleTecnicos')->name('incidencia
 
 Route::get('/incidencia/{id}', 'IncidenciaController@show')->middleware('auth');
 
+Route::get('/incidencia/{id}/modificar', 'IncidenciaController@update')->middleware('auth');
+
+Route::get('/incidencia/{id}/cerrar', 'IncidenciaController@cerrar')->middleware('auth');
+
 Route::get('/incidencia/datosCliente', 'IncidenciaController@datosCliente')->name('datosCliente')->middleware('auth');
 
 Route::get('/anadir', 'IncidenciaController@store')->middleware('auth');

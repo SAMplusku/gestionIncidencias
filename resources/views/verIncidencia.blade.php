@@ -59,12 +59,12 @@
 
                 @if($incidencia->estado = 1)
                     <div class="d-flex justify-content-center mb-3">
-                        <button class="btn btn-lg btn-success m-1" type="submit">Modificar</button>
-                        <button class="btn btn-lg btn-danger m-1" type="submit">Cerrar</button>
+                        <a href="/modificar" class="btn btn-lg btn-success m-1">Modificar</a>
+                        <a href="/cerrar" class="btn btn-lg btn-danger m-1">Cerrar</a>
                     </div>
                 @endif
             </div>
-        </form>
+
             <h2 class="h3 mb-3 font-weight-normal pl-3" >Informacion del cliente </h2>
             <div class="form-group col-sm-6">
                 <div class="col-xs-6">
@@ -176,6 +176,7 @@
                     </select>
                 </div>
             </div>
+        </form>
             @else
                 <div class="container-fluid p-2">
                     <div class="col-sm-11">
