@@ -53,31 +53,33 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
 
+    <script>
+        document
+    </script>
 
 </head>
 <body>
 <!-- Header -->
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/index">
-        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="40"
+<nav class="navbar navbar-light bg-light" id="navGrande" style="height: 8%">
+    <a class="navbar-brand m-0 float-left mr-2" href="/index">
+        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
-        Road Tech Assistance SL
     </a>
 
     @if(isset($_SESSION['id'])  )
-        <div>
-            <nav class="nav">
+        <div class="float-left">
+            <nav class="nav ">
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
-                    <a class="nav-link" href="/incidencia">Añadir Incidencia</a>
+                    <a class="nav-link text-dark p-3" href="/incidencia">Añadir Incidencia</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
+                    <a class="nav-link text-dark p-3" href="/busquedaTrabajadores">Perfiles</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/estadisticas">Estadísticas</a>
+                    <a class="nav-link text-dark p-3" href="/estadisticas">Estadísticas</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/register">Dar de alta usuario</a>
+                    <a class="nav-link text-dark p-3" href="/register">Dar de alta usuario</a>
                 @endif
                 @if($_SESSION['persona'] == 'tecnico')
                     <?php
@@ -102,8 +104,7 @@
             </nav>
         </div>
 
-
-        <div class="btn-group dropdown" style="margin-right: 40px">
+        <div class="btn-group dropdown float-right mt-2" style="margin-right: 60px">
             <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Menú
             </button>
@@ -113,6 +114,60 @@
             </div>
         </div>
     @endif
+</nav>
+<nav class="navbar navbar-light bg-light w-100" id="navResponsive">
+    <a class="navbar-brand m-0" href="/index">
+        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
+             class="d-inline-block align-top" alt="">
+    </a>
+
+    <div class="dropdown show float-right mt-3 pr-5">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ajustes
+        </a>
+
+        <div class="dropdown-menu">
+            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
+                <a class="nav-link text-dark p-3 dropdown-item" href="/incidencia">Añadir Incidencia</a>
+            @endif
+            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link text-dark p-3 dropdown-item" href="/busquedaTrabajadores">Perfiles</a>
+            @endif
+            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link text-dark p-3 dropdown-item" href="/estadisticas">Estadísticas</a>
+            @endif
+            @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
+                <a class="nav-link text-dark p-3 dropdown-item" href="/register">Dar de alta usuario</a>
+            @endif
+            @if($_SESSION['persona'] == 'tecnico')
+                <?php
+                $persona = \App\Persona::where('id_login', $_SESSION['id'])->first();
+                $incidencias = \App\Incidencia::all();
+                $notificacion = 0;
+                foreach ($incidencias as $incidencia) {
+                    if ($incidencia->id_tecnico == $persona->id) {
+                        $notificacion = 1;
+                        $idIncidencia = $incidencia->id;
+                    }
+                }
+                ?>
+                @if($notificacion == 1)
+                    <a href="/incidencia/{{$idIncidencia}}"><img class="noti"
+                                                                 src="https://image.flaticon.com/icons/svg/565/565423.svg"
+                                                                 style="width: 25%"></a>
+                @else
+                    <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
+                @endif
+            @endif
+             <a class="nav-link dropdown-toggle text-dark" href="/busquedaTrabajadores/tecnico" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item " href="/perfil/{{$_SESSION['id']}}">Perfil</a>
+                        <a class="dropdown-item " href="/cerrarSesion">Cerrar sesión</a>
+                    </li>
+                </ul>
+        </div>
+    </div>
 </nav>
 <!-- Container -->
 

@@ -15,9 +15,7 @@ use App\Incidencia;
 */
 
 
-Route::get('/', function () {
-    return view('index');
-})->middleware('auth');
+Route::get('/', 'IncidenciaController@index')->middleware('auth');
 
 Route::get('/perfil/{id}', 'PersonaController@show')->name('perfil')->middleware('auth');
 

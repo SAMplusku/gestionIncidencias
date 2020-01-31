@@ -9,6 +9,7 @@ use App\Operadore;
 use App\Incidencia;
 use App\Cliente;
 use App\Tecnico;
+use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
@@ -155,17 +156,14 @@ class IncidenciaController extends Controller
         return redirect()->route('index');
     }
 
+    public function index() {
+        $incidencias = DB::table('incidencias')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(5);
 
-
-    public function cerrar($id) {
-
-
-        $incidencia = Incidencia::find($id);
-        $incidencia->fechafin = date('Y-m-d H:i:s');
-        $incidencia->estado = 0;
-
-
-        return redirect()->route('index');
+        return view('index', [
+            'incidencias' => $incidencias
+        ]);
     }
 
 }
