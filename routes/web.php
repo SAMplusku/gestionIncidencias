@@ -52,7 +52,7 @@ Route::get('/modificarIncidencia/{id}', 'IncidenciaController@update')->middlewa
 
 Route::get('/cerrarIncidencia/{id}', 'IncidenciaController@cerrar')->middleware('auth');
 
-Route::get('/cerrarSesion', 'UserController@cerrarSesion');
+Route::get('/cerrarSesion', 'UserController@cerrarSesion')->middleware('auth');
 
 Route::get('/signup/store', function () {
     return view('signup');
@@ -60,11 +60,11 @@ Route::get('/signup/store', function () {
 
 Route::get('/busquedaTrabajadores', 'PersonaController@index')->middleware('auth');
 
-Route::get('/estadisticas', 'EstadisticasController@index');
+Route::get('/estadisticas', 'EstadisticasController@index')->middleware('auth');
 
-Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show');
+Route::post('/estadisticas/cargarGrafica', 'EstadisticasController@show')->middleware('auth');
 
-Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos');
+Route::post('/estadisticas/cargarGraficaTecnicos', 'EstadisticasController@showTecnicos')->middleware('auth');
 
 
 Route::get('/index', function () {
