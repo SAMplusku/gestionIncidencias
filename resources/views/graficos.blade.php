@@ -44,7 +44,6 @@
 
     <canvas id="canvas"></canvas>
     <div id="map"></div>
-
     <script>
         let chart;
         $(document).ready(function () {
@@ -632,17 +631,22 @@
         }
         function mapaCalor(data) {
 
-
-
-
+            //https://esri.github.io/esri-leaflet/examples/visualize-points-as-a-heatmap.html
 
         let map = L.map('map').setView([42.866924, -2.676800], 8);
 
+            L.esri.basemapLayer('Gray').addTo(map);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        map
+
+            L.esri.Heat.featureLayer({
+                url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
+                radius: 10
+            }).addTo(map);
+
+ 
+
+
+
         }
 
 
