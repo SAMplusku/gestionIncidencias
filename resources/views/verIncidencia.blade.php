@@ -3,37 +3,6 @@
 @section("content")
     <?php session_start() ?>
     @if($_SESSION['persona'] == 'tecnico' && $_SESSION['id'] == $incidencia->id_tecnico  || $_SESSION['persona'] == 'operador' && $_SESSION['id'] == $incidencia->id_operador )
-
-<<<<<<< HEAD
-    <div class="container-fluid p-2">
-        <div class="col-sm-11">
-            <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center" >Incidencia - {{$incidencia->id}}</h1>
-            <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado = 1)<label class="text-success">Activa </label> @else<label class="text-danger">Cerrada </label> @endif</h5>
-        </div>
-
-        <form class="form " action="" method="post">
-            <div class="float-right col-xs-12 col-sm-6 w-50">
-                <h2 class="h3 mb-3 font-weight-normal pl-3" >Informacion de la incidencia </h2>
-
-                <h5>Localizacion</h5>
-                <div id="map"></div>
-                <script>
-                    let map = L.map('map').setView([42.866924, -2.676800], 8);
-
-                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
-                        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-
-                    }).addTo(map);
-
-                    let marker = L.marker([42.866924, -2.676800]).addTo(map);
-                </script>
-                <br>
-
-                <div class="form-group ">
-                    <div class="col-xs-6">
-                        <h5>Descripcion</h5>
-                        <textarea class="form-control" type="text" name="descripcion" required>{{$incidencia->descripcion}}</textarea>
-=======
         <div class="container-fluid p-2" style="margin-bottom: 70px">
             <div class="col-sm-11">
                 <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center">Incidencia - {{$incidencia->id}}</h1>
@@ -41,7 +10,6 @@
                         class="text-success">Activa </label> @else<label class="text-danger">Cerrada </label> @endif
                 </h5>
             </div>
-
             <form class="form " action="" method="post">
                 <div class="float-right col-xs-12 col-sm-6 w-50">
                     <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion de la incidencia </h2>
@@ -66,7 +34,6 @@
                             <textarea class="form-control" type="text" name="descripcion"
                                       required>{{$incidencia->descripcion}}</textarea>
                         </div>
->>>>>>> a98bca102ab5c0d9470945b9e494e48338208572
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-6">
@@ -93,7 +60,15 @@
                                    value="{{$incidencia->id_operador}}">
                         </div>
                     </div>
+                @if($incidencia->estado = 1)
+                    <div class="d-flex justify-content-center mb-3">
+                        <a class="btn btn-lg btn-success m-1" href="/modificarIncidencia/{{$incidencia->id}}">Modificar</a>
+                        <a class="btn btn-lg btn-danger m-1" href="/cerrarIncidencia/{{$incidencia->id}}">Cerrar</a>
+                    </div>
+                @endif
+            </div>
 
+            <h2 class="h3 mb-3 font-weight-normal pl-3" >Informacion del cliente </h2>
                     @if($incidencia->estado = 1)
                         <div class="d-flex justify-content-center mb-3">
                             <button class="btn btn-lg btn-success m-1" type="submit">Modificar</button>
@@ -101,7 +76,7 @@
                         </div>
                     @endif
                 </div>
-            </form>
+
             <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion del cliente </h2>
             <div class="form-group col-sm-6">
                 <div class="col-xs-6">
@@ -213,24 +188,16 @@
                     </select>
                 </div>
             </div>
+        </form>
             @else
                 <div class="container-fluid p-2" style="margin-bottom: 70px">
                     <div class="col-sm-11">
-<<<<<<< HEAD
                         <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center" >Incidencia - {{$incidencia->id}}</h1>
                         <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado = 1)<label class="text-success">Activa </label> @else<label class="text-danger">Cerrada </label> @endif</h5>
-=======
-                        <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center">Incidencia - {{$incidencia->id}}</h1>
-                        <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado = 1)
-                                <label class="text-success">Activa </label> @else<label
-                                    class="text-danger">Cerrada </label> @endif</h5>
->>>>>>> a98bca102ab5c0d9470945b9e494e48338208572
                     </div>
-
                     <form class="form" action="" method="post">
                         <div class="float-right col-xs-12 col-sm-6 w-50">
                             <h2 class="h3 mb-3 font-weight-normal pl-3">Informacion de la incidencia </h2>
-
                             <h5>Localizacion</h5>
                             <div id="map"></div>
                             <script>
@@ -402,6 +369,4 @@
                         @endif
                     </form>
                 </div>
-
-    </div>
 @endsection

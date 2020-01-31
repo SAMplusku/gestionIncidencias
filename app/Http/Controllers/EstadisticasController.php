@@ -19,7 +19,7 @@ class EstadisticasController extends Controller
             ]);
     }
 
-    public function showTecnicos() {
+    public function showTecnicos(Reques $request) {
         $grafico = request()->all()['grafico'];
         $id_tecnico = request()->all()['id_tecnico'];
         $array = array();
