@@ -4,25 +4,25 @@
     @section("content")
                     <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">
 
-                        <nav class="navbar navbar-expand-md navbar-light bg-light">
+                        <nav class="navbar navbar-expand-md navbar-light bg-light ">
 
-                                <form class="input-group mb-3 mt-3 w-25 float-right" method="get" action="/buscadorTrabajadores">
+                                <form class="row input-group mb-3 mt-3 w-25 float-right ml-1" id="buscador" method="get" action="/buscadorTrabajadores">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@</span>
                                     </div>
                                         <input type="text" class="form-control " placeholder="Nombre del usuario" name="busqueda">
                                 </form>
 
-                            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown">
+                            <div class=" collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                     @if(!Request::is('busquedaTrabajadores')) <li class="nav-item mr-3"><a class="nav-link" href="/busquedaTrabajadores">Inicio</a></li> @endif
                         <!--<li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/fecha">Fecha de creacion</a></li>-->
-                        <div class="dropdown">
+                        <div class="dropdown ">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                 Filtrar Por
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu col-sm-4" id="menuDesp">
                                 <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/operador">Operador</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/coordinador">Coordinador</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/busquedaTrabajadores/gerente">Gerente</a></li>
@@ -76,16 +76,16 @@
                 <thead>
                 <tr>
                     <th><span>Usuario</span></th>
-                    <th><span>Fecha creacion</span></th>
-                    <th><span>Telefono</span></th>
-                    <th><span>Email</span></th>
+                    <th class="d-none d-sm-table-cell"><span>Fecha creacion</span></th>
+                    <th class="d-none d-sm-table-cell"><span>Telefono</span></th>
+                    <th class="d-none d-sm-table-cell"><span>Email</span></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($trabajadores as $trabajador)
                     <tr>
                         <td>
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" id="imagenTecnicos">
+                            <img src="{{ URL::asset('images/' . $trabajador->foto) }}" class="img-circle"  id="imagenTecnicos">
                             <a href="perfil/{{$trabajador->id}}" id="linkUsuario">{{$trabajador->nombre}}</a><br>
                             <span id="tipoTrabajador">
                                 @if(\App\Coordinadore::all()->where('id_persona',$trabajador->id)->count()> 0)
@@ -99,16 +99,16 @@
                                 @endif
                             </span>
                         </td>
-                        <td>
+                        <td class="d-none d-sm-table-cell">
                             {{substr($trabajador->created_at, 0, 10)}}
                         </td>
-                        <td>
+                        <td class="d-none d-sm-table-cell">
                             <span class="label label-default">{{$trabajador->telefono}}</span>
                         </td>
-                        <td>
-                            <a href="#">{{$trabajador->email}}</a>
+                        <td class="d-none d-sm-table-cell">
+                            <a style="overflow: hidden" class="d-50" href="#">{{$trabajador->email}}</a>
                         </td>
-                        <td style="width: 20%;">
+                        <td class="d-none d-sm-block" style="width: 20%;">
                             <button class="btn btn-success" data-toggle="modal" data-target="#contactar">Contactar</button>
                         </td>
                     </tr>

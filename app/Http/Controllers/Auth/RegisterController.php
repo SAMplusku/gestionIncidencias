@@ -92,7 +92,7 @@ class RegisterController extends Controller
             $persona->apellidos = $data['lastname'];
             $persona->edad = $data['edad'];
             $persona->direccion = $data['direccion'];
-            $persona->foto = 'foto';
+            $persona->foto = 'foto.png';
             $persona->id_login = $login_id->id;
             $persona->created_at = date('Y-m-d');
             $persona->save();
