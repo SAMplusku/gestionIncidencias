@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center align-items-center divSign">
         <div class="d-flex justify-content-center align-items-center card signup bg-light">
             <h3>Enviar datos al coordinador</h3>
-            <form class="form-signin w-75" action="/signup/sendMail" method="get" onsubmit="return validacionsignup()">
+            <form class="form-signin w-75" action="/signup/sendMail" method="get" onsubmit="//return validacionsignup()">
                 <input type="text" id="nombre" name="name" class="form-control" placeholder="Nombre" required autofocus><br>
                 <input type="text" id="apellido" name="lastname" class="form-control" placeholder="Apellidos"
                        required><br>

@@ -18,8 +18,8 @@ a:hover, a:visited{
     text-decoration: none;
 }
 .login{
-    width: 30%;
-    height: 50%;
+    width: 40%;
+    height: 60%;
 }
 .index{
     margin-top: 2%;
@@ -37,6 +37,9 @@ a:hover, a:visited{
     .signup {
         width: 70%;
         margin-bottom: 7%;
+    }
+    #buscador{
+        margin-right: 0;
     }
 }
 @media only screen and (max-width: 800px) {
@@ -99,3 +102,11 @@ a:hover, a:visited{
     white-space: nowrap;
 }
 
+
+#buscador{
+    width: 10%;
+    margin-right: 2%;
+}
+#menuDesp {
+    padding-left: 3%;
+}

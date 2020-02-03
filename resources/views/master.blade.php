@@ -15,7 +15,7 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/validaciones.js') }}">
+    <script rel="stylesheet" src="{{ asset('js/validaciones.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery-3.4.1.js') }}"></script>
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
@@ -59,31 +59,34 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
 
+    <script>
+        document
+    </script>
 
 </head>
 <body>
 <!-- Header -->
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/index">
-        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="40"
+
+<nav class="navbar navbar-light bg-light" id="navGrande">
+    <a class="navbar-brand m-0 float-left mr-2" href="/">
+        <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
-        Road Tech Assistance SL
     </a>
 
-    @if(isset($_SESSION['id'])  )
-        <div>
-            <nav class="nav">
+    @if(isset($_SESSION['id']))
+        <div class="float-left">
+            <nav class="nav ">
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente' || $_SESSION['persona'] == 'operador')
-                    <a class="nav-link" href="/incidencia">Añadir Incidencia</a>
+                    <a class="nav-link text-dark p-3" href="/incidencia">Añadir Incidencia</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/busquedaTrabajadores">Perfiles</a>
+                    <a class="nav-link text-dark p-3" href="/busquedaTrabajadores">Buscar Trabajadores</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/estadisticas">Estadísticas</a>
+                    <a class="nav-link text-dark p-3" href="/estadisticas">Estadísticas</a>
                 @endif
                 @if($_SESSION['persona'] == "coordinador" || $_SESSION['persona'] == 'gerente')
-                    <a class="nav-link" href="/register">Dar de alta usuario</a>
+                    <a class="nav-link text-dark p-3" href="/register">Dar de alta usuario</a>
                 @endif
                 @if($_SESSION['persona'] == 'tecnico')
                     <?php
@@ -109,7 +112,8 @@
         </div>
 
 
-        <div class="btn-group dropdown" style="margin-right: 40px">
+        <div class="btn-group dropdown float-right mt-2" style="margin-right: 60px">
+
             <button class="btn btn-info  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Menú
             </button>
@@ -120,6 +124,7 @@
         </div>
     @endif
 </nav>
+
 <!-- Container -->
 
 @yield('content')
