@@ -68,7 +68,7 @@
 <!-- Header -->
 
 <nav class="navbar navbar-light bg-light" id="navGrande">
-    <a class="navbar-brand m-0 float-left mr-2" href="/">
+    <a class="navbar-brand m-0 float-left mr-2" href="/index">
         <img src="https://www.road-tech.com/web/image/res.company/1/logo?unique=e76bbdb" width="80"
              class="d-inline-block align-top" alt="">
     </a>
@@ -94,7 +94,7 @@
                     $incidencias = \App\Incidencia::all();
                     $notificacion = 0;
                     foreach ($incidencias as $incidencia) {
-                        if ($incidencia->id_tecnico == $persona->id) {
+                        if ($incidencia->id_tecnico == $persona->id && $incidencia->estado == 1) {
                             $notificacion = 1;
                             $idIncidencia = $incidencia->id;
                         }
@@ -105,7 +105,7 @@
                                                                      src="https://image.flaticon.com/icons/svg/565/565423.svg"
                                                                      style="width: 25%"></a>
                     @else
-                        <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 3%">
+                        <img src="https://image.flaticon.com/icons/svg/565/565422.svg" style="width: 25%">
                     @endif
                 @endif
             </nav>
