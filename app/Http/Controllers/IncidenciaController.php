@@ -110,11 +110,13 @@ class IncidenciaController extends Controller
         $incidencia = Incidencia::all()->where('id', $id)->first();
         $cliente = Cliente::all()->where('id', $incidencia->id_cliente)->first();
         $vehiculo = Vehiculo::all()->where('id', $cliente->id_vehiculo)->first();
+        $tecnico = Tecnico::all()->where('id_persona', $incidencia->id_tecnico)->first();
 
         return view("verIncidencia", [
             "incidencia" => $incidencia,
             "cliente" => $cliente,
-            "vehiculo" => $vehiculo
+            "vehiculo" => $vehiculo,
+            "tecnico" => $tecnico
         ]);
     }
 
