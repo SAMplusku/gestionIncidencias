@@ -43,7 +43,9 @@
     </nav>
 
     <canvas id="canvas"></canvas>
+
     <div id="map"></div>
+
     <script>
         let chart;
         $(document).ready(function () {
@@ -633,19 +635,49 @@
 
             //https://esri.github.io/esri-leaflet/examples/visualize-points-as-a-heatmap.html
 
-        let map = L.map('map').setView([42.866924, -2.676800], 8);
-
-            L.esri.basemapLayer('Gray').addTo(map);
 
 
+
+
+/*
             L.esri.Heat.featureLayer({
                 url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
                 radius: 10
-            }).addTo(map);
 
- 
+            }).addTo(map)
+
+             */
+            let longitud = [];
+            let latitud = [];
+            let localizacion = [];
+
+            for(let i in data) {
+                latitud.push(data[i].latitud);
+                longitud.push(data[i].longitud);
+
+            }
+
+            for(let x = 0; x < latitud.length; x++) {
+                localizacion.push(latitud[x],longitud[x])
+            }
+
+            var localizacionFinal = localizacion.slice()
+
+            console.log(longitud.toString(), latitud.toString());
+
+            var addressPoints = [localizacion.slice(), longitud]
+
+            console.log(longitud, latitud);
 
 
+
+            let map = L.map('map').setView([42.866924, -2.676800], 8);
+
+            L.esri.basemapLayer('Gray').addTo(map);
+
+            addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+            var heat = L.heatLayer(addressPoints).addTo(map);
 
         }
 
