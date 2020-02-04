@@ -70,51 +70,53 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $login = new Login();
+            $login = new Login();
 
-        $login->email =  $data['email'];
-        $login->password = Hash::make($data['password']);
-        $login->save();
-        $login_id = Login::all()->last();
+            $login->email =  $data['email'];
+            $login->password = Hash::make($data['password']);
+            $login->save();
+            $login_id = Login::all()->last();
 
-        $persona = new Persona();
-        $persona->nombre = $data['name'];
-        $persona->dni =  $data['dni'];
-        $persona->email = $data['email'];
-        $persona->telefono = $data['phone'];
-        $persona->apellidos = $data['lastname'];
-        $persona->edad = $data['edad'];
-        $persona->direccion = $data['direccion'];
-        $persona->foto = 'foto';
-        $persona->id_login = $login_id->id;
-        $persona->save();
+            $persona = new Persona();
+            $persona->nombre = $data['name'];
+            $persona->dni =  $data['dni'];
+            $persona->email = $data['email'];
+            $persona->telefono = $data['phone'];
+            $persona->apellidos = $data['lastname'];
+            $persona->edad = $data['edad'];
+            $persona->direccion = $data['direccion'];
+            $persona->foto = 'foto.png';
+            $persona->id_login = $login_id->id;
+            $persona->created_at = date('Y-m-d');
+            $persona->save();
 
-        $persona_id = Persona::all()->last();
-        if ($data['tipo'] == 'operador'){
-            $operador = new Operadore();
-            $operador->id_persona = $persona_id->id;
-            $operador->save();
-        }elseif ($data['tipo'] == "tecnico"){
-            $tecnico = new Tecnico();
-            $tecnico->id_persona = $persona_id->id;
-            $tecnico->localizacion = $data['localizacion'];
-            $tecnico->especializacion = $data['especializacion'];
-            $tecnico->jornada = $data['jornada'];
-            $tecnico->comunidad = $data['comunidad'];
-            $tecnico->disponibilidad = 1;
-            $tecnico->save();
-        }elseif ($data['tipo'] == 'coordinador'){
-            $coordinador = new Coordinadore();
-            $coordinador->id_persona = $persona_id->id;
-            $coordinador->save();
-        }elseif ($data['tipo'] == 'gerente'){
-            $gerente = new Gerente();
-            $gerente->id_persona = $persona_id->id;
-            $gerente->save();
-        }
+            $persona_id = Persona::all()->last();
+            if ($data['tipo'] == 'operador'){
+                $operador = new Operadore();
+                $operador->id_persona = $persona_id->id;
+                $operador->save();
+            }elseif ($data['tipo'] == "tecnico"){
+                $tecnico = new Tecnico();
+                $tecnico->id_persona = $persona_id->id;
+                $tecnico->localizacion = $data['localizacion'];
+                $tecnico->especializacion = $data['especializacion'];
+                $tecnico->jornada = $data['jornada'];
+                $tecnico->comunidad = $data['comunidad'];
+                $tecnico->disponibilidad = 1;
+                $tecnico->save();
+            }elseif ($data['tipo'] == 'coordinador'){
+                $coordinador = new Coordinadore();
+                $coordinador->id_persona = $persona_id->id;
+                $coordinador->save();
+            }elseif ($data['tipo'] == 'gerente'){
+                $gerente = new Gerente();
+                $gerente->id_persona = $persona_id->id;
+                $gerente->save();
+            }
 
-        $user = Login::all()->last();
-        return $user;
+            $user = Login::all()->last();
+            return $user;
+
         //redirect()->route('index');
     }
     /**

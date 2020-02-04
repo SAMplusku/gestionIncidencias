@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Coordinadore;
 use App\Gerente;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Authenticatable;
 use App\Login;
 use App\Operadore;
 use App\Persona;

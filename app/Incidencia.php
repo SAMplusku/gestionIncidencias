@@ -22,5 +22,5 @@ class Incidencia extends Model
 
 
 
-    protected $fillable = ['localizacion','tipo','fechafin','fechainicio','estado','descripcion','observacion','id_tecnico','id_operador','id_cliente'];
+    protected $fillable = ['localizacion','latitud','longitud','tipo','fechafin','fechainicio','estado','descripcion','observacion','id_tecnico','id_operador','id_cliente'];
 }

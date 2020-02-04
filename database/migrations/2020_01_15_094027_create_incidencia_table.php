@@ -16,6 +16,8 @@ class CreateIncidenciaTable extends Migration
         Schema::create('incidencias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("localizacion");
+            $table->string("latitud");
+            $table->string("longitud");
             $table->string("tipo");
             $table->date("fechafin")->nullable();
             $table->boolean("estado")->default(1);

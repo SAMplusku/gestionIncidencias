@@ -19,15 +19,17 @@
             document.getElementById('divDatos').style.display = 'none';
         }
     </script>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" style="margin-bottom: 50px; margin-top: 10px">
             <div class="col-sm-3"><!--left col-->
                 <div class="text-center">
                     <form class="form" action="/perfil/CambiarFoto/{{$persona2->id}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <img src="{{ URL::asset('images/' . $persona2->foto) }}" class="img-circle img-thumbnail img-fluid" style="width: 60%"><br><br>
-                    <label class="btn btn-default bg-info">
+                        @if($persona2->id_login ==$_SESSION['id'])
+                        <label class="btn btn-default bg-info">
                         Cambia de foto <input name="image" type="file" hidden>
                     </label>
+                            @endif
                 </div>
                 <br>
                 <ul class="list-group">
@@ -62,7 +64,7 @@
                     </li>
 
                     <li class="list-group-item text-center">
-                        <strong>Estado: </strong> @if($persona->disponibilidad = 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
+                        <strong>Estado: </strong> @if($persona->disponibilidad == 1) <label class="text-success">Disponible </label> @else<label class="text-danger"> No disponible </label>@endif
                     </li>
 
                      <li class="list-group-item text-center">
@@ -75,14 +77,16 @@
                     @endif
 
                 </ul>
-            </div>
+                </div>
             <div class="col-sm-7">
                 <ul class="nav nav-tabs">
+                    @if(\App\Tecnico::all()->where('id_persona',$persona2->id)->count()> 0 || \App\Operadore::all()->where('id_persona',$persona2->id)->count()> 0)
                     <li class="p-2" id="liIncidencia">
-                        <input type="button" onclick="ocultarDatos()" value="Incidencias">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarDatos()" value="Incidencias">
                     </li>
+                    @endif
                     <li class="p-2" id="liDatos">
-                        <input type="button" onclick="ocultarIncidencias()" value="Datos Personales">
+                        <input type="button" class="btn btn-lg btn-secondary m-1" onclick="ocultarIncidencias()" value="Datos Personales">
                     </li>
                 </ul><br>
 
@@ -136,12 +140,13 @@
                                     <input type="text" class="form-control" name="fecha" disabled  value="{{$persona2->edad}}">
                                 </div>
                             </div>
-
+                        @if($persona2->id_login ==$_SESSION['id'])
                             <div class="form-group">
                                 <div class="col-xs-12"> <br>
                                     <button class="btn btn-lg btn-success" type="submit">Guardar</button>
                                 </div>
                             </div>
+                            @endif
                         </form>
                         <hr>
                     </div>
@@ -149,20 +154,20 @@
 
                 @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0 || \App\Tecnico::where('id_persona','=',$persona2->id)->count()> 0)
                 <div class="col-sm-12" id="divIncidencias">
-                    <h2>Mis Incidencias</h2> <br>
+                    <h2>Incidencias</h2> <br>
                             @if(\App\Operadore::where('id_persona','=',$persona2->id)->count()> 0)
                                 @foreach($incidenciasOperador as $incidencia)
                                     <div>
-                                        <a href="incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
-                                        @if($incidencia->estado = 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
+                                        <a href="/incidencia/{{$incidencia->id}}">Incidencia-{{$incidencia->id}}</a>
+                                        @if($incidencia->estado == 1) <label class="text-success"> Abierta </label> @else<label class="text-danger"> Cerrada</label>@endif
                                         <hr>
                                     </div>
                                 @endforeach
                                 @else
                                 @foreach($incidenciasTecnico as $incidencia)
                                     <div>
-                                        <h3><a href="incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
-                                        Estado: @if($incidencia->estado = 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
+                                        <h3><a href="/incidencia/{{$incidencia->id}}">Incidencia - {{$incidencia->id}}</a></h3>
+                                        Estado: @if($incidencia->estado == 1) <label class="text-success">Abierta </label> @else<label class="text-danger"> Cerrada </label>@endif
                                         <label class="float-right">Fecha Inicio: {{$incidencia->created_at}}</label> <br>
                                         Tipo de incidente: <label class="text-capitalize"> {{$incidencia->tipo}}</label> <br>
                                         <div
@@ -190,5 +195,5 @@
                 @endif
             </div>
 
-
+        </div>
 @endsection
