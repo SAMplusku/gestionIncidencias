@@ -3,7 +3,7 @@
 @section("content")
     <?php session_start() ?>
     @if($_SESSION['persona'] == 'tecnico' && $_SESSION['id'] == $incidencia->id_tecnico && $incidencia->estado == 1  || $_SESSION['persona'] == 'operador' && $_SESSION['id'] == $incidencia->id_operador && $incidencia->estado == 1)
-        <div class="container-fluid p-2" style="margin-bottom: 70px">
+        <div class="container-fluid p-2" style="margin-bottom: 180px">
             <div class="col-sm-11">
                 <h1 class="h2 mb-3 font-weight-normal p-0 m-0 text-center">Incidencia - {{$incidencia->id}}</h1>
                 <h5 class="h5 mb-3 font-weight-normal p-0 m-0 text-center mb-4">@if($incidencia->estado == 1)<label
