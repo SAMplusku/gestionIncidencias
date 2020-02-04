@@ -89,7 +89,12 @@ a:hover, a:visited{
     transform: rotate(-90deg);
 }
 
-#map { height: 460px; width: 100%;}
+#map {
+    height: 460px; width: 100%;
+    position: relative;
+    top: 20%;
+}
+#mapa { height: 70%; width: 100%;}
 
 .indexador {
     background-image: url("https://image.freepik.com/foto-gratis/hombre-mujer-trajes-negocios-estrictos-oficina_85574-2043.jpg");

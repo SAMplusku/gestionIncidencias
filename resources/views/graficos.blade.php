@@ -27,7 +27,7 @@
                 </select>
             </label>
 
-            <button id="botonTecnicos" >Filtrar por tecnico</button>
+            <button id="botonTecnicos">Filtrar por tecnico</button>
 
             <label class="w-25" id="labelIdTecnicos">
                 Id tecnico:<select id="selectIdTecnico" name="id_tecnico" class="form-control ">
@@ -37,12 +37,13 @@
                 </select>
             </label>
 
-            <button id="volver" >Volver</button>
+            <button id="volver">Volver</button>
 
         </div>
     </nav>
 
     <canvas id="canvas"></canvas>
+
 
     <div id="map"></div>
 
@@ -55,17 +56,17 @@
 
             document.getElementById('volver').style.display = 'none';
 
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy()
 
             $.ajax({
-               url: '/estadisticas/cargarGrafica',
-               method: 'POST',
+                url: '/estadisticas/cargarGrafica',
+                method: 'POST',
                 data: {grafico: 'IncidenciasDia'},
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     console.log("Succes")
                     console.log(data);
                     incidenciaPorDia(data)
@@ -88,7 +89,7 @@
 
             document.getElementById('botonTecnicos').style.display = 'none';
 
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy();
             $.ajax({
                 url: '/estadisticas/cargarGraficaTecnicos',
@@ -97,7 +98,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     console.log("Succes")
                     console.log(data);
                     incidenciaPorDiaTecnico(data)
@@ -120,7 +121,7 @@
 
             document.getElementById('botonTecnicos').style.display = 'block';
 
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy();
 
             $.ajax({
@@ -130,7 +131,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     console.log("Succes")
                     console.log(data);
                     incidenciaPorDia(data)
@@ -143,7 +144,7 @@
         });
 
         $('#selectIdTecnico').on('change', function () {
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy()
             $.ajax({
                 type: 'POST',
@@ -152,9 +153,9 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     filtro = $('#selectTecnicos').val()
-                    switch (filtro){
+                    switch (filtro) {
                         case 'IncidenciasDiaTecnico':
                             incidenciaPorDiaTecnico(data);
                             break;
@@ -177,7 +178,7 @@
         });
 
         $('#selectTecnicos').on('change', function () {
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy()
             $.ajax({
                 type: 'POST',
@@ -186,9 +187,9 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     filtro = $('#selectTecnicos').val()
-                    switch (filtro){
+                    switch (filtro) {
                         case 'IncidenciasDiaTecnico':
                             incidenciaPorDiaTecnico(data);
                             break;
@@ -211,18 +212,18 @@
         });
 
         $('#select').on('change', function () {
-            if(chart !== undefined)
+            if (chart !== undefined)
                 chart.destroy()
             $.ajax({
                 type: 'POST',
                 url: '/estadisticas/cargarGrafica',
-                data: {grafico: $('#select').val() },
+                data: {grafico: $('#select').val()},
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data){
+                success: function (data) {
                     filtro = $('#select').val()
-                    switch (filtro){
+                    switch (filtro) {
                         case 'IncidenciasDia':
                             incidenciaPorDia(data);
                             break;
@@ -257,14 +258,16 @@
         });
 
         function incidenciaPorDia(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
 
             for (var i in data) {
                 incidentes.push(data[i].numIncidencias);
-                fechas.push(data[i].fechas.substring(0,11));
+                fechas.push(data[i].fechas.substring(0, 11));
             }
 
             var chartdata = {
@@ -290,14 +293,16 @@
         }
 
         function incidenciaPorDiaTecnico(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
 
             for (var i in data) {
                 incidentes.push(data[i].numIncidencias);
-                fechas.push(data[i].fechas.substring(0,11));
+                fechas.push(data[i].fechas.substring(0, 11));
             }
 
             var chartdata = {
@@ -323,7 +328,9 @@
         }
 
         function incidenciaPorHora(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
@@ -358,7 +365,9 @@
         }
 
         function incidenciaPorHoraTecnico(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
@@ -393,7 +402,9 @@
         }
 
         function incidenciaPorMes(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
@@ -428,7 +439,9 @@
         }
 
         function incidenciaPorMesTecnico(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var fechas = [];
@@ -463,7 +476,9 @@
         }
 
         function incidenciaPorJornada(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var jornada = [];
@@ -498,7 +513,9 @@
         }
 
         function incidenciaPorComunidad(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var comunidad = [];
@@ -533,7 +550,9 @@
         }
 
         function tiposAveria(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             var incidentes = [];
             var tipo = [];
@@ -569,12 +588,14 @@
 
 
         function tiempoMedio(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             let $tecnico = [];
             let $dias = [];
 
-            for(let i in data) {
+            for (let i in data) {
                 $tecnico.push(data[i].id_tecnico);
                 $dias.push(data[i].dias);
             }
@@ -601,12 +622,14 @@
         }
 
         function tiempoMedioTecnico(data) {
-            if(chart !== undefined)
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('map').style.display = 'none';
+            if (chart !== undefined)
                 chart.destroy()
             let $tecnico = [];
             let $dias = [];
 
-            for(let i in data) {
+            for (let i in data) {
                 $tecnico.push(data[i].id_tecnico);
                 $dias.push(data[i].dias);
             }
@@ -631,43 +654,43 @@
                 data: chartdata
             })
         }
+
         function mapaCalor(data) {
 
             //https://esri.github.io/esri-leaflet/examples/visualize-points-as-a-heatmap.html
 
 
+            /*
+                        L.esri.Heat.featureLayer({
+                            url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
+                            radius: 10
 
+                        }).addTo(map)
 
+                         */
 
-/*
-            L.esri.Heat.featureLayer({
-                url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
-                radius: 10
+            document.getElementById('canvas').style.display = 'none';
+            document.getElementById('map').style.display = 'block';
 
-            }).addTo(map)
-
-             */
             let longitud = [];
             let latitud = [];
             let localizacion = [];
 
-            for(let i in data) {
+            for (let i in data) {
                 latitud.push(data[i].latitud);
                 longitud.push(data[i].longitud);
 
             }
-
-            for(let x = 0; x < latitud.length; x++) {
-                localizacion.push(latitud[x],longitud[x])
+            var addressPoints=[];
+            for (let x = 0; x < latitud.length; x++) {
+                localizacion=[longitud[x], latitud[x]];
+                addressPoints.push(localizacion);
             }
 
+            console.log(addressPoints);
             var localizacionFinal = localizacion.slice()
 
-            console.log(longitud.toString(), latitud.toString());
 
-            var addressPoints = [localizacion.slice(), longitud]
-
-            console.log(longitud, latitud);
 
 
 
@@ -675,7 +698,9 @@
 
             L.esri.basemapLayer('Gray').addTo(map);
 
-            addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+            addressPoints = addressPoints.map(function (p) {
+                return [p[0], p[1]];
+            });
 
             var heat = L.heatLayer(addressPoints).addTo(map);
 
