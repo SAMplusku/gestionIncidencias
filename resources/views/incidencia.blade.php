@@ -37,7 +37,7 @@
                     }).addTo(map);*/
 
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=TALcQipMfxgGJSNPScri', {
                         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
