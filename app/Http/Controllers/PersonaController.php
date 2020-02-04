@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 class PersonaController extends Controller
 {
     public function show($id) {
-
+        
         $persona = Persona::all()->where('id',$id)->first();
         $tecnico = Tecnico::all()->where('id_persona',$id)->first();
         $numeroIncidenciasOperador = Incidencia::all()->where('id_operador',$id)->count();
