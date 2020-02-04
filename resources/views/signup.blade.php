@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-    <div class="d-flex justify-content-center align-items-center divSign">
+    <div class="d-flex justify-content-center align-items-center divSign" style="clear: both; margin-bottom: 40px">
         <div class="d-flex justify-content-center align-items-center card signup bg-light">
             <h3>Enviar datos al coordinador</h3>
             <form class="form-signin w-75" action="/signup/sendMail" method="get" onsubmit="//return validacionsignup()">
