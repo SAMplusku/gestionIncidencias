@@ -92,7 +92,11 @@ class EstadisticasController extends Controller
     }
 
     public function mapaCalor() {
+        $incidencias = DB::table('incidencias')
+            ->select('longitud', 'latitud')
+            ->get();
 
+        return $incidencias;
     }
 
     public function incidenciasPorDia() {
