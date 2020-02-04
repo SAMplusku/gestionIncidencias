@@ -162,7 +162,7 @@ class IncidenciaController extends Controller
 
     public function index() {
         $incidencias = DB::table('incidencias')
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
             ->paginate(5);
 
         return view('index', [

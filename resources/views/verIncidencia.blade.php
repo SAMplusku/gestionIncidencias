@@ -332,14 +332,6 @@
 
                         <div class="form-group col-sm-6">
                             <div class="col-xs-6">
-                                <label for="email"><h5>Email</h5></label>
-                                <input type="email" class="form-control" disabled name="email"
-                                       value="{{$cliente->email}}">
-                            </div>
-                        </div>
-
-                        <div class="form-group col-sm-6">
-                            <div class="col-xs-6">
                                 <h5>Direccion</h5>
                                 <input type="text" class="form-control" disabled name="direccion"
                                        value="{{$cliente->direccion}}">

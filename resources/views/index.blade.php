@@ -19,7 +19,9 @@
     } elseif (App\Gerente::where('id_persona', '=', $persona->id)->count() > 0) {
         $_SESSION['persona'] = "gerente";
     }
-    $incidencias = DB::table('incidencias')->paginate(5);
+    $incidencias = DB::table('incidencias')
+        ->orderBy('id', 'DESC')
+        ->paginate(5);
     ?>
 
     <div class="main-box clearfix col-lg-12 p-0" style="margin-bottom: 70px">

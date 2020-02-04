@@ -2,7 +2,7 @@
 
 @section('content')
     <?php session_start()?>
-    <nav class="p-2">
+    <nav class="p-2" >
         <div class="">
             <label class="w-25 mr-4" id="labelGrafica">
                 Grafica a elegir:<select id="select" class="form-control">
@@ -42,7 +42,7 @@
         </div>
     </nav>
 
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" style="margin-bottom: 80px; padding: 20px"></canvas>
 
 
     <div id="map"></div>
@@ -275,7 +275,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -310,7 +310,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias por dia Tecnico',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -347,7 +347,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -384,7 +384,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -421,7 +421,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -458,7 +458,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -495,7 +495,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -532,7 +532,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -569,7 +569,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -604,7 +604,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
@@ -638,7 +638,7 @@
                 datasets: [
                     {
                         label: 'Numero incidencias',
-                        backgroundColor: '#49e2ff',
+                        backgroundColor: ['#49e2ff','#FF5733'] ,
                         borderColor: '#46d5f1',
                         hoverBackgroundColor: '#CCCCCC',
                         hoverBorderColor: '#666666',
